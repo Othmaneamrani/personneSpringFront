@@ -1,7 +1,7 @@
 import React from "react";
 import mail from './email.png'
 
-export default function Sign(){
+export default function Sign({onLoginClick}){
 return(
     <div className="login-container" >
 <form className="login-form">
@@ -26,6 +26,8 @@ return(
   </div>
   <div className="form-group">
     <button type="submit" className="boutton-login">S'inscrire</button>
+
+    <a onClick={onLoginClick} className="inscription">login</a>
   </div>
 </form>
     </div>
