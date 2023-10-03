@@ -169,6 +169,8 @@ body {
 .mail-icon{
   width: 24px;
   margin-bottom: 6px;
+  margin-right: 4px;
+  margin-top: 0;
 }
 
 .gmail-icon {

@@ -27,7 +27,7 @@ return(
   <div className="form-group">
     <button type="submit" className="boutton-login">S'inscrire</button>
 
-    <a onClick={onLoginClick} className="inscription">login</a>
+    <a onClick={onLoginClick} className="inscription">Login</a>
   </div>
 </form>
     </div>
