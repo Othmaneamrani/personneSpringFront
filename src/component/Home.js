@@ -1,8 +1,12 @@
 import React from "react";
+import Sidebar from './Sidebar';
+
 
 export default function Home(){
     return(
         <div className="bienvenu">
+         <Sidebar />
+
         <h1>BIENVENU M.</h1>    
         <h3>Que souhaitez-vous faire ?</h3>
         <h1>Liste des Personnes : </h1>
