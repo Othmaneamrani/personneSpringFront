@@ -24,10 +24,14 @@ export default function Create () {
               </div>
             </div>
             <button className="boutton-login" type="button" id="ajouterAdresse">Ajouter une adresse</button>
-            <button className="boutton-patch" type="button" id="modifierAdresse">Modifier une autre adresse</button>
+            <button className="boutton-login" type="button" id="modifierAdresse">Modifier une autre adresse</button>
+            <div className="marginT">
+            <div className="form-group">
+          <button className="boutton-login" type="submit">Sauvegarder Personne</button>
+          </div>
+          </div>
 
           </div>
-          <button className="boutton-create" type="submit">Sauvegarder Personne</button>
         </form>
       </div>
     )

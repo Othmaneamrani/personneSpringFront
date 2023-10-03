@@ -103,8 +103,6 @@ body {
 
 .form-group {
   margin-bottom: 20px;
-  margin-right: 20px;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -135,10 +133,9 @@ body {
   border-radius: 5px;
   font-size: 18px;
   cursor: pointer;
-  float: left;
 }
 
-.boutton-login:hover , .boutton-create:hover , .boutton-patch{
+.boutton-login:hover  , .boutton-patch{
   background-color: #777474;
 }
 
@@ -187,25 +184,15 @@ body {
 
 .personne-container{
   text-align: center;
-  margin: 30px auto 100px auto;
+  margin:100px auto;
   max-width: 400px;
-  padding: 50px 18px;
+  padding: 20px 18px;
   background-color: #585555;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
-.boutton-create{
-  background-color: #333;
-  color: #fff;
-  padding: 10px 20px;
-  margin-left: 94px;
-  border: none;
-  border-radius: 5px;
-  font-size: 18px;
-  cursor: pointer;
-  float: left;
-}
+
 
 .mini-login-header {
   font-size: 20px;
@@ -213,17 +200,6 @@ body {
   color: #201f1f;
 }
 
-.boutton-patch{
-  background-color: #333;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 18px;
-  cursor: pointer;
-  float: left;
-  margin-top: 5px;
-}
 
 .supprimer{
   color: rgb(241, 12, 12);
@@ -258,4 +234,9 @@ body {
 
 .search-button:hover {
   background-color: #0056b3;
+}
+
+
+.marginT{
+  margin-top:20px ;
 }

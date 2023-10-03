@@ -22,10 +22,15 @@ export default function Create () {
                 <label className="login-label" htmlFor="numeroMaison">Numero de maison:</label>
                 <input className="form-control" type="text" id="numeroMaison" name="numeroMaison[]" required />
               </div>
+              
             </div>
             <button className="boutton-login" type="button" id="ajouterAdresse">Ajouter une adresse</button>
           </div>
-          <button className="boutton-create" type="submit">Créer Personne</button>
+
+          <div className="form-group">
+          <button className="boutton-login" type="submit">Créer Personne</button>
+          </div>
+
         </form>
       </div>
     )
