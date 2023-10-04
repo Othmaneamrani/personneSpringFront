@@ -1,7 +1,7 @@
 import React from "react";
 import mail from './email.png'
 
-export default function Sign({onLoginClick , onClickConnexion}){
+export default function Sign({onLoginClick , onClickInscription}){
 return(
     <div className="login-container" >
 <form className="login-form">
@@ -25,7 +25,7 @@ return(
     <input type="email" id="gmail" name="gmail" className="form-control " placeholder="example@gmail.com" required />
   </div>
   <div className="form-group">
-    <button type="submit" onClick={onClickConnexion} className="boutton-login">S'inscrire</button> 
+    <button type="submit" onClick={onClickInscription} className="boutton-login">S'inscrire</button> 
 
     <a onClick={onLoginClick}  className="inscription">Login</a>
   </div>
