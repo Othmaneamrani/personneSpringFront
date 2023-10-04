@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-export default function Sidebar({onRechercherClick , onModifierClick , onCreateClick , onSupprimerClick , onClickDeonnexion}){
+export default function Sidebar({onRechercherClick , onModifierClick , onCreateClick , onSupprimerClick , onClickDeconnexion}){
 
     const [showSearch, setShowSearch] = useState(false);
     const activeSearch = () => {
@@ -34,7 +34,7 @@ export default function Sidebar({onRechercherClick , onModifierClick , onCreateC
           <li><a  onClick={onCreateClick} className="sidebar-l3" href="#">Créer personne</a></li>
           <li><a onClick={onModifierClick} className="sidebar-l3" href="#">Modifier personne</a></li>
           <li><a  onClick={onSupprimerClick} className="supprimer" href="#">Supprimer personne</a></li>
-          <li><a  onClick={onClickDeonnexion} className="deconnexion" href="#">Deconnexion</a></li>
+          <li><a  onClick={onClickDeconnexion} className="deconnexion" href="#">Deconnexion</a></li>
 
       </ul>
       </div>

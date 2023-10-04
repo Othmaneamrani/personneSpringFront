@@ -2,11 +2,11 @@ import React from "react";
 import Sidebar from './Sidebar';
 
 
-export default function Home({onRechercherClick , onModifierClick , onCreateClick , onSupprimerClick , onClickDeonnexion}){
+export default function Home({onRechercherClick , onModifierClick , onCreateClick , onSupprimerClick , onClickDeconnexion}){
   
     return(
         <div className="bienvenu">
-          <Sidebar onRechercherClick={onRechercherClick}  onModifierClick={onModifierClick}  onCreateClick={onCreateClick}  onSupprimerClick={onSupprimerClick}  onClickDeonnexion={onClickDeonnexion}/>
+          <Sidebar onRechercherClick={onRechercherClick}  onModifierClick={onModifierClick}  onCreateClick={onCreateClick}  onSupprimerClick={onSupprimerClick}  onClickDeconnexion={onClickDeconnexion}/>
          
         <h1>BIENVENU M. (smia)</h1>    
         <h3>Que souhaitez-vous faire ?</h3>

@@ -22,9 +22,8 @@ const toggleAuth = () => {
         {auth ? ( <Authentification onClickConnexion={toggleAuth}
                                     onClickInscription={toggleAuth}
               />
-          ): (<ControlHome onClickDeonnexion={toggleAuth} />
+          ): (<ControlHome onClickDeconnexion={toggleAuth} />
       ) }
-      {/* <ControlHome /> */}
      <Footer />
     </div>
   );

@@ -3,9 +3,9 @@ import Home from "./Home";
 import Sort from "./Sort";
 import Modifier from "./Modifier"
 import Create from "./Create";
-import Pop from "./Pop";
+import PopValider from "./PopValider";
 
-export default function ControlHome ({onClickDeonnexion}){
+export default function ControlHome ({onClickDeconnexion}){
 
     const [afficherSort, setAfficherSort] = useState(false)
 
@@ -31,7 +31,7 @@ export default function ControlHome ({onClickDeonnexion}){
       const [afficherCreate, setAfficherCreate] = useState(false)
 
       const toggleCreate= () => {
-          setAfficherModifier(true)
+          setAfficherCreate(true)
         };
         
         const toggleCreateRetour= () => {
@@ -58,7 +58,7 @@ export default function ControlHome ({onClickDeonnexion}){
                         onModifierClick={toggleModifier} 
                         onCreateClick={toggleCreate}
                         onSupprimerClick={togglePop}
-                        onClickDeonnexion={onClickDeonnexion}
+                        onClickDeconnexion={onClickDeconnexion}
                     />;
 
         } else if (afficherSort) {
@@ -69,7 +69,7 @@ export default function ControlHome ({onClickDeonnexion}){
                 } else if (afficherCreate) {
             contenu = <Create onRetourClick={toggleCreateRetour} />;
                     }else if (afficherPop) {
-                        contenu = <Pop onRetourClick={onClose} />
+                        contenu = <PopValider onRetourClick={onClose} />
                                 }
   
 
