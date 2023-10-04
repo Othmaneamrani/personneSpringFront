@@ -5,7 +5,7 @@ import Modifier from "./Modifier"
 import Create from "./Create";
 import Pop from "./Pop";
 
-export default function ControlHome (){
+export default function ControlHome ({onClickDeonnexion}){
 
     const [afficherSort, setAfficherSort] = useState(false)
 
@@ -58,6 +58,7 @@ export default function ControlHome (){
                         onModifierClick={toggleModifier} 
                         onCreateClick={toggleCreate}
                         onSupprimerClick={togglePop}
+                        onClickDeonnexion={onClickDeonnexion}
                     />;
 
         } else if (afficherSort) {

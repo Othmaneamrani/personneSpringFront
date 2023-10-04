@@ -13,7 +13,7 @@ export default function App() {
   const [auth,setAuth]= useState(true)
 
 const toggleAuth = () => {
-  setAuth(false)
+  setAuth(!auth)
 }
 
   return (
@@ -22,7 +22,7 @@ const toggleAuth = () => {
         {auth ? ( <Authentification onClickConnexion={toggleAuth}
                                     onClickInscription={toggleAuth}
               />
-          ): (<ControlHome />
+          ): (<ControlHome onClickDeonnexion={toggleAuth} />
       ) }
       {/* <ControlHome /> */}
      <Footer />
