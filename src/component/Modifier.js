@@ -1,6 +1,9 @@
-export default function Create () {
+export default function Modifier ({onRetourClick}) {
     return(
+      <div>
+          <a  onClick={onRetourClick} href="#" className="retour"><span className="arrow">&#8592;</span>Retour</a>
         <div className="personne-container">
+        
         <h1 className="login-header" >Modifier une personne</h1>
         <form action=".localhost:8080/personnes" method="POST" className="login-form" >
           <div className="form-group">
@@ -33,6 +36,7 @@ export default function Create () {
 
           </div>
         </form>
+      </div>
       </div>
     )
 }

@@ -1,5 +1,7 @@
-export default function Create () {
+export default function Create ({onRetourClick}) {
     return(
+      <div>
+          <a  onClick={onRetourClick} href="#" className="retour"><span className="arrow">&#8592;</span>Retour</a>
         <div className="personne-container">
         <h1 className="login-header" >Créer une personne</h1>
         <form action=".localhost:8080/personnes" method="POST" className="login-form" >
@@ -32,6 +34,7 @@ export default function Create () {
           </div>
 
         </form>
+      </div>
       </div>
     )
 }

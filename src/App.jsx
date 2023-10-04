@@ -1,21 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Footer from './component/Footer';
 import Navbar from './component/Navbar';
-import Login from './component/Login';
-import Home from './component/Home';
-import Create from './component/Create';
-import Modifier from './component/Modifier' ;
 import Authentification from './component/Authentification';
+import ControlHome from './component/ControlHome';
+
+
+
 
 
 export default function App() {
+
+  const [auth,setAuth]= useState(true)
+
+const toggleAuth = () => {
+  setAuth(false)
+}
+
   return (
     <div>
      <Navbar />
-     <Authentification />
-     {/* <Home /> */}
-     {/* <Create /> */}
-     {/* <Modifier /> */}
+        {auth ? ( <Authentification onClickConnexion={toggleAuth}
+                                    onClickInscription={toggleAuth}
+              />
+          ): (<ControlHome />
+      ) }
+      {/* <ControlHome /> */}
      <Footer />
     </div>
   );

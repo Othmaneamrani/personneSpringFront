@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Login ({ onInscriptionClick }){
+export default function Login ({ onInscriptionClick , onClickInscription}){    
     return (
         <div className="login-container">
         <h2 className="login-header">Connexion</h2>
@@ -14,7 +14,7 @@ export default function Login ({ onInscriptionClick }){
             <input type="password" id="password" name="password" className="form-control" />
           </div>
           <div className="form-group">
-            <button type="submit" className="boutton-login">Se connecter</button>
+            <button type="submit" onClick={onClickInscription} className="boutton-login">Se connecter</button> 
 
             <a onClick={onInscriptionClick} className="inscription">S'inscrire</a>
           </div>

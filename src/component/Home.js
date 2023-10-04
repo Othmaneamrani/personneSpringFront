@@ -2,12 +2,13 @@ import React from "react";
 import Sidebar from './Sidebar';
 
 
-export default function Home(){
+export default function Home({onRechercherClick , onModifierClick , onCreateClick , onSupprimerClick}){
+  
     return(
         <div className="bienvenu">
-         <Sidebar />
-
-        <h1>BIENVENU M.</h1>    
+          <Sidebar onRechercherClick={onRechercherClick}  onModifierClick={onModifierClick}  onCreateClick={onCreateClick}  onSupprimerClick={onSupprimerClick} />
+         
+        <h1>BIENVENU M. (smia)</h1>    
         <h3>Que souhaitez-vous faire ?</h3>
         <h1>Liste des Personnes : </h1>
         {/* <ul>

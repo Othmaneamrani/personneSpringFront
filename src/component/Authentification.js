@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import Login from "./Login";
 import Sign from "./Sign";
 
-export default function Authentification() {
+
+
+export default function Authentification({onClickConnexion , onClickInscription}) { 
+
+
+    
+
   const [afficherLogin, setAfficherLogin] = useState(true);
 
   const toggleAffichage = () => {
@@ -12,9 +18,9 @@ export default function Authentification() {
   return (
     <div>
       {afficherLogin ? (
-        <Login onInscriptionClick={toggleAffichage} />
+        <Login onInscriptionClick={toggleAffichage}  onClickConnexion={onClickConnexion} />     
       ) : (
-        <Sign onLoginClick={toggleAffichage} />
+        <Sign onLoginClick={toggleAffichage} onClickInscription={onClickInscription} />        
       )}
     </div>
   );
