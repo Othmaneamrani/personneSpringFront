@@ -1,11 +1,10 @@
 import React from "react";
 import Sidebar from './Sidebar';
 
-
 export default function Home({onRechercherClick , onModifierClick , onCreateClick , onSupprimerClick , onClickDeconnexion}){
   const isVisible=true
 
-  
+ 
     return(
       <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} >
         <div className="bienvenu">
@@ -14,17 +13,7 @@ export default function Home({onRechercherClick , onModifierClick , onCreateClic
         <h1 className="smia" >BIENVENU M. (smia)</h1>    
         <h3>Que souhaitez-vous faire ?</h3>
         <h1>Liste des Personnes : </h1>
-        {/* <ul>
-        {personnes.map((personne, index) => (
-            <li key={index}>{`${personne.nom} ${personne.prenom} ${personne.adresse.map((personne, index)=>(
-                <li key={index}>{`${adresse.rue} ${adresse.numeroMaison}`}</li>
-              ))}} 
-            
-            `} 
-            <hr/>
-            </li>
-          ))}
-        </ul> */}
+
         </div>
         </div>
 
