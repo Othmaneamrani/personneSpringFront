@@ -3,7 +3,9 @@ export default function Create ({onRetourClick  , onCreerClick}) {
 
     return(
       <div    className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} >
-          <a  onClick={onRetourClick} href="#" className="retour"><span className="arrow">&#8592;</span>Retour</a>
+        <div className="retour-hover">
+          <a className="retour" onClick={onRetourClick} href="#" ><span className="arrow">&#8592;</span>Retour</a>
+          </div>
         <div className="personne-container">
         <h1 className="login-header" >Créer une personne</h1>
         <form action=".localhost:8080/personnes" method="POST" className="login-form" >

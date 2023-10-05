@@ -1,7 +1,9 @@
 export default function Modifier ({onRetourClick , onSauvegarderClick}) {
     return(
       <div>
+         <div className="retour-hover">
           <a  onClick={onRetourClick} href="#" className="retour"><span className="arrow">&#8592;</span>Retour</a>
+          </div>
         <div className="personne-container">
         
         <h1 className="login-header" >Modifier une personne</h1>
