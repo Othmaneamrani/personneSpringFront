@@ -1,4 +1,4 @@
-export default function Modifier ({onRetourClick}) {
+export default function Modifier ({onRetourClick , onSauvegarderClick}) {
     return(
       <div>
           <a  onClick={onRetourClick} href="#" className="retour"><span className="arrow">&#8592;</span>Retour</a>
@@ -30,7 +30,7 @@ export default function Modifier ({onRetourClick}) {
             <button className="boutton-login" type="button" id="modifierAdresse">Modifier une autre adresse</button>
             <div className="marginT">
             <div className="form-group">
-          <button className="boutton-login" type="submit">Sauvegarder Personne</button>
+          <button className="boutton-login" onClick={onSauvegarderClick} type="submit">Sauvegarder Personne</button>
           </div>
           </div>
 

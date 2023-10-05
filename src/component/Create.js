@@ -1,4 +1,4 @@
-export default function Create ({onRetourClick}) {
+export default function Create ({onRetourClick  , onCreerClick}) {
     return(
       <div>
           <a  onClick={onRetourClick} href="#" className="retour"><span className="arrow">&#8592;</span>Retour</a>
@@ -30,7 +30,7 @@ export default function Create ({onRetourClick}) {
           </div>
 
           <div className="form-group">
-          <button className="boutton-login" type="submit">Créer Personne</button>
+          <button className="boutton-login" onClick={onCreerClick} type="submit">Créer Personne</button>
           </div>
 
         </form>

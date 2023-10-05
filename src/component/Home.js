@@ -8,7 +8,7 @@ export default function Home({onRechercherClick , onModifierClick , onCreateClic
         <div className="bienvenu">
           <Sidebar onRechercherClick={onRechercherClick}  onModifierClick={onModifierClick}  onCreateClick={onCreateClick}  onSupprimerClick={onSupprimerClick}  onClickDeconnexion={onClickDeconnexion}/>
          
-        <h1>BIENVENU M. (smia)</h1>    
+        <h1 className="smia" >BIENVENU M. (smia)</h1>    
         <h3>Que souhaitez-vous faire ?</h3>
         <h1>Liste des Personnes : </h1>
         {/* <ul>

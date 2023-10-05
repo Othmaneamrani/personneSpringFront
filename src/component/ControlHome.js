@@ -1,54 +1,44 @@
 import React, { useState } from "react";
 import Home from "./Home";
 import Sort from "./Sort";
-import Modifier from "./Modifier"
-import Create from "./Create";
+import CreatePlus from "./CreatePlus";
 import PopValider from "./PopValider";
+import ModifierPlus from "./ModifierPlus";
 
 export default function ControlHome ({onClickDeconnexion}){
 
     const [afficherSort, setAfficherSort] = useState(false)
 
     const toggleSearch = () => {
-        setAfficherSort(true)
+        setAfficherSort(!afficherSort)
       };
     
-    const toggleRetour = () => {
-        setAfficherSort(false)
-      };
       
 
     const [afficherModifier, setAfficherModifier] = useState(false)
 
     const toggleModifier= () => {
-        setAfficherModifier(true)
+        setAfficherModifier(!afficherModifier)
       };
       
-      const toggleModifierRetour= () => {
-        setAfficherModifier(false)
-      };
+
 
       const [afficherCreate, setAfficherCreate] = useState(false)
 
       const toggleCreate= () => {
-          setAfficherCreate(true)
+          setAfficherCreate(!afficherCreate)
         };
         
-        const toggleCreateRetour= () => {
-          setAfficherCreate(false)
-        };
+
 
         const [afficherPop, setAfficherPop] = useState(false)
 
         const togglePop= () => {
-            setAfficherPop(true)
+            setAfficherPop(!afficherPop)
           };
         
           
-          const onClose = () => {
-            setAfficherPop(false)
-          };
-    
+
 
 
       let contenu = null; 
@@ -62,14 +52,14 @@ export default function ControlHome ({onClickDeconnexion}){
                     />;
 
         } else if (afficherSort) {
-        contenu = <Sort onRetourClick={toggleRetour} />;
+        contenu = <Sort onRetourClick={toggleSearch} />;
         
             } else if (afficherModifier ) {
-        contenu = <Modifier onRetourClick={toggleModifierRetour} />;
+        contenu = <ModifierPlus onRetourClick={toggleModifier} onOkClick={toggleModifier} />;
                 } else if (afficherCreate) {
-            contenu = <Create onRetourClick={toggleCreateRetour} />;
+            contenu = <CreatePlus onRetourClick={toggleCreate} onNonClick={toggleCreate} />;   
                     }else if (afficherPop) {
-                        contenu = <PopValider onRetourClick={onClose} />
+                        contenu = <PopValider onRetourClick={togglePop} />
                                 }
   
 

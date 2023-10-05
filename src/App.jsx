@@ -7,11 +7,9 @@ import ControlHome from './component/ControlHome';
 
 
 
-
 export default function App() {
 
   const [auth,setAuth]= useState(true)
-
 const toggleAuth = () => {
   setAuth(!auth)
 }
