@@ -3,8 +3,11 @@ import Sidebar from './Sidebar';
 
 
 export default function Home({onRechercherClick , onModifierClick , onCreateClick , onSupprimerClick , onClickDeconnexion}){
+  const isVisible=true
+
   
     return(
+      <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} >
         <div className="bienvenu">
           <Sidebar onRechercherClick={onRechercherClick}  onModifierClick={onModifierClick}  onCreateClick={onCreateClick}  onSupprimerClick={onSupprimerClick}  onClickDeconnexion={onClickDeconnexion}/>
          
@@ -23,5 +26,7 @@ export default function Home({onRechercherClick , onModifierClick , onCreateClic
           ))}
         </ul> */}
         </div>
+        </div>
+
     )
 }

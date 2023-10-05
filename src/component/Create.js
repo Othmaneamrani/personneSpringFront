@@ -1,6 +1,8 @@
 export default function Create ({onRetourClick  , onCreerClick}) {
+  const isVisible=true
+
     return(
-      <div>
+      <div    className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} >
           <a  onClick={onRetourClick} href="#" className="retour"><span className="arrow">&#8592;</span>Retour</a>
         <div className="personne-container">
         <h1 className="login-header" >Créer une personne</h1>

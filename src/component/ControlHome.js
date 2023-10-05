@@ -7,6 +7,8 @@ import ModifierPlus from "./ModifierPlus";
 
 export default function ControlHome ({onClickDeconnexion}){
 
+  const isVisible=true
+
     const [afficherSort, setAfficherSort] = useState(false)
 
     const toggleSearch = () => {
@@ -44,7 +46,7 @@ export default function ControlHome ({onClickDeconnexion}){
       let contenu = null; 
 
       if (!afficherSort && !afficherModifier && !afficherCreate && !afficherPop) {
-        contenu = <Home onRechercherClick={toggleSearch} 
+        contenu =  <Home onRechercherClick={toggleSearch} 
                         onModifierClick={toggleModifier} 
                         onCreateClick={toggleCreate}
                         onSupprimerClick={togglePop}
@@ -52,19 +54,20 @@ export default function ControlHome ({onClickDeconnexion}){
                     />;
 
         } else if (afficherSort) {
-        contenu = <Sort onRetourClick={toggleSearch} />;
+        contenu = <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} ><Sort onRetourClick={toggleSearch} /></div>
         
             } else if (afficherModifier ) {
-        contenu = <ModifierPlus onRetourClick={toggleModifier} onOkClick={toggleModifier} />;
+        contenu = <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} ><ModifierPlus onRetourClick={toggleModifier} onOkClick={toggleModifier} /></div>
                 } else if (afficherCreate) {
-            contenu = <CreatePlus onRetourClick={toggleCreate} onNonClick={toggleCreate} />;   
+            contenu =<div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} > <CreatePlus onRetourClick={toggleCreate} onNonClick={toggleCreate} /></div> 
                     }else if (afficherPop) {
                         contenu = <PopValider onRetourClick={togglePop} />
                                 }
   
 
     return(
-        <div>
+      
+        <div > 
                 {contenu}
         </div>
     )

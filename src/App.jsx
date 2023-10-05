@@ -5,9 +5,9 @@ import Authentification from './component/Authentification';
 import ControlHome from './component/ControlHome';
 
 
-
-
 export default function App() {
+
+  const isVisible=true
 
   const [auth,setAuth]= useState(true)
 const toggleAuth = () => {
@@ -15,12 +15,15 @@ const toggleAuth = () => {
 }
 
   return (
-    <div>
+    <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`}>
      <Navbar />
-        {auth ? ( <Authentification onClickConnexion={toggleAuth}
+        {auth ? (
+        <Authentification onClickConnexion={toggleAuth}
                                     onClickInscription={toggleAuth}
               />
-          ): (<ControlHome onClickDeconnexion={toggleAuth} />
+        ): (<div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`}>
+          <ControlHome onClickDeconnexion={toggleAuth} />
+          </div>
       ) }
      <Footer />
     </div>

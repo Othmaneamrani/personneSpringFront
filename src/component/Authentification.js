@@ -6,6 +6,7 @@ import Sign from "./Sign";
 
 export default function Authentification({onClickConnexion , onClickInscription}) { 
 
+  const isVisible=true
 
     
 
@@ -16,7 +17,7 @@ export default function Authentification({onClickConnexion , onClickInscription}
   };
 
   return (
-    <div>
+    <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} >
       {afficherLogin ? (
         <Login onInscriptionClick={toggleAffichage}  onClickConnexion={onClickConnexion} />     
       ) : (

@@ -2,7 +2,10 @@ import React from "react";
 import mail from './email.png'
 
 export default function Sign({onLoginClick , onClickInscription}){
+  const isVisible=true
+
 return(
+  <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} >
     <div className="login-container" >
 <form className="login-form">
   <div className="form-group">
@@ -31,5 +34,7 @@ return(
   </div>
 </form>
     </div>
+    </div>
+
 )
 }

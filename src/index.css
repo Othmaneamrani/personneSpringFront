@@ -372,3 +372,20 @@ body {
 }
 
 
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.transition-fade {
+  animation: fadeInOut 0.7s ease-in-out;
+  opacity: 0;
+}
+
+.transition-fade.visible {
+  opacity: 1; 
+}

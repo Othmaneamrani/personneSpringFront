@@ -2,7 +2,10 @@ import React from "react";
 
 
 export default function Login ({ onInscriptionClick , onClickConnexion}){    
+  const isVisible=true
+
     return (
+      <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} >
         <div className="login-container">
         <h2 className="login-header">Connexion</h2>
         <form className="login-form">
@@ -21,4 +24,6 @@ export default function Login ({ onInscriptionClick , onClickConnexion}){
           </div>
         </form>
       </div>
+      </div>
+
     )}
