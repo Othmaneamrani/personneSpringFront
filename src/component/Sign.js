@@ -18,7 +18,7 @@ return(
   </div>
   <div className="form-group">
     <label htmlFor="birthdate" min="1900-01-01" className="login-label">Date de naissance :</label>
-    <input type="date" id="birthdate" name="birthdate" className="form-control " required />
+    <input type="date" id="birthdate"   name="birthdate" className="form-control " required />
   </div>
   <div className="form-group">
     <div className="gmail-icon">
