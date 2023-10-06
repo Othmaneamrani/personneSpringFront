@@ -17,7 +17,7 @@ return(
     <input type="password" id="password" name="password" className="form-control " required />
   </div>
   <div className="form-group">
-    <label htmlFor="birthdate" className="login-label">Date de naissance :</label>
+    <label htmlFor="birthdate" min="1900-01-01" className="login-label">Date de naissance :</label>
     <input type="date" id="birthdate" name="birthdate" className="form-control " required />
   </div>
   <div className="form-group">
