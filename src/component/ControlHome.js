@@ -3,6 +3,7 @@ import Home from "./Home";
 import Sort from "./Sort";
 import CreatePlus from "./CreatePlus";
 import PopValider from "./PopValider";
+import ModifierAdressePlus from "./ModifierAdressePlus";
 import ModifierPlus from "./ModifierPlus";
 
 export default function ControlHome ({onClickDeconnexion}){
@@ -24,6 +25,13 @@ export default function ControlHome ({onClickDeconnexion}){
       };
       
 
+      
+    const [afficherModifierAdresse, setAfficherModifierAdresse] = useState(false)
+
+    const toggleModifierAdresse= () => {
+        setAfficherModifierAdresse(!afficherModifierAdresse)
+      };
+      
 
       const [afficherCreate, setAfficherCreate] = useState(false)
 
@@ -45,25 +53,26 @@ export default function ControlHome ({onClickDeconnexion}){
 
       let contenu = null; 
 
-      if (!afficherSort && !afficherModifier && !afficherCreate && !afficherPop) {
+      if (!afficherSort && !afficherModifier && !afficherCreate && !afficherPop && !afficherModifierAdresse) {
         contenu =  <Home onRechercherClick={toggleSearch} 
                         onModifierClick={toggleModifier} 
                         onCreateClick={toggleCreate}
                         onSupprimerClick={togglePop}
+                        onModifierAdresseClick={toggleModifierAdresse}
                         onClickDeconnexion={onClickDeconnexion}
                     />;
 
         } else if (afficherSort) {
         contenu = <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} ><Sort onRetourClick={toggleSearch} /></div>
-        
             } else if (afficherModifier ) {
         contenu = <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} ><ModifierPlus onRetourClick={toggleModifier} onOkClick={toggleModifier} /></div>
                 } else if (afficherCreate) {
             contenu =<div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} > <CreatePlus onRetourClick={toggleCreate} onNonClick={toggleCreate} /></div> 
                     }else if (afficherPop) {
                         contenu = <PopValider onRetourClick={togglePop} />
+                                }else if (afficherModifierAdresse) {
+                                  contenu = <ModifierAdressePlus onRetourClick={toggleModifierAdresse}  onOkClick={toggleModifierAdresse}/>
                                 }
-  
 
     return(
       

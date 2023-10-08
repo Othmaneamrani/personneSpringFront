@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-export default function Sidebar({onRechercherClick , onModifierClick , onCreateClick , onSupprimerClick , onClickDeconnexion}){
+export default function Sidebar({onRechercherClick , onModifierClick , onCreateClick , onSupprimerClick , onClickDeconnexion , onModifierAdresseClick}){
 
   const isVisible=true
 
@@ -37,6 +37,7 @@ export default function Sidebar({onRechercherClick , onModifierClick , onCreateC
 
           <li><a  onClick={onCreateClick} className="sidebar-l3" href="#">Créer personne</a></li>
           <li><a onClick={onModifierClick} className="sidebar-l3" href="#">Modifier personne</a></li>
+          <li><a onClick={onModifierAdresseClick} className="sidebar-l3" href="#">Modifier adresse</a></li>
           <li><a  onClick={onSupprimerClick} className="supprimer" href="#">Supprimer personne</a></li>
           <li> <a  onClick={onClickDeconnexion} className="deconnexion" href="#">Deconnexion</a></li>
 

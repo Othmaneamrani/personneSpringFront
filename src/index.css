@@ -268,16 +268,23 @@ body {
 
 .retour:hover {
   text-decoration: underline;
-}
-
-.retour-hover{
   transition: transform 0.2s;
 }
+
 
 .retour-hover:hover{
   transform: translateY(-3px);
 }
 
+
+.prec-hover:hover{
+transform: translateY(-3px);
+}
+
+.suiv-hover:hover{
+  transform: translateY(-3px);
+  }
+  
 
 .resultat {
   font-size: 30px;
@@ -285,10 +292,81 @@ body {
   margin-top: 20px;
   text-align: left;
   margin-left: 46.2%;
+  clear: both; 
+}
+
+.prec{
+  text-decoration: none;
+  color: #442f33; 
+  font-weight: bold;
+  font-size: 20px;
+  display: block;
+  float: left;
+  margin-top: 20px;
+  margin-left: 10px; 
+}
+
+.prec-home{
+  text-decoration: none;
+  color: #442f33; 
+  font-weight: bold;
+  font-size: 20px;
+  display: block;
+  float: left;
+  margin-top: 20px;
+  margin-left: 198px; 
+}
+
+.suiv {
+  text-decoration: none;
+  color: #442f33; 
+  font-weight: bold;
+  font-size: 20px;
+  display: block;
+  float: right; 
+  margin-top: 20px;
+  margin-right: 10px; 
+  z-index: 999;
+}
+
+.conteneur-suiv {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 10px;
+  right: 0;
+  padding: 0 10px;
+}
+
+
+.conteneur-prec {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  padding: 0 10px;
+}
+
+.suiv:hover {
+  text-decoration: underline;
+  transition: transform 0.2s;
+}
+
+.prec:hover {
+  text-decoration: underline;
+  transition: transform 0.2s;
+}
+
+
+.prec-home:hover {
+  text-decoration: underline;
+  transition: transform 0.2s;
 }
 
 .arrow{
-  font-size:25px;
+  font-size:25px;  
 }
 
 

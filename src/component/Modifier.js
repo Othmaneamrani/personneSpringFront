@@ -17,19 +17,19 @@ export default function Modifier ({onRetourClick , onSauvegarderClick}) {
             <input className="form-control" type="text" id="prenom" name="prenom" required />
           </div>
           <div className="form-group">
-            <h3 className="mini-login-header">Adresses:</h3>
-            <div className="address-group">
-              <div className="form-group">
-                <label className="login-label" htmlFor="rue">Rue:</label>
-                <input className="form-control" type="text" id="rue" name="rue[]" required />
-              </div>
-              <div className="form-group">
-                <label className="login-label" htmlFor="numeroMaison">Numero de maison:</label>
-                <input className="form-control" type="text" id="numeroMaison" name="numeroMaison[]" required />
-              </div>
-            </div>
-            <button className="boutton-login" type="button" id="ajouterAdresse">Ajouter une adresse</button>
-            <button className="boutton-login" type="button" id="modifierAdresse">Modifier une autre adresse</button>
+            {/* <h3 className="mini-login-header">Adresses:</h3> */}
+            {/* <div className="address-group"> */}
+              {/* <div className="form-group"> */}
+                {/* <label className="login-label" htmlFor="rue">Rue:</label> */}
+                {/* <input className="form-control" type="text" id="rue" name="rue[]" required /> */}
+              {/* </div> */}
+              {/* <div className="form-group"> */}
+                {/* <label className="login-label" htmlFor="numeroMaison">Numero de maison:</label> */}
+                {/* <input className="form-control" type="text" id="numeroMaison" name="numeroMaison[]" required /> */}
+              {/* </div> */}
+            {/* </div> */}
+            {/* <button className="boutton-login" type="button" id="ajouterAdresse">Ajouter une adresse</button> */}
+            {/* <button className="boutton-login" type="button" id="modifierAdresse">Modifier une autre adresse</button> */}
             <div className="marginT">
             <div className="form-group">
           <button className="boutton-login" onClick={onSauvegarderClick} type="submit">Sauvegarder Personne</button>
