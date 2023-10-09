@@ -401,7 +401,6 @@ transform: translateY(-3px);
   margin: 0 10px;
   padding: 10px 20px;
   border: none;
-  background: #d80909; 
   color: #fff; 
   cursor: pointer;
   border-radius: 5px;
@@ -410,8 +409,18 @@ transform: translateY(-3px);
   transition: transform 0.2s;
 }
 
-.popup button:last-child {
-  background: hsl(224, 98%, 49%); 
+.linkB {
+text-decoration: none;
+}
+
+.red-button {
+  background: red;
+  color: white;
+}
+
+.blue-button {
+  background: blue;
+  color: white;
 }
 
 
@@ -419,7 +428,7 @@ transform: translateY(-3px);
   display: block;
   color: #fff;
   font-weight: bold;
-  margin-top: 255px;
+  margin-top: 200px;
   transition: transform 0.2s;
 }
 

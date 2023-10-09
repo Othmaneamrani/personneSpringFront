@@ -1,14 +1,14 @@
 import React from "react";
 import Sidebar from './Sidebar';
 
-export default function Home({onRechercherClick , onModifierClick , onCreateClick , onSupprimerClick , onClickDeconnexion , onModifierAdresseClick}){
+export default function Home(){
   const isVisible=true
 
  
     return(
       <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} >
         <div className="bienvenu">
-          <Sidebar onRechercherClick={onRechercherClick}  onModifierClick={onModifierClick}  onModifierAdresseClick={onModifierAdresseClick} onCreateClick={onCreateClick}  onSupprimerClick={onSupprimerClick}  onClickDeconnexion={onClickDeconnexion}/>
+          <Sidebar />
          
         <h1 className="smia" >BIENVENU M. (smia)</h1>    
         <h3>Que souhaitez-vous faire ?</h3>

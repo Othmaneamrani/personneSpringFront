@@ -1,10 +1,14 @@
-export default function Create ({onRetourClick  , onCreerClick}) {
+import React from "react"
+import { Link } from 'react-router-dom';
+
+
+export default function Create () {
   const isVisible=true
 
     return(
       <div    className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} >
         <div className="retour-hover">
-          <a className="retour" onClick={onRetourClick} href="#" ><span className="arrow">&#8592;</span>Retour</a>
+        <Link className="retour"  to={'/home'} > <span className="arrow">&#8592;</span>  Retour</Link>
           </div>
         <div className="personne-container">
         <h1 className="login-header" >Créer une personne</h1>
@@ -26,7 +30,7 @@ export default function Create ({onRetourClick  , onCreerClick}) {
               </div>
               <div className="form-group">
                 <label className="login-label" htmlFor="numeroMaison">Numero de maison:</label>
-                <input className="form-control" type="text" id="numeroMaison" name="numeroMaison[]" required />
+                <input className="form-control" type="text" id="numeroMaison" name="numeroMaison" required />
               </div>
               
             </div>
@@ -34,7 +38,7 @@ export default function Create ({onRetourClick  , onCreerClick}) {
           </div>
 
           <div className="form-group">
-          <button className="boutton-login" onClick={onCreerClick} type="submit">Créer Personne</button>
+          <Link to={'/popDemander'} ><button className="boutton-login" type="submit">Créer Personne</button></Link>
           </div>
 
         </form>

@@ -1,13 +1,15 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
-export default function PopDemander({onOuiClick , onNonClick}) {
+
+export default function PopDemander() {
 
   return (
     <div className="popup-overlay">
       <div className="popup2">
         <h2>Personne créee ! Ajouter une autre ?</h2>
-        <button onClick={onOuiClick} >Oui</button>
-        <button onClick={onNonClick} >Non</button>
+        <Link className="linkB" to={'/create'}   ><button  >Oui</button> </Link>
+        <Link className="linkB" to={'/home'}  > <button  >Non</button> </Link>
       </div>
     </div>
   );

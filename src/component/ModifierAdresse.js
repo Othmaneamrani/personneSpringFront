@@ -1,12 +1,13 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
-export default function ModifierAdresse({ onRetourClick, onSauvegarderClick }) {
+
+
+export default function ModifierAdresse() {
     return (
       <div>
         <div className="retour-hover">
-          <a onClick={onRetourClick} href="#" className="retour">
-            <span className="arrow">&#8592;</span> Retour
-          </a>
+        <Link className="retour"  to={'/home'} > <span className="arrow">&#8592;</span>  Retour</Link>
         </div>
         <div className="personne-container">
           <h1 className="login-header">Modifier une adresse</h1>
@@ -31,9 +32,8 @@ export default function ModifierAdresse({ onRetourClick, onSauvegarderClick }) {
             </div>
             <div className="marginT">
               <div className="form-group">
-                <button className="boutton-login" onClick={onSauvegarderClick} type="submit">
-                  Sauvegarder Adresse
-                </button>
+              <Link  to={'/popVoid'}  >  <button className="boutton-login"  type="submit">Sauvegarder adresse</button></Link>
+
               </div>
             </div>
           </form>

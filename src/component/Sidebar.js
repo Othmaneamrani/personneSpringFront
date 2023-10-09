@@ -1,7 +1,9 @@
 import React from "react";
 import { useState } from "react";
+import BarreRecherche from "./BarreRecherche";
+import { Link } from "react-router-dom";
 
-export default function Sidebar({onRechercherClick , onModifierClick , onCreateClick , onSupprimerClick , onClickDeconnexion , onModifierAdresseClick}){
+export default function Sidebar(){
 
   const isVisible=true
 
@@ -11,8 +13,7 @@ export default function Sidebar({onRechercherClick , onModifierClick , onCreateC
         setShowSearch(!showSearch);
       };
 
- 
-
+      
     return (
       <div className="sidebar">
         <div className="hebto">
@@ -21,25 +22,15 @@ export default function Sidebar({onRechercherClick , onModifierClick , onCreateC
           <li><a onClick={activeSearch} className="sidebar-l3" href="#">Chercher personne</a>
           {showSearch && (
              <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} >
-          <form className="search-form">
-            <input
-              type="text"
-              placeholder="Rechercher..."
-              className="search-input"
-            />
-            <button onClick={onRechercherClick} type="submit" className="search-button">
-              Rechercher
-            </button>
-
-          </form>
+         <BarreRecherche />
           </div>)}</li>
 
 
-          <li><a  onClick={onCreateClick} className="sidebar-l3" href="#">Créer personne</a></li>
-          <li><a onClick={onModifierClick} className="sidebar-l3" href="#">Modifier personne</a></li>
-          <li><a onClick={onModifierAdresseClick} className="sidebar-l3" href="#">Modifier adresse</a></li>
-          <li><a  onClick={onSupprimerClick} className="supprimer" href="#">Supprimer personne</a></li>
-          <li> <a  onClick={onClickDeconnexion} className="deconnexion" href="#">Deconnexion</a></li>
+          <li><Link to={'/create'} className="sidebar-l3" >Créer personne</Link></li>
+          <li><Link to={'/modifier'} className="sidebar-l3" >Modifier personne</Link></li>
+          <li><Link to={'/modifierAdresse'}className="sidebar-l3" >Modifier adresse</Link></li>
+          <li><Link  to={'/popValider'}className="supprimer" >Supprimer personne</Link></li>
+          <li> <Link to={'/'} className="deconnexion" >Deconnexion</Link></li>
 
       </ul>
       </div>
