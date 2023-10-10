@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter , Route,Routes } from 'react-router-dom';
+import React ,{useState } from 'react';
+import { BrowserRouter , Route,Routes, Navigate } from 'react-router-dom';
 import Footer from './component/Footer';
 import Navbar from './component/Navbar';
 import Modifier from './component/Modifier';
@@ -12,10 +12,22 @@ import Sort from './component/Sort';
 import Home from './component/Home';
 import Sign from './component/Sign';
 import Login from './component/Login';
+import PopSign from './component/PopSign';
 
 export default function App() {
 
   const isVisible=true
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  const toggle = () =>{
+   console.log(isLoggedIn)
+
+   setIsLoggedIn(!isLoggedIn)    
+   console.log('setter')
+   console.log(isLoggedIn)
+
+  }
 
   return (
     <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`}>
@@ -24,7 +36,9 @@ export default function App() {
 
         <Routes>
           
-          <Route path='/'  element={<Login/> }  ></Route>
+          <Route path='/'  element={ <Login onToggleClick={toggle} /> }  ></Route>
+          {isLoggedIn && (
+          <>
           <Route path='/home'  element={<Home/> }  ></Route>
           <Route path='/modifier'  element={<Modifier/> }  ></Route>
           <Route path='/modifierAdresse'  element={<ModifierAdresse/> }  ></Route>
@@ -34,7 +48,9 @@ export default function App() {
           <Route path='/popVoid'  element={<PopVoid/> }  ></Route>
           <Route path='/sort'  element={<Sort/> }  ></Route>
           <Route path='/sign'  element={<Sign/> }  ></Route>
-
+          <Route path='/popSign'  element={<PopSign/> }  ></Route>
+          </>
+          )}
         </Routes>
       
       </BrowserRouter>
