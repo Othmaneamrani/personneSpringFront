@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link ,   useNavigate} from 'react-router-dom';
 
 
-export default function Login({onConnexion}) {
+export default function Login({onConnexion, onProblem}) {
   const isVisible = true;
   const [usernameCommand, setUsernameCommand] = useState('');
   const [passwordCommand, setPasswordCommand] = useState('');
@@ -26,7 +26,8 @@ export default function Login({onConnexion}) {
         onConnexion(true, usernameCommand);
         navigate('/home');
       }else {
-        navigate('/');
+        onProblem(true)
+        navigate('/popIncorrect');
         // window.location.href = '/';
 
       }

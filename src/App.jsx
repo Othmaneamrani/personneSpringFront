@@ -13,6 +13,10 @@ import Home from './component/Home';
 import Sign from './component/Sign';
 import Login from './component/Login';
 import PopSign from './component/PopSign';
+import PopGmail from './component/PopGmail';
+import PopName from './component/PopName';
+import PopIncorrect from './component/PopIncorrect';
+import PopMdp from './component/PopMdp';
 
 export default function App() {
 
@@ -20,11 +24,20 @@ export default function App() {
 
   const [username, setUsername] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [pop, setPop] = useState(false)
+
 
   const toggle = (newIsLoggedIn, newUsername) => {
     setIsLoggedIn(newIsLoggedIn);
     setUsername(newUsername);
   };
+
+
+
+  const togglePop = (newPop) => {
+    setPop(newPop);
+
+  }
 
   return (
     <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`}>
@@ -33,8 +46,18 @@ export default function App() {
 
         <Routes>
           
-          <Route path='/'  element={ <Login onConnexion={toggle} /> }  ></Route>
-          <Route path='/sign'  element={<Sign  onConnexion={toggle} /> }  ></Route>
+          <Route path='/'  element={ <Login onConnexion={toggle} onProblem={togglePop}  /> }  ></Route>
+          <Route path='/sign'  element={<Sign  onConnexion={toggle}  onProblem={togglePop} /> }  ></Route>
+
+          {pop && (
+          <>
+          <Route path='/popIncorrect'  element={<PopIncorrect/> }  ></Route>
+          <Route path='/popName'  element={<PopName/> }  ></Route>
+          <Route path='/popGmail'  element={<PopGmail/> }  ></Route>
+          <Route path='/popMdp'  element={<PopMdp/> }  ></Route>
+          </>
+          )}
+
 
           {isLoggedIn && (
           <>
@@ -47,6 +70,9 @@ export default function App() {
           <Route path='/popVoid'  element={<PopVoid/> }  ></Route>
           <Route path='/sort'  element={<Sort/> }  ></Route>
           <Route path='/popSign'  element={<PopSign/> }  ></Route>
+
+
+
           </>
           )}
         </Routes>

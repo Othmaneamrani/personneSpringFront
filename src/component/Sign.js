@@ -4,7 +4,7 @@ import { Link  ,   useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 
-export default function Sign({onConnexion}){
+export default function Sign({onConnexion,onProblem}){
   const isVisible=true
   const navigate = useNavigate();
 
@@ -26,11 +26,18 @@ const LoginCommand = {
 try {
 
   const response = await axios.post ('http://localhost:8080/logins/signup',LoginCommand)
-  if(response.data === true){
-    onConnexion()
-        navigate('/popSign');
-  }else{
-    navigate('/Sign');
+  if(response.data === LoginCommand.connexionCommand.usernameCommand){
+    onConnexion(true, connexionCommand.usernameCommand);
+    navigate('/popSign');
+  }else if (response.data === "gmail") {
+    onProblem(true)
+    navigate('/popGmail');
+    }else if (response.data === "mdp") {
+      onProblem(true)
+      navigate('/popMdp');
+    }else{
+    onProblem(true)
+    navigate('/popName');
 
   }} 
   catch(error){

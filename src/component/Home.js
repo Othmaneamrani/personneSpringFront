@@ -34,7 +34,7 @@ export default function Home({onDeconnexionClick , username}){
         <div className="bienvenu">
           <Sidebar onSupprimerClick = {handleDeletePersonne} onDeconnexionClick={onDeconnexionClick} />
          
-         <h1 className="smia">BIENVENU M. {username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}</h1>
+         <h1 className="smia">BIENVENU {username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}</h1>
         <h3>Que souhaitez-vous faire ?</h3>
         <h1>Liste des Personnes : </h1>
 
