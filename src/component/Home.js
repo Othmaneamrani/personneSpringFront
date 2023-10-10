@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import Sidebar from './Sidebar';
 import axios from "axios";
 
-export default function Home({onDeconnexionClick}){
+export default function Home({onDeconnexionClick , username}){
   const isVisible=true
+
 
     const [personnes,setPersonnes] =useState({});
 
@@ -33,7 +34,7 @@ export default function Home({onDeconnexionClick}){
         <div className="bienvenu">
           <Sidebar onSupprimerClick = {handleDeletePersonne} onDeconnexionClick={onDeconnexionClick} />
          
-        <h1 className="smia" >BIENVENU M. (username)</h1>    
+         <h1 className="smia">BIENVENU M. {username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}</h1>
         <h3>Que souhaitez-vous faire ?</h3>
         <h1>Liste des Personnes : </h1>
 
@@ -41,7 +42,6 @@ export default function Home({onDeconnexionClick}){
         <ul key={indexe}>  
           <li> {personne.nomRepresentation} </li>
           <li> {personne.prenomRepresentation} </li>
-
         </ul>
      ))
 }

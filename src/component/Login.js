@@ -22,8 +22,8 @@ export default function Login({onConnexion}) {
       const response = await axios.post('http://localhost:8080/connexions/connexion', connexionCommand);
 
       console.log('Réponse de l\'API:', response.data);
-      if(response.data === true){
-        onConnexion()
+      if(response.data === usernameCommand){
+        onConnexion(true, usernameCommand);
         navigate('/home');
       }else {
         navigate('/');

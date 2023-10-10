@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import mail from './email.png'
-import { Link } from 'react-router-dom';
+import { Link  ,   useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 
-export default function Sign(){
+export default function Sign({onConnexion}){
   const isVisible=true
+  const navigate = useNavigate();
 
   const [connexionCommand, setConnexionCommand] = useState({
     usernameCommand: '',
@@ -26,9 +27,11 @@ try {
 
   const response = await axios.post ('http://localhost:8080/logins/signup',LoginCommand)
   if(response.data === true){
-    window.location.href = '/popSign'
+    onConnexion()
+        navigate('/popSign');
   }else{
-    window.location.href = '/sign';
+    navigate('/Sign');
+
   }} 
   catch(error){
     console.log('erreur de la requette', error)

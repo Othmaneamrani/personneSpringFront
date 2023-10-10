@@ -1,5 +1,5 @@
 import React ,{useState } from 'react';
-import { BrowserRouter , Route,Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter , Route,Routes} from 'react-router-dom';
 import Footer from './component/Footer';
 import Navbar from './component/Navbar';
 import Modifier from './component/Modifier';
@@ -18,14 +18,12 @@ export default function App() {
 
   const isVisible=true
 
+  const [username, setUsername] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-  const toggle = () => {
-    setIsLoggedIn((prevIsLoggedIn) => {
-      const newIsLoggedIn = !prevIsLoggedIn;
-      console.log(newIsLoggedIn); 
-      return newIsLoggedIn;
-    });
+  const toggle = (newIsLoggedIn, newUsername) => {
+    setIsLoggedIn(newIsLoggedIn);
+    setUsername(newUsername);
   };
 
   return (
@@ -36,9 +34,11 @@ export default function App() {
         <Routes>
           
           <Route path='/'  element={ <Login onConnexion={toggle} /> }  ></Route>
+          <Route path='/sign'  element={<Sign  onConnexion={toggle} /> }  ></Route>
+
           {isLoggedIn && (
           <>
-          <Route path='/home'  element={<Home  onDeconnexionClick={toggle}  /> }  ></Route>
+          <Route path='/home'  element={<Home   username={username} onDeconnexionClick={toggle}  /> }  ></Route>
           <Route path='/modifier'  element={<Modifier/> }  ></Route>
           <Route path='/modifierAdresse'  element={<ModifierAdresse/> }  ></Route>
           <Route path='/create'  element={<Create/> }  ></Route>
@@ -46,7 +46,6 @@ export default function App() {
           <Route path='/popValider'  element={<PopValider/> }  ></Route>
           <Route path='/popVoid'  element={<PopVoid/> }  ></Route>
           <Route path='/sort'  element={<Sort/> }  ></Route>
-          <Route path='/sign'  element={<Sign/> }  ></Route>
           <Route path='/popSign'  element={<PopSign/> }  ></Route>
           </>
           )}
