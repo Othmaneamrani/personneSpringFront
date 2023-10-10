@@ -20,14 +20,13 @@ export default function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-  const toggle = () =>{
-   console.log(isLoggedIn)
-
-   setIsLoggedIn(!isLoggedIn)    
-   console.log('setter')
-   console.log(isLoggedIn)
-
-  }
+  const toggle = () => {
+    setIsLoggedIn((prevIsLoggedIn) => {
+      const newIsLoggedIn = !prevIsLoggedIn;
+      console.log(newIsLoggedIn); 
+      return newIsLoggedIn;
+    });
+  };
 
   return (
     <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`}>
@@ -36,10 +35,10 @@ export default function App() {
 
         <Routes>
           
-          <Route path='/'  element={ <Login onToggleClick={toggle} /> }  ></Route>
+          <Route path='/'  element={ <Login onConnexion={toggle} /> }  ></Route>
           {isLoggedIn && (
           <>
-          <Route path='/home'  element={<Home/> }  ></Route>
+          <Route path='/home'  element={<Home  onDeconnexionClick={toggle}  /> }  ></Route>
           <Route path='/modifier'  element={<Modifier/> }  ></Route>
           <Route path='/modifierAdresse'  element={<ModifierAdresse/> }  ></Route>
           <Route path='/create'  element={<Create/> }  ></Route>

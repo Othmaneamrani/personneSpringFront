@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Sidebar from './Sidebar';
 import axios from "axios";
 
-export default function Home(){
+export default function Home({onDeconnexionClick}){
   const isVisible=true
 
     const [personnes,setPersonnes] =useState({});
@@ -31,7 +31,7 @@ export default function Home(){
     return(
       <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} >
         <div className="bienvenu">
-          <Sidebar onSupprimerClick = {handleDeletePersonne} />
+          <Sidebar onSupprimerClick = {handleDeletePersonne} onDeconnexionClick={onDeconnexionClick} />
          
         <h1 className="smia" >BIENVENU M. (username)</h1>    
         <h3>Que souhaitez-vous faire ?</h3>

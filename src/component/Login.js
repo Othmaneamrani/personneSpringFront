@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link ,  Navigate} from 'react-router-dom';
+import { Link ,   useNavigate} from 'react-router-dom';
 
 
-export default function Login({onToggleClick}) {
+export default function Login({onConnexion}) {
   const isVisible = true;
   const [usernameCommand, setUsernameCommand] = useState('');
   const [passwordCommand, setPasswordCommand] = useState('');
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,11 +23,13 @@ export default function Login({onToggleClick}) {
 
       console.log('Réponse de l\'API:', response.data);
       if(response.data === true){
-        onToggleClick()
-        window.location.href = '/home';
+        onConnexion()
+        navigate('/home');
       }else {
-      window.location.href = '/';
-    }
+        navigate('/');
+        // window.location.href = '/';
+
+      }
     } catch (error) {
       console.error('Erreur lors de la requête API:', error);
     }

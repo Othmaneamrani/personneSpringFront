@@ -3,7 +3,7 @@ import { useState } from "react";
 import BarreRecherche from "./BarreRecherche";
 import { Link } from "react-router-dom";
 
-export default function Sidebar(){
+export default function Sidebar({onDeconnexionClick}){
 
   const isVisible=true
 
@@ -30,7 +30,7 @@ export default function Sidebar(){
           <li><Link to={'/modifier'} className="sidebar-l3" >Modifier personne</Link></li>
           <li><Link to={'/modifierAdresse'}className="sidebar-l3" >Modifier adresse</Link></li>
           <li><Link  to={'/popValider'}className="supprimer" >Supprimer personne</Link></li>
-          <li> <Link to={'/'} className="deconnexion" >Deconnexion</Link></li>
+          <li> <Link to={'/'}  onClick={onDeconnexionClick} className="deconnexion" >Deconnexion</Link></li>
 
       </ul>
       </div>
