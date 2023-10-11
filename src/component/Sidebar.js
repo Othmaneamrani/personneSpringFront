@@ -3,7 +3,7 @@ import { useState } from "react";
 import BarreRecherche from "./BarreRecherche";
 import { Link } from "react-router-dom";
 
-export default function Sidebar({onDeconnexionClick}){
+export default function Sidebar({onDeconnexionClick , onSort , sort}){
 
   const isVisible=true
 
@@ -19,10 +19,10 @@ export default function Sidebar({onDeconnexionClick}){
         <div className="hebto">
       <ul className="sidebarList">
 
-          <li><a onClick={activeSearch} className="sidebar-l3" href="#">Chercher personne</a>
+      <li> <Link  onClick={activeSearch}  className="sidebar-l3" >Chercher personne</Link>
           {showSearch && (
              <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} >
-         <BarreRecherche />
+         <BarreRecherche onSort={onSort}  sort={sort} />
           </div>)}</li>
 
 

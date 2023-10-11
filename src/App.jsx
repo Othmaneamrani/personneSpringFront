@@ -22,15 +22,17 @@ export default function App() {
 
   const isVisible=true
 
+  const [sort, setSort] = useState('');
+
+  const toggleSort = (newSort) => {
+    setSort(newSort);
+  }
+
   const [username, setUsername] = useState('');
-  const [p, setP] = useState('');
 
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [pop, setPop] = useState(false)
 
-  const pe = (newP) => {
-    setP(newP)
-  } 
 
   const toggle = (newIsLoggedIn, newUsername) => {
     setIsLoggedIn(newIsLoggedIn);
@@ -66,14 +68,14 @@ export default function App() {
 
           {isLoggedIn && (
           <>
-          <Route path='/home'  element={<Home   username={username} onDeconnexionClick={toggle}  /> }  ></Route>
+          <Route path='/home'  element={<Home  sort={sort} onSort={toggleSort}  username={username} onDeconnexionClick={toggle}  /> }  ></Route>
           <Route path='/modifier'  element={<Modifier/> }  ></Route>
           <Route path='/modifierAdresse'  element={<ModifierAdresse/> }  ></Route>
-          <Route path='/create'  element={<Create  onCreate={pe} /> }  ></Route>
-          <Route path='/popDemander'  element={<PopDemander  p={p} /> }  ></Route>
+          <Route path='/create'  element={<Create  /> }  ></Route>
+          <Route path='/popDemander'  element={<PopDemander /> }  ></Route>
           <Route path='/popValider'  element={<PopValider/> }  ></Route>
           <Route path='/popVoid'  element={<PopVoid/> }  ></Route>
-          <Route path='/sort'  element={<Sort/> }  ></Route>
+          <Route path='/sort'  element={<Sort sort={sort}  /> }  ></Route>
           <Route path='/popSign'  element={<PopSign/> }  ></Route>
 
 

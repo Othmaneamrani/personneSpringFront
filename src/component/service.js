@@ -12,6 +12,10 @@ export const getPersonnes = () => {
     return personneApi.get('/personnes')
 }
 
+export const getPersonnesSort = (sort) => {
+    return personneApi.get(`/personnes?page=1&size=4&sort=nom&like=${sort}`)
+}
+
 // export const deleltePersonne = (personne) => {
 //     return personneApi.delete(`/personnes/supprimer${personne.id}`)
 // }

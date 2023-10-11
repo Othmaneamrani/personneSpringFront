@@ -9,8 +9,8 @@ export default function Create({onCreate}) {
 
 
   const [isAddingAddress, setIsAddingAddress] = useState(false);
-  const [addresses, setAddresses] = useState([]);
-  const [newAddress, setNewAddress] = useState({ rue: '', numeroMaison: '' });
+  const [adressesCommand, setAddressesCommand] = useState([]);
+  const [adresseCommand, setAdresseCommand] = useState({ rueCommand: '', numeroMaisonCommand: '' ,});
 
 
   const [nomCommand, setNomCommand] = useState('');
@@ -21,12 +21,21 @@ export default function Create({onCreate}) {
     setIsAddingAddress(!isAddingAddress);
   };
 
+
   const addAddress = () => {
-    setAddresses([...addresses, newAddress]);
-    setNewAddress({ rue: '', numeroMaison: '' });
+    if (adresseCommand.rueCommand.trim() === '') {
+      return;
+    }
+    setAddressesCommand([...adressesCommand, adresseCommand]);
+    setAdresseCommand({ rueCommand: '', numeroMaisonCommand: '' });
     toggleAddressPopup();
   };
 
+  const removeAddress = (index) => {
+    const updatedAddresses = [...adressesCommand];
+    updatedAddresses.splice(index, 1);
+    setAddressesCommand(updatedAddresses);
+  };
 
   const handleCreatePersonne = async (e) => {
     e.preventDefault();
@@ -34,7 +43,7 @@ export default function Create({onCreate}) {
       const personneCommand = {
         nomCommand : nomCommand,
         prenomCommand : prenomCommand,
-        adressesCommand : addresses
+        adressesCommand : adressesCommand
       }
 
 try{
@@ -44,6 +53,7 @@ try{
   if(response.data === "ok"){
     navigate('/popDemander');
     onCreate(personneCommand.nomCommand)
+    console.log(personneCommand.adressesCommand)
   }
 
 }catch (error) {
@@ -79,9 +89,7 @@ try{
             name="prenomcommand"
             value={prenomCommand}
             onChange={(e)=>setPrenomCommand(e.target.value)}
-              
-              
-              required />
+            required />
           </div>
           <div className="form-group">
             <button className="boutton-login" type="button" id="ajouterAdresse" onClick={toggleAddressPopup}>Ajouter une adresse</button>
@@ -93,36 +101,36 @@ try{
         </form>
 
         {isAddingAddress && (
-          <div className="address-popup">
+          <form className="address-popup">
             <h3 className="popup-header">Ajouter une adresse</h3>
             <div className="form-group">
-              <label className="login-label" htmlFor="rue">Rue:</label>
+              <label className="login-label" htmlFor="rueCommand">Rue:</label>
               <input
                 className="form-control"
                 type="text"
-                id="rue"
-                name="rue"
-                value={newAddress.rue}
-                onChange={(e) => setNewAddress({ ...newAddress, rue: e.target.value })}
+                id="rueCommand"
+                name="rueCommand"
+                value={adresseCommand.rueCommand}
+                onChange={(e) => setAdresseCommand({ ...adresseCommand, rueCommand: e.target.value })}
                 required
               />
             </div>
             <div className="form-group">
-              <label className="login-label" htmlFor="numeroMaison">Numéro de maison:</label>
+              <label className="login-label" htmlFor="numeroMaisonCommand">Numéro de maison:</label>
               <input
                 className="form-control"
                 type="text"
-                id="numeroMaison"
-                name="numeroMaison"
-                value={newAddress.numeroMaison}
-                onChange={(e) => setNewAddress({ ...newAddress, numeroMaison: e.target.value })}
+                id="numeroMaisonCommand"
+                name="numeroMaisonCommand"
+                value={adresseCommand.numeroMaisonCommand}
+                onChange={(e) => setAdresseCommand({ ...adresseCommand, numeroMaisonCommand: e.target.value })}
                 required
               />
             </div>
             <button className="boutton-login" onClick={addAddress}>Ajouter</button>
-          </div>
+          </form>
         )}
-{addresses.length > 0 && (
+{adressesCommand.length > 0 && (
   <div className="address-table">
     <h3 className="mini-login-header">Adresses:</h3>
     <table className="address-table">
@@ -133,10 +141,12 @@ try{
         </tr>
       </thead>
       <tbody>
-        {addresses && addresses.map((address, index) => (
+        {adressesCommand && adressesCommand.map((address, index) => (
           <tr key={index}>
-            <td className="address-cell">{address.rue}</td>
-            <td className="address-cell">{address.numeroMaison}</td>
+            <td className="address-cell">{address.rueCommand}</td>
+            <td className="address-cell">{address.numeroMaisonCommand}</td>
+            <td className="address-cell">
+              <button  className="bouton-supprimer-adresses" onClick={() => removeAddress(index)}>Supprimer</button></td> 
           </tr>
         ))}
       </tbody>

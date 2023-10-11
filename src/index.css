@@ -542,7 +542,7 @@ text-decoration: none;
 }
 
 .personnes-table {
-  margin-left: 340px;
+  margin-left: 330px;
   max-height: 30%;
   width: 70%; 
   border-collapse: collapse;
@@ -617,4 +617,50 @@ text-decoration: none;
 
 .bouton-afficher-adresses:hover {
   background-color: #2980b9;
+}
+
+
+.bouton-supprimer-adresses {
+  background-color: #3498db;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.bouton-supprimer-adresses:hover {
+  background-color: #2980b9;
+}
+
+
+.personnes-table-sort {
+  margin-left: 230px;
+  max-height: 30%;
+  width: 70%; 
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+
+.personnes-table-sort th {
+  background-color: #333;
+  color: #fff;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.personnes-table-sort th,
+.personnes-table-sort td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+
+.personnes-table-sort td {
+  font-size: 20px;
+  font-weight: bold;
+  color: #0d0d0e ;
 }
