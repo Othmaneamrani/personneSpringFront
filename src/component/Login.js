@@ -37,8 +37,10 @@ export default function Login({onConnexion, onProblem}) {
     }
   };
 
+
   return (
     <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`}>
+      
       <div className="login-container">
         <h2 className="login-header">Connexion</h2>
         <form className="login-form" onSubmit={handleSubmit}>

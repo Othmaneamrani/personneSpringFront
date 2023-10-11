@@ -51,17 +51,14 @@ try{
   console.log('reponse de l\'API : '  ,response.data)
 
   if(response.data === "ok"){
+    onCreate(personneCommand.nomCommand);
     navigate('/popDemander');
-    onCreate(personneCommand.nomCommand)
-    console.log(personneCommand.adressesCommand)
   }
 
 }catch (error) {
   console.error('Erreur lors de la requête API:', error);
-
   }
-
-  }
+}
 
   return (
     <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`}>

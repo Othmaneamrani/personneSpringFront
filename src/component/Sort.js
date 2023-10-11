@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-import { getPersonnesSort } from "./service";
+import { getPersonnesSort} from "./service";
 
 export default function Sort ({sort}){
 
@@ -26,9 +26,13 @@ export default function Sort ({sort}){
         )
   }
 
+
   useEffect(() => {
     hanldeGetSortPersonnes();
   }, []);
+
+
+
 
 return(
     <div >
