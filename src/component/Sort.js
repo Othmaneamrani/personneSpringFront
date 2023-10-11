@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import { getPersonnesSort} from "./service";
 
-export default function Sort ({sort}){
+export default function Sort ({sort , onvide}){
+  const isVisible = true;
 
   const [personnes, setPersonnes] = useState([]);
   const [selectedPersonne, setSelectedPersonne] = useState(null);
@@ -19,7 +20,9 @@ export default function Sort ({sort}){
 
   const hanldeGetSortPersonnes = () => {
         getPersonnesSort(sort).then((resp) =>{
-        setPersonnes(resp.data) })
+        setPersonnes(resp.data)
+          onvide('')
+      })
         .catch((err) => {
             console.log(err)
         }
@@ -35,6 +38,8 @@ export default function Sort ({sort}){
 
 
 return(
+  <div className={`transition-fade ${isVisible ? "visible" : "invisible"}`}>
+
     <div >
          <div className="retour-hover">
         <Link className="retour"  to={'/home'} > <span className="arrow">&#8592;</span>  Retour</Link>
@@ -89,6 +94,8 @@ return(
 
 
     </div>
+    </div>
+
 )
 
 }

@@ -32,6 +32,7 @@ export default function App() {
     setSort(newSort);
   }
 
+
   const [username, setUsername] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [pop, setPop] = useState(false);
@@ -83,7 +84,7 @@ export default function App() {
               <Route path='/popDemander' element={<PopDemander  p={p} />} />
               <Route path='/popValider' element={<PopValider />} />
               <Route path='/popVoid' element={<PopVoid />} />
-              <Route path='/sort' element={<Sort sort={sort} />} />
+              <Route path='/sort' element={<Sort sort={sort} onvide={toggleSort} />} />
               <Route path='/popSign' element={<PopSign />} />
             </>
           )}
