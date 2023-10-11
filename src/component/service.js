@@ -1,16 +1,16 @@
-// import axios from "axios";
+import axios from "axios";
 
-// export const personneApi  = axios.create({
-//     baseURL : "http://localhost:8080"
-// });
+export const personneApi  = axios.create({
+    baseURL : "http://localhost:8080"
+});
 
 // export const adresseApi  = axios.create({
 //     baseURL : "http://localhost:8080"
 // });
 
-// export const getPersonnes = () => {
-//     return personneApi.get('/personnes')
-// }
+export const getPersonnes = () => {
+    return personneApi.get('/personnes')
+}
 
 // export const deleltePersonne = (personne) => {
 //     return personneApi.delete(`/personnes/supprimer${personne.id}`)
@@ -25,9 +25,9 @@
 // }
 
 
-// export const createPersonne = (personne) => {
-//     return personneApi.post(`/personnes`, personne)
-// }
+export const createPersonne = (personneCommand) => {
+    return personneApi.post(`/personnes`, personneCommand)
+}
 
 // export const updatePersonne = (personne) => {
 //     return personneApi.put = (`/personnes/modifierLight/${personne.id}`, personne)
@@ -37,3 +37,7 @@
 //     return adresseApi.put = (`/adresses/modifier/${adresse.id}`, adresse)
 // }
 
+
+export const loggg = (connexionCommand) => {
+    return personneApi.post('/connexions/connexion',connexionCommand) 
+}

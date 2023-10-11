@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { Link ,   useNavigate} from 'react-router-dom';
+import { loggg } from './service';
+
 
 
 export default function Login({onConnexion, onProblem}) {
@@ -19,7 +20,7 @@ export default function Login({onConnexion, onProblem}) {
     };
 
     try {
-      const response = await axios.post('http://localhost:8080/connexions/connexion', connexionCommand);
+      const response = await loggg(connexionCommand)
 
       console.log('Réponse de l\'API:', response.data);
       if(response.data === usernameCommand){

@@ -534,3 +534,87 @@ text-decoration: none;
     transform: rotate(360deg);
   }
 }
+
+
+.personnes-title {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.personnes-table {
+  margin-left: 340px;
+  max-height: 30%;
+  width: 70%; 
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.personnes-table th {
+  background-color: #333;
+  color: #fff;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.personnes-table th,
+.personnes-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.adresses-header {
+  width: 40%;
+}
+
+.personnes-table td {
+  font-size: 20px;
+  font-weight: bold;
+  color: #0d0d0e ;
+}
+
+
+.address-table {
+  margin-top: 20px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+
+.address-cell {
+  border: 1px solid #a1a0a0;
+  padding: 10px;
+}
+
+
+.address-table tr {
+  background-color: #b2aeae;
+}
+.address-table td {
+  font-size: 16px;
+  font-weight: bold;
+  color: #070707 ;
+}
+
+
+.address-table th {
+  background-color: #333;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.bouton-afficher-adresses {
+  margin-left: 137px;
+  background-color: #3498db;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.bouton-afficher-adresses:hover {
+  background-color: #2980b9;
+}
