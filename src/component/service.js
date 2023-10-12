@@ -4,9 +4,9 @@ export const personneApi  = axios.create({
     baseURL : "http://localhost:8080"
 });
 
-// export const adresseApi  = axios.create({
-//     baseURL : "http://localhost:8080"
-// });
+export const adresseApi  = axios.create({
+    baseURL : "http://localhost:8080"
+});
 
 export const getPersonnes = () => {
     return personneApi.get('/personnes')
@@ -25,9 +25,9 @@ export const getPersonnesSort = (sort) => {
 //     return personneApi.get(`/personnes/${personne.id}`)
 // }
 
-// export const delelteAdresse = (adresse) => {
-//     return adresseApi.delete(`/adresses/supprimer${adresse.id}`)
-// }
+export const deleteAdresse = (adresse) => {
+    return adresseApi.delete(`/adresses/supprimer/${adresse}`)
+}
 
 
 export const createPersonne = (personneCommand) => {

@@ -1,34 +1,45 @@
 import React, { useState } from "react";
-import { Link , useNavigate } from 'react-router-dom';
-import { createPersonne } from "./service";
+import { Link, useNavigate } from 'react-router-dom';
+import { createPersonne, getPersonnes } from "./service";
 
-export default function Create({onCreate}) {
+export default function Create({ onCreate }) {
   const isVisible = true;
 
   const navigate = useNavigate();
 
-
   const [isAddingAddress, setIsAddingAddress] = useState(false);
   const [adressesCommand, setAddressesCommand] = useState([]);
-  const [adresseCommand, setAdresseCommand] = useState({ rueCommand: '', numeroMaisonCommand: '' ,});
-
+  const [adresseCommand, setAdresseCommand] = useState({ rueCommand: '', numeroMaisonCommand: '' });
 
   const [nomCommand, setNomCommand] = useState('');
   const [prenomCommand, setPrenomCommand] = useState('');
+  const [id, setId] = useState('');
+
+  const [isDuplicateAddress, setIsDuplicateAddress] = useState(false);
+  const [isDuplicatePerson, setIsDuplicatePerson] = useState(false);
 
 
   const toggleAddressPopup = () => {
     setIsAddingAddress(!isAddingAddress);
   };
 
-
-  const addAddress = () => {
+  const addAddress = (e) => {
+    e.preventDefault();
     if (adresseCommand.rueCommand.trim() === '') {
       return;
     }
-    setAddressesCommand([...adressesCommand, adresseCommand]);
-    setAdresseCommand({ rueCommand: '', numeroMaisonCommand: '' });
-    toggleAddressPopup();
+
+    const isDuplicate = adressesCommand.some((address) =>
+      address.rueCommand === adresseCommand.rueCommand && address.numeroMaisonCommand === adresseCommand.numeroMaisonCommand
+    );
+
+    if (isDuplicate) {
+      setIsDuplicateAddress(true);
+    } else {
+      setAddressesCommand([...adressesCommand, adresseCommand]);
+      setAdresseCommand({ rueCommand: '', numeroMaisonCommand: '' });
+      toggleAddressPopup();
+    }
   };
 
   const removeAddress = (index) => {
@@ -37,26 +48,62 @@ export default function Create({onCreate}) {
     setAddressesCommand(updatedAddresses);
   };
 
-  const handleCreatePersonne = async (e) => {
-    e.preventDefault();
+ const handleCreatePersonne = async (e) => {
+  e.preventDefault();
 
+  try {
+    const response = await getPersonnes();
+    const personnes = response.data.content; 
+
+    const isDuplicateP = () => {
+      const existingPerson = personnes.find(person => (
+        person.nomRepresentation === nomCommand &&
+        person.prenomRepresentation === prenomCommand &&
+        areAddressesEqual(person.adressesRepresentation, adressesCommand)
+      ));
+    
+      if (existingPerson) {
+        setId(existingPerson.idRepresentation);
+        return true;
+      }
+      return false;
+    };
+    function areAddressesEqual(addresses1, addresses2) {
+      if (addresses1.length !== addresses2.length) {
+        return false;
+      }
+    
+      for (let i = 0; i < addresses1.length; i++) {
+        if (
+          addresses1[i].rueRepresentation !== addresses2[i].rueCommand ||
+          addresses1[i].numeroMaisonRepresentation !== addresses2[i].numeroMaisonCommand
+        ) {
+          return false;
+        }
+      }
+    
+      return true;
+    }
+
+    if (isDuplicateP()) {
+      setIsDuplicatePerson(true); 
+    } else {
       const personneCommand = {
-        nomCommand : nomCommand,
-        prenomCommand : prenomCommand,
-        adressesCommand : adressesCommand
+        nomCommand: nomCommand,
+        prenomCommand: prenomCommand,
+        adressesCommand: adressesCommand
       }
 
-try{
-  const response = await createPersonne(personneCommand)
-  console.log('reponse de l\'API : '  ,response.data)
+      const response = await createPersonne(personneCommand);
+      console.log('réponse de l\'API : ', response.data);
 
-  if(response.data === "ok"){
-    onCreate(personneCommand.nomCommand);
-    navigate('/popDemander');
-  }
-
-}catch (error) {
-  console.error('Erreur lors de la requête API:', error);
+      if (response.data === "ok") {
+        onCreate(personneCommand.nomCommand);
+        navigate('/popDemander');
+      }
+    }
+  } catch (error) {
+    console.error('Erreur lors de la requête API:', error);
   }
 }
 
@@ -71,31 +118,37 @@ try{
           <div className="form-group">
             <label className="login-label" htmlFor="nom">Nom:</label>
             <input className="form-control"
-             type="text"
-              id="nomCommand" 
-              name="nomCommand" 
+              type="text"
+              id="nomCommand"
+              name="nomCommand"
               value={nomCommand}
-              onChange={(e)=>setNomCommand(e.target.value)}
+              onChange={(e) => setNomCommand(e.target.value)}
               required />
           </div>
           <div className="form-group">
             <label className="login-label" htmlFor="prenom">Prénom:</label>
-            <input className="form-control" 
-            type="text"
-            id="prenomCommand"
-            name="prenomcommand"
-            value={prenomCommand}
-            onChange={(e)=>setPrenomCommand(e.target.value)}
-            required />
+            <input className="form-control"
+              type="text"
+              id="prenomCommand"
+              name="prenomcommand"
+              value={prenomCommand}
+              onChange={(e) => setPrenomCommand(e.target.value)}
+              required />
           </div>
           <div className="form-group">
             <button className="boutton-login" type="button" id="ajouterAdresse" onClick={toggleAddressPopup}>Ajouter une adresse</button>
           </div>
 
           <div className="form-group">
-          <button className="boutton-login" type="submit">Créer Personne</button>
+            <button className="boutton-login" type="submit">Créer Personne</button>
           </div>
         </form>
+
+        {isDuplicatePerson && (
+          <p className="alert alert-danger">
+            Cette personne existe déjà avec l'id {id}
+          </p>
+        )}
 
         {isAddingAddress && (
           <form className="address-popup">
@@ -127,29 +180,36 @@ try{
             <button className="boutton-login" onClick={addAddress}>Ajouter</button>
           </form>
         )}
-{adressesCommand.length > 0 && (
-  <div className="address-table">
-    <h3 className="mini-login-header">Adresses:</h3>
-    <table className="address-table">
-      <thead>
-        <tr>
-          <th className="address-cell">Rue</th>
-          <th className="address-cell">Numéro de maison</th>
-        </tr>
-      </thead>
-      <tbody>
-        {adressesCommand && adressesCommand.map((address, index) => (
-          <tr key={index}>
-            <td className="address-cell">{address.rueCommand}</td>
-            <td className="address-cell">{address.numeroMaisonCommand}</td>
-            <td className="address-cell">
-              <button  className="bouton-supprimer-adresses" onClick={() => removeAddress(index)}>Supprimer</button></td> 
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
-)}
+
+        {isDuplicateAddress && (
+          <p className="alert alert-danger">
+            Cette adresse existe déjà.
+          </p>
+        )}
+
+        {adressesCommand.length > 0 && (
+          <div className="address-table">
+            <h3 className="mini-login-header">Adresses:</h3>
+            <table className="address-table">
+              <thead>
+                <tr>
+                  <th className="address-cell">Rue</th>
+                  <th className="address-cell">Numéro de maison</th>
+                </tr>
+              </thead>
+              <tbody>
+                {adressesCommand && adressesCommand.map((address, index) => (
+                  <tr key={index}>
+                    <td className="address-cell">{address.rueCommand}</td>
+                    <td className="address-cell">{address.numeroMaisonCommand}</td>
+                    <td className="address-cell">
+                      <button className="bouton-supprimer-adresses" onClick={() => removeAddress(index)}>Supprimer</button></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -28,7 +28,6 @@ export default function Sidebar({onDeconnexionClick , onSort , sort}){
 
           <li><Link to={'/create'} className="sidebar-l3" >Créer personne</Link></li>
           <li><Link to={'/modifier'} className="sidebar-l3" >Modifier personne</Link></li>
-          <li><Link to={'/modifierAdresse'}className="sidebar-l3" >Modifier adresse</Link></li>
           <li><Link  to={'/popValider'}className="supprimer" >Supprimer personne</Link></li>
           <li> <Link to={'/'}  onClick={onDeconnexionClick} className="deconnexion" >Deconnexion</Link></li>
 

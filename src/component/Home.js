@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from './Sidebar';
-import { getPersonnes } from './service';
+import { deleteAdresse, getPersonnes } from './service';
 
 export default function Home({ onDeconnexionClick, username, onSort, sort }) {
   const isVisible = true;
+
+
 
   const [selectedPersonId, setSelectedPersonId] = useState(null);
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
@@ -44,21 +46,21 @@ export default function Home({ onDeconnexionClick, username, onSort, sort }) {
   }, []);
 
 
-  const handleDeleteAddress = (addressId) => {
+  const handleDeleteAddress = (addressId , personne) => {
     if (selectedPersonAddresses.length === 1) {
       alert("Impossible de supprimer la dernière adresse.");
       return;
     }
-    const updatedAddresses = [...selectedPersonAddresses];
-
-    const addressIndex = updatedAddresses.findIndex((address) => address.idRepresentation === addressId);
-
-    if (addressIndex !== -1) {
-      updatedAddresses.splice(addressIndex, 1);
-      setSelectedPersonAddresses(updatedAddresses);
-    }
+    
+    deleteAdresse(addressId).then(() => {
+    const updatedAddresses = selectedPersonAddresses.filter(adresse => adresse.idRepresentation !== addressId);
+    personne.adressesRepresentation  = updatedAddresses
+    setSelectedPersonAddresses(updatedAddresses);
+        })
+      .catch((error) => {
+        console.log(error);
+      });
   };
-
 
 
 
@@ -111,14 +113,14 @@ export default function Home({ onDeconnexionClick, username, onSort, sort }) {
                           </tr>
                         </thead>
                         <tbody>
-                          {selectedPersonAddresses.map((adresse, index) => (
+                          { selectedPersonAddresses && selectedPersonAddresses.map((adresse, index) => (
                             <tr key={index}>
                               <td>{adresse.idRepresentation}</td>
                               <td>{adresse.rueRepresentation}</td>
                               <td>{adresse.numeroMaisonRepresentation}</td>
                               <td>
                                  <button className="bouton-modifier-adresses">Modifier</button>
-                                <button   onClick={() => handleDeleteAddress(adresse.idRepresentation)} className="bouton-supprimer-adresses">Supprimer</button>
+                                <button   onClick={() => handleDeleteAddress(adresse.idRepresentation, personne)} className="bouton-supprimer-adresses">Supprimer</button>
                              </td>
                             </tr>
                           ))}
