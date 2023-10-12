@@ -650,7 +650,7 @@ text-decoration: none;
 }
 
 .bouton-supprimer-adresses:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   background-color: #b60000;
 }
 
@@ -705,6 +705,11 @@ text-decoration: none;
 .case-select-personne:hover {
   background-color: #0056b3; 
 }
+
+.case-select-personne.selected:hover {
+  background-color: #d62920; 
+}
+
 
 .adresses-table2 {
   max-height: 30%;
