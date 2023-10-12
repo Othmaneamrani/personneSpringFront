@@ -13,7 +13,7 @@ export const getPersonnes = () => {
 }
 
 export const getPersonnesSort = (sort) => {
-    return personneApi.get(`/personnes?page=1&size=4&like=${sort}`)
+    return personneApi.get(`/personnes?like=${sort}`)
 }
 
 

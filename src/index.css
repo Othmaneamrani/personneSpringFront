@@ -616,12 +616,31 @@ text-decoration: none;
 }
 
 .bouton-afficher-adresses:hover {
+  transform: translateY(-3px);
+}
+
+.bouton-modifier-adresses:hover {
+  transform: translateY(-3px);
+}
+
+.bouton-modifier-adresses{
+  background-color: #3498db;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  margin-left: 6.6px;
+}
+
+.bouton-afficher-adresses:hover {
   background-color: #2980b9;
 }
 
 
 .bouton-supprimer-adresses {
-  background-color: #3498db;
+  background-color: #f63434;
   color: #fff;
   padding: 5px 10px;
   border: none;
@@ -631,7 +650,8 @@ text-decoration: none;
 }
 
 .bouton-supprimer-adresses:hover {
-  background-color: #2980b9;
+  transform: translateY(-3px);
+  background-color: #b60000;
 }
 
 
@@ -661,6 +681,54 @@ text-decoration: none;
 
 .personnes-table-sort td {
   font-size: 20px;
+  font-weight: bold;
+  color: #0d0d0e ;
+}
+
+.case-select-personne {
+  background-color: #3498db;
+  color: #fff;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.case-select-personne.selected {
+  background-color: #e74c3c;
+  color: #fff;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+
+
+
+.case-select-personne:hover {
+  background-color: #0056b3; 
+}
+
+.adresses-table2 {
+  max-height: 30%;
+  width: 100%; 
+  border-collapse: collapse;
+  margin-top: 5px;
+}
+
+.adresses-table2 th {
+  background-color: #333;
+  color: #fff;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.adresses-table2 th,
+.adresses-table2 td {
+  padding: 4px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.adresses-table2 td {
+  font-size: 16px;
   font-weight: bold;
   color: #0d0d0e ;
 }
