@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from './Sidebar';
-import { deletePersonne, deleteAdresse, getPersonnes} from './service';
+import { deleteAdresse, getPersonnes} from './service';
 import Pagination from "./Pagination";
 import { Link } from "react-router-dom";
 
@@ -51,10 +51,10 @@ export default function Home({ onDeconnexionClick, username, onSort, sort ,selec
       return;
     }
 
-    deleteAdresse(addressId).then(() => {
+    deleteAdresse(addressId , personne).then(() => {
       const updatedAddresses = selectedPersonAddresses.filter(adresse => adresse.idRepresentation !== addressId);
-      personne.adressesRepresentation = updatedAddresses;
       setSelectedPersonAddresses(updatedAddresses);
+      personne.adressesRepresentation = updatedAddresses;
     }).catch((error) => {
       console.log(error);
     });
@@ -121,7 +121,7 @@ export default function Home({ onDeconnexionClick, username, onSort, sort ,selec
                                <Link to={{pathname: '/modifierAdresse',
                                           state: { adresse }
                                           }} ><button className="bouton-modifier-adresses">Modifier</button></Link>
-                                <button onClick={() => handleDeleteAddress(adresse.idRepresentation)} className="bouton-supprimer-adresses">Supprimer</button>
+                                <button onClick={() => handleDeleteAddress(adresse.idRepresentation , personne)} className="bouton-supprimer-adresses">Supprimer</button>
                               </td>
                             </tr>
                           ))}
