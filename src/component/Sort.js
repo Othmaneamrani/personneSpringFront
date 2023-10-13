@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import { getPersonnesSort} from "./service";
+import Pagination from "./Pagination";
 
 export default function Sort ({sort , onvide}){
   const isVisible = true;
 
   const [personnes, setPersonnes] = useState([]);
   const [selectedPersonne, setSelectedPersonne] = useState(null);
+
+  const [pageActuelle, setPageActuelle] = useState(1);
+  const [taillePage, setTaillePage] = useState(5);
+  const [totalPages, setTotalPages] = useState(1); 
 
 
   const handleToggleAdresses = (personne) => {
@@ -19,9 +24,11 @@ export default function Sort ({sort , onvide}){
 
 
   const hanldeGetSortPersonnes = () => {
-        getPersonnesSort(sort).then((resp) =>{
+        getPersonnesSort(pageActuelle, taillePage,sort).then((resp) =>{
         setPersonnes(resp.data)
           onvide('')
+        setTotalPages(Math.ceil(resp.data.totalElements / taillePage));
+          
       })
         .catch((err) => {
             console.log(err)
@@ -32,10 +39,13 @@ export default function Sort ({sort , onvide}){
 
   useEffect(() => {
     hanldeGetSortPersonnes();
-  }, []);
+  }, [pageActuelle, taillePage]);
 
 
 
+  const handlePageChange = (page) => {
+    setPageActuelle(page);
+  };
 
 return(
   <div className={`transition-fade ${isVisible ? "visible" : "invisible"}`}>
@@ -91,7 +101,11 @@ return(
   </tbody>
 </table>
 
-
+<div className="pagination-controls">
+                <Pagination  currentPage={pageActuelle}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}  />
+        </div>
 
     </div>
     </div>

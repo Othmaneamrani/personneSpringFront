@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
-import { createPersonne, getPersonnes } from "./service";
+import { createPersonne, getAllPersonnes } from "./service";
 
 export default function Create({ onCreate }) {
   const isVisible = true;
@@ -52,8 +52,8 @@ export default function Create({ onCreate }) {
   e.preventDefault();
 
   try {
-    const response = await getPersonnes();
-    const personnes = response.data.content; 
+    const response = await getAllPersonnes();
+    const personnes = response.data; 
 
     const isDuplicateP = () => {
       const existingPerson = personnes.find(person => (

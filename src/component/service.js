@@ -8,14 +8,18 @@ export const adresseApi  = axios.create({
     baseURL : "http://localhost:8080"
 });
 
-export const getPersonnes = () => {
-    return personneApi.get('/personnes')
+export const getPersonnes = (currentPage , size) => {
+    return personneApi.get(`/personnes?page=${currentPage}&size=${size}`)
 }
 
-export const getPersonnesSort = (sort) => {
-    return personneApi.get(`/personnes?like=${sort}`)
+export const getPersonnesSort = (currentPage , size ,sort) => {
+    return personneApi.get(`/personnes?page=${currentPage}&size=${size}&like=${sort}`)
 }
 
+
+export const getAllPersonnes = () => {
+    return personneApi.get('/personnes/list')
+}
 
 export const deleltePersonne = (personne) => {
     return personneApi.delete(`/personnes/supprimer/${personne.id}`)

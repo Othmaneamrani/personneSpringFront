@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from './Sidebar';
-import { deleltePersonne, deleteAdresse, getPersonnes } from './service';
-
+import { deleteAdresse, getPersonnes} from './service';
+import Pagination from "./Pagination";
 
 export default function Home({ onDeconnexionClick, username, onSort, sort }) {
   const isVisible = true;
 
-
   const [selectedPersonId, setSelectedPersonId] = useState(null);
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
-
   const [personnes, setPersonnes] = useState([]);
   const [selectedPersonne, setSelectedPersonne] = useState(null);
+  const [pageActuelle, setPageActuelle] = useState(1);
+  const [taillePage, setTaillePage] = useState(5);
+  const [totalPages, setTotalPages] = useState(1); 
 
   const handleToggleAdresses = (personne) => {
     if (selectedPersonne === personne) {
@@ -32,46 +33,40 @@ export default function Home({ onDeconnexionClick, username, onSort, sort }) {
   };
 
   const handleGetPersonnes = () => {
-    getPersonnes()
+    getPersonnes(pageActuelle, taillePage)
       .then((resp) => {
         setPersonnes(resp.data);
+        setTotalPages(Math.ceil(resp.data.totalElements / taillePage));
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
+  const handlePageChange = (page) => {
+    setPageActuelle(page);
+  };
+
+
   useEffect(() => {
     handleGetPersonnes();
-  }, []);
+  }, [pageActuelle, taillePage]);
 
-
-  const handleDeleteAddress = (addressId , personne) => {
+  const handleDeleteAddress = (addressId, personne) => {
     if (selectedPersonAddresses.length === 1) {
       alert("Impossible de supprimer la dernière adresse.");
       return;
     }
-    
+
     deleteAdresse(addressId).then(() => {
-    const updatedAddresses = selectedPersonAddresses.filter(adresse => adresse.idRepresentation !== addressId);
-    personne.adressesRepresentation  = updatedAddresses
-    setSelectedPersonAddresses(updatedAddresses);
-        })
-      .catch((error) => {
-        console.log(error);
-      });
+      const updatedAddresses = selectedPersonAddresses.filter(adresse => adresse.idRepresentation !== addressId);
+      personne.adressesRepresentation = updatedAddresses;
+      setSelectedPersonAddresses(updatedAddresses);
+    }).catch((error) => {
+      console.log(error);
+    });
   };
 
-
-  // const handleDeletePersonne = (selectedPersonId,personnes) => {
-  //   deleltePersonne(selectedPersonId.idRepresentation).then(() => {
-  //     const updatedPersonnes = personnes.content.filter(personne => personne.idRepresentation !== selectedPersonId);
-  //     personnes.content = updatedPersonnes
-  //         })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  // }
 
 
   return (
@@ -112,26 +107,25 @@ export default function Home({ onDeconnexionClick, username, onSort, sort }) {
                       Afficher Adresses
                     </button>
                     {selectedPersonne === personne && (
-                      <table className="adresses-table2" >
+                      <table className="adresses-table2">
                         <thead>
                           <tr>
                             <th>ID</th>
                             <th>Rue</th>
                             <th>Numéro de Maison</th>
                             <th>Actions</th>
-
                           </tr>
                         </thead>
                         <tbody>
-                          { selectedPersonAddresses && selectedPersonAddresses.map((adresse, index) => (
+                          {selectedPersonAddresses && selectedPersonAddresses.map((adresse, index) => (
                             <tr key={index}>
                               <td>{adresse.idRepresentation}</td>
                               <td>{adresse.rueRepresentation}</td>
                               <td>{adresse.numeroMaisonRepresentation}</td>
                               <td>
-                                 <button  className="bouton-modifier-adresses">Modifier</button>
-                                <button   onClick={() => handleDeleteAddress(adresse.idRepresentation, personne)} className="bouton-supprimer-adresses">Supprimer</button>
-                             </td>
+                                <button className="bouton-modifier-adresses">Modifier</button>
+                                <button onClick={() => handleDeleteAddress(adresse.idRepresentation)} className="bouton-supprimer-adresses">Supprimer</button>
+                              </td>
                             </tr>
                           ))}
                         </tbody>
@@ -147,6 +141,12 @@ export default function Home({ onDeconnexionClick, username, onSort, sort }) {
             )}
           </tbody>
         </table>
+
+        <div className="pagination-controls">
+                <Pagination  currentPage={pageActuelle}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}  />
+        </div>
       </div>
     </div>
   );
