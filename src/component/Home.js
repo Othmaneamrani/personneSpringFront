@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from './Sidebar';
-import { deleteAdresse, getPersonnes} from './service';
+import { deletePersonne, deleteAdresse, getPersonnes} from './service';
 import Pagination from "./Pagination";
+import { Link } from "react-router-dom";
 
-export default function Home({ onDeconnexionClick, username, onSort, sort }) {
+export default function Home({ onDeconnexionClick, username, onSort, sort ,selectedPersonId, selectionPersonne}) {
   const isVisible = true;
 
-  const [selectedPersonId, setSelectedPersonId] = useState(null);
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
   const [personnes, setPersonnes] = useState([]);
   const [selectedPersonne, setSelectedPersonne] = useState(null);
@@ -24,13 +24,6 @@ export default function Home({ onDeconnexionClick, username, onSort, sort }) {
     }
   };
 
-  const selectionPersonne = (personne) => {
-    if (selectedPersonId === personne) {
-      setSelectedPersonId(null);
-    } else {
-      setSelectedPersonId(personne);
-    }
-  };
 
   const handleGetPersonnes = () => {
     getPersonnes(pageActuelle, taillePage)
@@ -69,10 +62,12 @@ export default function Home({ onDeconnexionClick, username, onSort, sort }) {
 
 
 
+
+
   return (
     <div className={`transition-fade ${isVisible ? "visible" : "invisible"}`}>
       <div className="bienvenu">
-        <Sidebar onSort={onSort} sort={sort} onDeconnexionClick={onDeconnexionClick} />
+        <Sidebar selectedPersonId={selectedPersonId} onSort={onSort} sort={sort} onDeconnexionClick={onDeconnexionClick} />
 
         <h1 className="smia">BIENVENU {username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}</h1>
         <h3>Que souhaitez-vous faire ?</h3>
@@ -92,8 +87,8 @@ export default function Home({ onDeconnexionClick, username, onSort, sort }) {
               personnes.content.map((personne, index) => (
                 <tr key={index}>
                   <td
-                    className={`case-select-personne ${selectedPersonId === personne.idRepresentation ? 'selected' : ''}`}
-                    onClick={() => selectionPersonne(personne.idRepresentation)}
+                    className={`case-select-personne ${selectedPersonId === personne ? 'selected' : ''}`}
+                    onClick={() => selectionPersonne(personne)}
                   >
                     {personne.idRepresentation}
                   </td>
@@ -123,7 +118,9 @@ export default function Home({ onDeconnexionClick, username, onSort, sort }) {
                               <td>{adresse.rueRepresentation}</td>
                               <td>{adresse.numeroMaisonRepresentation}</td>
                               <td>
-                                <button className="bouton-modifier-adresses">Modifier</button>
+                               <Link to={{pathname: '/modifierAdresse',
+                                          state: { adresse }
+                                          }} ><button className="bouton-modifier-adresses">Modifier</button></Link>
                                 <button onClick={() => handleDeleteAddress(adresse.idRepresentation)} className="bouton-supprimer-adresses">Supprimer</button>
                               </td>
                             </tr>

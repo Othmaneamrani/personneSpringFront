@@ -21,6 +21,17 @@ import PopMdp from './component/PopMdp';
 export default function App() {
   const isVisible = true;
 
+
+  const [selectedPersonId, setSelectedPersonId] = useState(null);
+  const selectionPersonne = (personne) => {
+    if (selectedPersonId === personne) {
+      setSelectedPersonId(null);
+    } else {
+      setSelectedPersonId(personne);
+    }
+  };
+
+
   const [p, setP] = useState('');
   const toggleP = (val) => {
     setP(val);
@@ -36,6 +47,7 @@ export default function App() {
   const [username, setUsername] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [pop, setPop] = useState(false);
+  
 
   const toggle = (newIsLoggedIn, newUsername) => {
     setIsLoggedIn(newIsLoggedIn);
@@ -77,12 +89,12 @@ export default function App() {
 
           {isLoggedIn && (
             <>
-              <Route path='/home' element={<Home sort={sort} onSort={toggleSort} username={username} onDeconnexionClick={toggle} />} />
+              <Route path='/home' element={<Home  selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  sort={sort} onSort={toggleSort} username={username} onDeconnexionClick={toggle} />} />
               <Route path='/modifier' element={<Modifier />} />
               <Route path='/modifierAdresse' element={<ModifierAdresse />} />
               <Route path='/create' element={<Create onCreate={toggleP} />} />
               <Route path='/popDemander' element={<PopDemander  p={p} />} />
-              <Route path='/popValider' element={<PopValider />} />
+              <Route path='/popValider' element={<PopValider  selectedPersonId={selectedPersonId} />} />
               <Route path='/popVoid' element={<PopVoid />} />
               <Route path='/sort' element={<Sort sort={sort} onvide={toggleSort} />} />
               <Route path='/popSign' element={<PopSign />} />

@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 
 
 
-export default function ModifierAdresse() {
+export default function ModifierAdresse(props) {
+  const [address, setAddress] = useState(props.location.state.adresse);
+
+
     return (
       <div>
         <div className="retour-hover">
@@ -16,7 +19,12 @@ export default function ModifierAdresse() {
               <label className="login-label" htmlFor="rue">
                 Rue:
               </label>
-              <input className="form-control" type="text" id="rue" name="rue" required />
+              <input className="form-control"
+               type="text" 
+               id="rue"
+               name="rue" 
+               value={address ? address.rueCommand : ""}
+               required />
             </div>
             <div className="form-group">
               <label className="login-label" htmlFor="numeroMaison">
@@ -27,6 +35,8 @@ export default function ModifierAdresse() {
                 type="text"
                 id="numeroMaison"
                 name="numeroMaison"
+               value={address ? address.numeroMaisonCommand : ""}
+
                 required
               />
             </div>

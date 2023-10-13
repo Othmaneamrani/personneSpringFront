@@ -3,7 +3,7 @@ import { useState } from "react";
 import BarreRecherche from "./BarreRecherche";
 import { Link } from "react-router-dom";
 
-export default function Sidebar({onDeconnexionClick , onSort , sort}){
+export default function Sidebar({onDeconnexionClick , onSort , sort }){
 
   const isVisible=true
 
