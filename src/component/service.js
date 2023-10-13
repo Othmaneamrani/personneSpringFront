@@ -17,9 +17,9 @@ export const getPersonnesSort = (sort) => {
 }
 
 
-// export const deleltePersonne = (personne) => {
-//     return personneApi.delete(`/personnes/supprimer${personne.id}`)
-// }
+export const deleltePersonne = (personne) => {
+    return personneApi.delete(`/personnes/supprimer/${personne.id}`)
+}
 
 // export const getPersonneById = () => {
 //     return personneApi.get(`/personnes/${personne.id}`)

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from './Sidebar';
-import { deleteAdresse, getPersonnes } from './service';
+import { deleltePersonne, deleteAdresse, getPersonnes } from './service';
+
 
 export default function Home({ onDeconnexionClick, username, onSort, sort }) {
   const isVisible = true;
-
 
 
   const [selectedPersonId, setSelectedPersonId] = useState(null);
@@ -63,6 +63,16 @@ export default function Home({ onDeconnexionClick, username, onSort, sort }) {
   };
 
 
+  // const handleDeletePersonne = (selectedPersonId,personnes) => {
+  //   deleltePersonne(selectedPersonId.idRepresentation).then(() => {
+  //     const updatedPersonnes = personnes.content.filter(personne => personne.idRepresentation !== selectedPersonId);
+  //     personnes.content = updatedPersonnes
+  //         })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  // }
+
 
   return (
     <div className={`transition-fade ${isVisible ? "visible" : "invisible"}`}>
@@ -119,7 +129,7 @@ export default function Home({ onDeconnexionClick, username, onSort, sort }) {
                               <td>{adresse.rueRepresentation}</td>
                               <td>{adresse.numeroMaisonRepresentation}</td>
                               <td>
-                                 <button className="bouton-modifier-adresses">Modifier</button>
+                                 <button  className="bouton-modifier-adresses">Modifier</button>
                                 <button   onClick={() => handleDeleteAddress(adresse.idRepresentation, personne)} className="bouton-supprimer-adresses">Supprimer</button>
                              </td>
                             </tr>
