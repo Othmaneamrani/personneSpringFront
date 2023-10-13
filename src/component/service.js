@@ -25,9 +25,6 @@ export const deletePersonne = (personne) => {
     return personneApi.delete(`/personnes/supprimer/${personne.idRepresentation}`)
 }
 
-// export const getPersonneById = () => {
-//     return personneApi.get(`/personnes/${personne.id}`)
-// }
 
 export const deleteAdresse = (adresse) => {
     return adresseApi.delete(`/adresses/supprimer/${adresse}`)
@@ -39,7 +36,11 @@ export const createPersonne = (personneCommand) => {
 }
 
 // export const updatePersonne = (personne) => {
-//     return personneApi.put = (`/personnes/modifierLight/${personne.id}`, personne)
+//     return personneApi.put = (`/personnes/modifier`, personne)
+// }
+
+// export const updateAdresse= (adresse) => {
+//     return adresseApi.put = (`/adresses/modifier`, adresse)
 // }
 
 export const updateAdresse = (adresse) => {
