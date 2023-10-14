@@ -1,7 +1,7 @@
 import React , {useEffect , useRef} from "react";
 import { Link } from "react-router-dom";
 
-export default function PopVoid() {
+export default function PopVoid({p}) {
   const okBoutonRef = useRef(null)
   const handlePressOk = (e) => {
  if (e.key === 'Enter' && okBoutonRef.current){
@@ -19,7 +19,7 @@ export default function PopVoid() {
   return (
     <div className="popup-overlay">
       <div className="popup2">
-        <h2>Modifications sauvegardées</h2>
+        <h2> {p} a été modifié !</h2>
        <Link  to={'/home'} ><button  ref={okBoutonRef} >Ok</button></Link> 
       </div>
     </div>

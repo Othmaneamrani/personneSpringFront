@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 
 
 
-export default function ModifierAdresse(props) {
-  const [address, setAddress] = useState(props.location.state.adresse);
+export default function ModifierAdresse() {
 
 
     return (
@@ -23,7 +22,6 @@ export default function ModifierAdresse(props) {
                type="text" 
                id="rue"
                name="rue" 
-               value={address ? address.rueCommand : ""}
                required />
             </div>
             <div className="form-group">
@@ -35,7 +33,6 @@ export default function ModifierAdresse(props) {
                 type="text"
                 id="numeroMaison"
                 name="numeroMaison"
-               value={address ? address.numeroMaisonCommand : ""}
 
                 required
               />

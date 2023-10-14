@@ -35,12 +35,12 @@ export const createPersonne = (personneCommand) => {
     return personneApi.post(`/personnes`, personneCommand)
 }
 
-// export const updatePersonne = (personne) => {
-//     return personneApi.put = (`/personnes/modifier`, personne)
-// }
+export const updatePersonne = (personne) => {
+    return personneApi.put = ('/personnes/modifier', personne)
+}
 
 // export const updateAdresse= (adresse) => {
-//     return adresseApi.put = (`/adresses/modifier`, adresse)
+//     return adresseApi.put = ('/adresses/modifier', adresse)
 // }
 
 export const updateAdresse = (adresse) => {

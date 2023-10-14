@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Sidebar from './Sidebar';
 import { deleteAdresse, getPersonnes} from './service';
 import Pagination from "./Pagination";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from 'react-router-dom';
 
 export default function Home({ onDeconnexionClick, username, onSort, sort ,selectedPersonId, selectionPersonne}) {
   const isVisible = true;
@@ -13,6 +13,9 @@ export default function Home({ onDeconnexionClick, username, onSort, sort ,selec
   const [pageActuelle, setPageActuelle] = useState(1);
   const [taillePage, setTaillePage] = useState(5);
   const [totalPages, setTotalPages] = useState(1); 
+
+  const navigate = useNavigate()
+
 
   const handleToggleAdresses = (personne) => {
     if (selectedPersonne === personne) {
@@ -59,15 +62,12 @@ export default function Home({ onDeconnexionClick, username, onSort, sort ,selec
       console.log(error);
     });
   };
-
-
-
-
+  
 
   return (
     <div className={`transition-fade ${isVisible ? "visible" : "invisible"}`}>
       <div className="bienvenu">
-        <Sidebar selectedPersonId={selectedPersonId} onSort={onSort} sort={sort} onDeconnexionClick={onDeconnexionClick} />
+        <Sidebar onSort={onSort} sort={sort} onDeconnexionClick={onDeconnexionClick} />
 
         <h1 className="smia">BIENVENU {username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}</h1>
         <h3>Que souhaitez-vous faire ?</h3>
@@ -118,9 +118,7 @@ export default function Home({ onDeconnexionClick, username, onSort, sort ,selec
                               <td>{adresse.rueRepresentation}</td>
                               <td>{adresse.numeroMaisonRepresentation}</td>
                               <td>
-                               <Link to={{pathname: '/modifierAdresse',
-                                          state: { adresse }
-                                          }} ><button className="bouton-modifier-adresses">Modifier</button></Link>
+                              <Link  to={'/modifierAdresse'} >   <button className="bouton-modifier-adresses">Modifier</button></Link>
                                 <button onClick={() => handleDeleteAddress(adresse.idRepresentation , personne)} className="bouton-supprimer-adresses">Supprimer</button>
                               </td>
                             </tr>

@@ -18,9 +18,13 @@ export default function Create({ onCreate }) {
   const [isDuplicateAddress, setIsDuplicateAddress] = useState(false);
   const [isDuplicatePerson, setIsDuplicatePerson] = useState(false);
 
+  const [editAddressIndex, setEditAddressIndex] = useState(-1);
 
   const toggleAddressPopup = () => {
     setIsAddingAddress(!isAddingAddress);
+    setEditAddressIndex(-1); 
+    if(isDuplicatePerson)
+    setIsDuplicatePerson(!isDuplicatePerson)
   };
 
   const addAddress = (e) => {
@@ -36,9 +40,17 @@ export default function Create({ onCreate }) {
     if (isDuplicate) {
       setIsDuplicateAddress(true);
     } else {
+      if (editAddressIndex !== -1) {
+        const updatedAddresses = [...adressesCommand];
+        updatedAddresses.splice(editAddressIndex, 1);
+        setAddressesCommand(updatedAddresses);
+        setEditAddressIndex(-1);
+      }
+
       setAddressesCommand([...adressesCommand, adresseCommand]);
       setAdresseCommand({ rueCommand: '', numeroMaisonCommand: '' });
       toggleAddressPopup();
+      setIsDuplicateAddress(false)
     }
   };
 
@@ -46,66 +58,81 @@ export default function Create({ onCreate }) {
     const updatedAddresses = [...adressesCommand];
     updatedAddresses.splice(index, 1);
     setAddressesCommand(updatedAddresses);
+    setEditAddressIndex(-1);
   };
 
- const handleCreatePersonne = async (e) => {
-  e.preventDefault();
+  const editAddress = (index) => {
+    removeAddress(index)
+    if(!isAddingAddress){
+    setIsAddingAddress(!isAddingAddress)
+    }
+    const addressToEdit = adressesCommand[index];
+    setEditAddressIndex(index);
+    setAdresseCommand({
+      rueCommand: addressToEdit.rueCommand,
+      numeroMaisonCommand: addressToEdit.numeroMaisonCommand,
+    });
+  };
 
-  try {
-    const response = await getAllPersonnes();
-    const personnes = response.data; 
+  const handleCreatePersonne = async (e) => {
+    e.preventDefault();
 
-    const isDuplicateP = () => {
-      const existingPerson = personnes.find(person => (
-        person.nomRepresentation === nomCommand &&
-        person.prenomRepresentation === prenomCommand &&
-        areAddressesEqual(person.adressesRepresentation, adressesCommand)
-      ));
-    
-      if (existingPerson) {
-        setId(existingPerson.idRepresentation);
-        return true;
-      }
-      return false;
-    };
-    function areAddressesEqual(addresses1, addresses2) {
-      if (addresses1.length !== addresses2.length) {
+    try {
+      const response = await getAllPersonnes();
+      const personnes = response.data;
+
+      const isDuplicateP = () => {
+        const existingPerson = personnes.find(person => (
+          person.nomRepresentation === nomCommand &&
+          person.prenomRepresentation === prenomCommand &&
+          areAddressesEqual(person.adressesRepresentation, adressesCommand)
+        ));
+
+        if (existingPerson) {
+          setId(existingPerson.idRepresentation);
+          return true;
+        }
         return false;
-      }
-    
-      for (let i = 0; i < addresses1.length; i++) {
-        if (
-          addresses1[i].rueRepresentation !== addresses2[i].rueCommand ||
-          addresses1[i].numeroMaisonRepresentation !== addresses2[i].numeroMaisonCommand
-        ) {
+      };
+
+      function areAddressesEqual(addresses1, addresses2) {
+        if (addresses1.length !== addresses2.length) {
           return false;
         }
+
+        for (let i = 0; i < addresses1.length; i++) {
+          if (
+            addresses1[i].rueRepresentation !== addresses2[i].rueCommand ||
+            addresses1[i].numeroMaisonRepresentation !== addresses2[i].numeroMaisonCommand
+          ) {
+            return false;
+          }
+        }
+
+        return true;
       }
-    
-      return true;
+
+      if (isDuplicateP()) {
+        setIsDuplicatePerson(true);
+      } else {
+        const personneCommand = {
+          nomCommand: nomCommand,
+          prenomCommand: prenomCommand,
+          adressesCommand: adressesCommand
+        }
+
+        const response = await createPersonne(personneCommand);
+        console.log('réponse de l\'API : ', response.data);
+
+        if (response.data === "ok") {
+          onCreate(personneCommand.nomCommand);
+          navigate('/popDemander');
+        }
+      }
+    } catch (error) {
+      console.error('Erreur lors de la requête API:', error);
     }
-
-    if (isDuplicateP()) {
-      setIsDuplicatePerson(true); 
-    } else {
-      const personneCommand = {
-        nomCommand: nomCommand,
-        prenomCommand: prenomCommand,
-        adressesCommand: adressesCommand
-      }
-
-      const response = await createPersonne(personneCommand);
-      console.log('réponse de l\'API : ', response.data);
-
-      if (response.data === "ok") {
-        onCreate(personneCommand.nomCommand);
-        navigate('/popDemander');
-      }
-    }
-  } catch (error) {
-    console.error('Erreur lors de la requête API:', error);
   }
-}
 
   return (
     <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`}>
@@ -130,7 +157,7 @@ export default function Create({ onCreate }) {
             <input className="form-control"
               type="text"
               id="prenomCommand"
-              name="prenomcommand"
+              name="prenomCommand"
               value={prenomCommand}
               onChange={(e) => setPrenomCommand(e.target.value)}
               required />
@@ -146,9 +173,8 @@ export default function Create({ onCreate }) {
 
         {isDuplicatePerson && (
           <p className="alert alert-danger">
-            Cette personne existe déjà avec l'id {id}
-          </p>
-        )}
+          Cette personne existe déjà avec l'id {id}
+        </p>        )}
 
         {isAddingAddress && (
           <form className="address-popup">
@@ -182,9 +208,10 @@ export default function Create({ onCreate }) {
         )}
 
         {isDuplicateAddress && (
-          <p className="alert alert-danger">
-            Cette adresse existe déjà.
-          </p>
+ <p className="alert alert-danger">
+ Cette adresse existe déjà
+</p>  
+
         )}
 
         {adressesCommand.length > 0 && (
@@ -195,6 +222,7 @@ export default function Create({ onCreate }) {
                 <tr>
                   <th className="address-cell">Rue</th>
                   <th className="address-cell">Numéro de maison</th>
+                  <th className="address-cell">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -203,7 +231,9 @@ export default function Create({ onCreate }) {
                     <td className="address-cell">{address.rueCommand}</td>
                     <td className="address-cell">{address.numeroMaisonCommand}</td>
                     <td className="address-cell">
-                      <button className="bouton-supprimer-adresses" onClick={() => removeAddress(index)}>Supprimer</button></td>
+                      <button className="bouton-supprimer-adresses" onClick={() => removeAddress(index)}>Supprimer</button>
+                      <button className="bouton-modifier-adresses" onClick={() => editAddress(index)}>Modifier</button>
+                    </td>
                   </tr>
                 ))}
               </tbody>

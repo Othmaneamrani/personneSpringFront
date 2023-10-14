@@ -90,13 +90,13 @@ export default function App() {
           {isLoggedIn && (
             <>
               <Route path='/home' element={<Home  selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  sort={sort} onSort={toggleSort} username={username} onDeconnexionClick={toggle} />} />
-              <Route path='/modifier' element={<Modifier />} />
+              <Route path='/modifier' element={<Modifier selectedPersonId={selectedPersonId} onCreate={toggleP} />} />
               <Route path='/modifierAdresse' element={<ModifierAdresse />} />
               <Route path='/create' element={<Create onCreate={toggleP} />} />
               <Route path='/popDemander' element={<PopDemander  p={p} />} />
               <Route path='/popValider' element={<PopValider  selectedPersonId={selectedPersonId} />} />
-              <Route path='/popVoid' element={<PopVoid />} />
-              <Route path='/sort' element={<Sort sort={sort} onvide={toggleSort} />} />
+              <Route path='/popVoid' element={<PopVoid p={p}/>} />
+              <Route path='/sort' element={<Sort sort={sort} onvide={toggleSort} selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  />} />
               <Route path='/popSign' element={<PopSign />} />
             </>
           )}
