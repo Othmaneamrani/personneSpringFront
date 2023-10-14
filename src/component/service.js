@@ -39,13 +39,10 @@ export const updatePersonne = (personneCommand) => {
     return personneApi.put('/personnes/modifier', personneCommand)
 }
 
-// export const updateAdresse= (adresse) => {
-//     return adresseApi.put = ('/adresses/modifier', adresse)
-// }
-
-export const updateAdresse = (adresse) => {
-    return adresseApi.put = ('/adresses/modifier', adresse)
+export const updateAdresse= (adresseCommand) => {
+    return adresseApi.put('/adresses/modifier', adresseCommand)
 }
+
 
 
 export const loggg = (connexionCommand) => {

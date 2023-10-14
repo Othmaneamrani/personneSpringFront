@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import Sidebar from './Sidebar';
 import { deleteAdresse, getPersonnes} from './service';
 import Pagination from "./Pagination";
-import { Link, useNavigate} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 
-export default function Home({ onDeconnexionClick, username, onSort, sort ,selectedPersonId, selectionPersonne}) {
+
+export default function Home({ onDeconnexionClick, username, onSort, sort ,selectedPersonId, selectionPersonne , handleLadrisa}) {
   const isVisible = true;
 
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
@@ -14,8 +15,12 @@ export default function Home({ onDeconnexionClick, username, onSort, sort ,selec
   const [taillePage, setTaillePage] = useState(5);
   const [totalPages, setTotalPages] = useState(1); 
 
-  const navigate = useNavigate()
+const navigate = useNavigate()
 
+const handleModifierAdresse = (adresse) => {
+  handleLadrisa(adresse)
+  navigate('/modifierAdresse')
+}
 
   const handleToggleAdresses = (personne) => {
     if (selectedPersonne === personne) {
@@ -118,7 +123,7 @@ export default function Home({ onDeconnexionClick, username, onSort, sort ,selec
                               <td>{adresse.rueRepresentation}</td>
                               <td>{adresse.numeroMaisonRepresentation}</td>
                               <td>
-                              <Link  to={'/modifierAdresse'} >   <button className="bouton-modifier-adresses">Modifier</button></Link>
+                                <button  onClick={() => handleModifierAdresse(adresse)} className="bouton-modifier-adresses">Modifier</button>
                                 <button onClick={() => handleDeleteAddress(adresse.idRepresentation , personne)} className="bouton-supprimer-adresses">Supprimer</button>
                               </td>
                             </tr>

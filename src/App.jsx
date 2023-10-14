@@ -31,6 +31,13 @@ export default function App() {
     }
   };
 
+  const [ladrisa, setLadrisa] = useState({ idCommand:'' , rueCommand: '', numeroMaisonCommand: '' });
+  const handleLadrisa = (NewLadrisa) => {
+    setLadrisa(NewLadrisa)
+  }
+
+
+
 
   const [p, setP] = useState('');
   const toggleP = (val) => {
@@ -89,9 +96,9 @@ export default function App() {
 
           {isLoggedIn && (
             <>
-              <Route path='/home' element={<Home  selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  sort={sort} onSort={toggleSort} username={username} onDeconnexionClick={toggle} />} />
+              <Route path='/home' element={<Home  handleLadrisa={handleLadrisa}    selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  sort={sort} onSort={toggleSort} username={username} onDeconnexionClick={toggle} />} />
               <Route path='/modifier' element={<Modifier selectedPersonId={selectedPersonId} onCreate={toggleP} />} />
-              <Route path='/modifierAdresse' element={<ModifierAdresse />} />
+              <Route path='/modifierAdresse' element={<ModifierAdresse ladrisa={ladrisa}  onCreate={toggleP} />} />
               <Route path='/create' element={<Create onCreate={toggleP} />} />
               <Route path='/popDemander' element={<PopDemander  p={p} />} />
               <Route path='/popValider' element={<PopValider  selectedPersonId={selectedPersonId} />} />

@@ -1,9 +1,49 @@
-import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from 'react-router-dom';
+import { updateAdresse } from "./service";
 
 
 
-export default function ModifierAdresse() {
+export default function ModifierAdresse({ladrisa,onCreate}) {
+  const navigate = useNavigate();
+
+  const [idCommand, setIdCommand] = useState('');
+  const [rueCommand, setRueCommand] = useState('');
+  const [numeroMaisonCommand, setNumeroMaisonCommand] = useState('');
+  
+
+
+
+      const editAdresse = async (e) => {
+        e.preventDefault()
+        if(ladrisa !== null ){
+          try {
+          const adresseCommand = {
+            idCommand:idCommand,
+            rueCommand: rueCommand,
+            numeroMaisonCommand: numeroMaisonCommand
+          }
+            const response = await updateAdresse(adresseCommand);
+             console.log('réponse de l\'API : ', response.data);
+          console.log(adresseCommand)
+
+             if (response.status === 200) {
+          onCreate(ladrisa.rueRepresentation);
+                navigate('/popVoid')
+             }
+        }catch(error){
+          console.error('Erreur lors de la requête API:', error);
+        }
+      }
+      }
+
+      useEffect(() => {
+        if (ladrisa !== null) {
+          setIdCommand(ladrisa.idRepresentation);
+          setRueCommand(ladrisa.rueRepresentation);
+          setNumeroMaisonCommand(ladrisa.numeroMaisonRepresentation);
+              }
+      }, [ladrisa]);
 
 
     return (
@@ -13,7 +53,7 @@ export default function ModifierAdresse() {
         </div>
         <div className="personne-container">
           <h1 className="login-header">Modifier une adresse</h1>
-          <form action=".localhost:8080/adresses" method="POST" className="login-form">
+          <form className="login-form">
             <div className="form-group">
               <label className="login-label" htmlFor="rue">
                 Rue:
@@ -22,6 +62,8 @@ export default function ModifierAdresse() {
                type="text" 
                id="rue"
                name="rue" 
+               value={rueCommand}
+               onChange={(e) => setRueCommand(e.target.value)}
                required />
             </div>
             <div className="form-group">
@@ -33,13 +75,14 @@ export default function ModifierAdresse() {
                 type="text"
                 id="numeroMaison"
                 name="numeroMaison"
-
+                value={numeroMaisonCommand}
+                onChange={(e) => setNumeroMaisonCommand(e.target.value)}
                 required
               />
             </div>
             <div className="marginT">
               <div className="form-group">
-              <Link  to={'/popVoid'}  >  <button className="boutton-login"  type="submit">Sauvegarder adresse</button></Link>
+               <button className="boutton-login" onClick={editAdresse} type="submit">Sauvegarder adresse</button>
 
               </div>
             </div>

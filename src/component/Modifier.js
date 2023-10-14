@@ -9,10 +9,9 @@ export default function Modifier({onCreate ,selectedPersonId}) {
 
   const [isAddingAddress, setIsAddingAddress] = useState(false);
   const [adressesCommand, setAddressesCommand] = useState([]);
-  const [adresseCommand, setAdresseCommand] = useState({idCommand: '' ,rueCommand: '', numeroMaisonCommand: '' });
+  const [adresseCommand, setAdresseCommand] = useState({idCommand: '' , rueCommand : '', numeroMaisonCommand: '' });
 
-  const [idCommand, setIdCommand] = useState('');
-
+  const [idCommand,  setIdCommand] = useState('');
   const [nomCommand, setNomCommand] = useState('');
   const [prenomCommand, setPrenomCommand] = useState('');
   const [id, setId] = useState('');
@@ -25,8 +24,9 @@ export default function Modifier({onCreate ,selectedPersonId}) {
   const toggleAddressPopup = () => {
     setIsAddingAddress(!isAddingAddress);
     setEditAddressIndex(-1); 
-    if(isDuplicatePerson)
+    if(isDuplicatePerson){
     setIsDuplicatePerson(!isDuplicatePerson)
+    }
   };
 
   const addAddress = (e) => {
@@ -50,7 +50,7 @@ export default function Modifier({onCreate ,selectedPersonId}) {
       }
 
       setAddressesCommand([...adressesCommand, adresseCommand]);
-      setAdresseCommand({ rueCommand: '', numeroMaisonCommand: '' });
+      setAdresseCommand({ idCommand  : '' , rueCommand: '', numeroMaisonCommand: '' });
       toggleAddressPopup();
       setIsDuplicateAddress(false)
     }
@@ -71,6 +71,7 @@ export default function Modifier({onCreate ,selectedPersonId}) {
     const addressToEdit = adressesCommand[index];
     setEditAddressIndex(index);
     setAdresseCommand({
+      idCommand:addressToEdit.idCommand,
       rueCommand: addressToEdit.rueCommand,
       numeroMaisonCommand: addressToEdit.numeroMaisonCommand,
     });
@@ -147,6 +148,7 @@ export default function Modifier({onCreate ,selectedPersonId}) {
         rueCommand: address.rueRepresentation,
         numeroMaisonCommand: address.numeroMaisonRepresentation
       })));
+      console.log(adressesCommand)
           }
   }, [selectedPersonId]);
 
