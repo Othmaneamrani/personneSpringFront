@@ -11,7 +11,7 @@ export default function Home({ onDeconnexionClick, username, onSort, sort ,selec
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
   const [personnes, setPersonnes] = useState([]);
   const [selectedPersonne, setSelectedPersonne] = useState(null);
-  const [pageActuelle, setPageActuelle] = useState(1);
+  const [pageActuelle, setPageActuelle] = useState();
   const [taillePage, setTaillePage] = useState(5);
   const [totalPages, setTotalPages] = useState(1); 
 
@@ -51,11 +51,11 @@ const handleModifierAdresse = (adresse) => {
 
 
   useEffect(() => {
-    handleGetPersonnes();
     const storedPage = localStorage.getItem("currentPage");
     if (storedPage) {
       setPageActuelle(Number(storedPage));
     }
+    handleGetPersonnes();
   }, [pageActuelle, taillePage]);
 
   const handleDeleteAddress = (addressId, personne) => {

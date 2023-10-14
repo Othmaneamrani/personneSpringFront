@@ -10,7 +10,7 @@ export default function Sort ({sort , onvide, onDeconnexionClick,selectedPersonI
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
   const [personnes, setPersonnes] = useState([]);
   const [selectedPersonne, setSelectedPersonne] = useState(null);
-  const [pageActuelle, setPageActuelle] = useState(1);
+  const [pageActuelle, setPageActuelle] = useState();
   const [taillePage, setTaillePage] = useState(5);
   const [totalPages, setTotalPages] = useState(1); 
 
@@ -51,12 +51,11 @@ export default function Sort ({sort , onvide, onDeconnexionClick,selectedPersonI
   }
 
   useEffect(() => {
-    hanldeGetSortPersonnes();
     const storedPage = localStorage.getItem("currentPage")
     if(storedPage){
       setPageActuelle(Number(storedPage))
     }
-
+    hanldeGetSortPersonnes();
   }, [pageActuelle, taillePage]);
 
   const handleDeleteAddress = (addressId, personne) => {
