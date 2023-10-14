@@ -103,7 +103,7 @@ export default function App() {
               <Route path='/popDemander' element={<PopDemander  p={p} />} />
               <Route path='/popValider' element={<PopValider  selectedPersonId={selectedPersonId} />} />
               <Route path='/popVoid' element={<PopVoid p={p}/>} />
-              <Route path='/sort' element={<Sort sort={sort} onvide={toggleSort} selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  />} />
+              <Route path='/sort' element={<Sort handleLadrisa={handleLadrisa}  sort={sort} onvide={toggleSort} selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  />} />
               <Route path='/popSign' element={<PopSign />} />
             </>
           )}

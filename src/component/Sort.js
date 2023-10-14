@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import SidebarSort from './SidebarSort';
 import { deleteAdresse, getPersonnesSort} from './service';
 import Pagination from "./Pagination";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function Sort ({sort , onvide, onDeconnexionClick,selectedPersonId, selectionPersonne }){
+export default function Sort ({sort , onvide, onDeconnexionClick,selectedPersonId, selectionPersonne , handleLadrisa}){
   const isVisible = true;
 
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
@@ -14,7 +14,7 @@ export default function Sort ({sort , onvide, onDeconnexionClick,selectedPersonI
   const [taillePage, setTaillePage] = useState(5);
   const [totalPages, setTotalPages] = useState(1); 
 
-
+  const navigate = useNavigate()
 
   const handleToggleAdresses = (personne) => {
     if (selectedPersonne === personne) {
@@ -42,11 +42,21 @@ export default function Sort ({sort , onvide, onDeconnexionClick,selectedPersonI
 
   const handlePageChange = (page) => {
     setPageActuelle(page);
+    localStorage.setItem("currentPage", page.toString())
   };
 
+  const handleModifierAdresse = (adresse) => {
+    handleLadrisa(adresse)
+    navigate('/modifierAdresse')
+  }
 
   useEffect(() => {
     hanldeGetSortPersonnes();
+    const storedPage = localStorage.getItem("currentPage")
+    if(storedPage){
+      setPageActuelle(Number(storedPage))
+    }
+
   }, [pageActuelle, taillePage]);
 
   const handleDeleteAddress = (addressId, personne) => {
@@ -120,9 +130,7 @@ export default function Sort ({sort , onvide, onDeconnexionClick,selectedPersonI
                               <td>{adresse.rueRepresentation}</td>
                               <td>{adresse.numeroMaisonRepresentation}</td>
                               <td>
-                               <Link to={{pathname: '/modifierAdresse',
-                                          state: { adresse }
-                                          }} ><button className="bouton-modifier-adresses">Modifier</button></Link>
+                                <button  onClick={() => handleModifierAdresse(adresse)} className="bouton-modifier-adresses">Modifier</button>
                                 <button onClick={() => handleDeleteAddress(adresse.idRepresentation , personne)} className="bouton-supprimer-adresses">Supprimer</button>
                               </td>
                             </tr>

@@ -46,11 +46,16 @@ const handleModifierAdresse = (adresse) => {
 
   const handlePageChange = (page) => {
     setPageActuelle(page);
+    localStorage.setItem("currentPage", page.toString());
   };
 
 
   useEffect(() => {
     handleGetPersonnes();
+    const storedPage = localStorage.getItem("currentPage");
+    if (storedPage) {
+      setPageActuelle(Number(storedPage));
+    }
   }, [pageActuelle, taillePage]);
 
   const handleDeleteAddress = (addressId, personne) => {
