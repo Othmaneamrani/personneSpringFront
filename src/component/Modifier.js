@@ -9,7 +9,9 @@ export default function Modifier({onCreate ,selectedPersonId}) {
 
   const [isAddingAddress, setIsAddingAddress] = useState(false);
   const [adressesCommand, setAddressesCommand] = useState([]);
-  const [adresseCommand, setAdresseCommand] = useState({ rueCommand: '', numeroMaisonCommand: '' });
+  const [adresseCommand, setAdresseCommand] = useState({idCommand: '' ,rueCommand: '', numeroMaisonCommand: '' });
+
+  const [idCommand, setIdCommand] = useState('');
 
   const [nomCommand, setNomCommand] = useState('');
   const [prenomCommand, setPrenomCommand] = useState('');
@@ -115,13 +117,19 @@ export default function Modifier({onCreate ,selectedPersonId}) {
       if (isDuplicateP()) {
         setIsDuplicatePerson(true);
       } else {
+        const personneCommand = {
+          idCommand:idCommand,
+          nomCommand: nomCommand,
+          prenomCommand: prenomCommand,
+          adressesCommand: adressesCommand
+        }
 
-        const response = await updatePersonne(selectedPersonId);
+        const response = await updatePersonne(personneCommand);
         console.log('réponse de l\'API : ', response.data);
 
-        if (response.data === "ok") {
-          onCreate(selectedPersonId.nomCommand);
-          navigate('/popDemander');
+        if (response.status === 200) {
+          onCreate(selectedPersonId.nomRepresentation);
+          navigate('/popVoid');
         }
       }
     } catch (error) {
@@ -131,9 +139,11 @@ export default function Modifier({onCreate ,selectedPersonId}) {
 
   useEffect(() => {
     if (selectedPersonId !== null) {
+      setIdCommand(selectedPersonId.idRepresentation);
       setNomCommand(selectedPersonId.nomRepresentation);
       setPrenomCommand(selectedPersonId.prenomRepresentation);
       setAddressesCommand(selectedPersonId.adressesRepresentation.map(address => ({
+        idCommand : address.idRepresentation,
         rueCommand: address.rueRepresentation,
         numeroMaisonCommand: address.numeroMaisonRepresentation
       })));

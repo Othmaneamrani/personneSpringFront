@@ -35,8 +35,8 @@ export const createPersonne = (personneCommand) => {
     return personneApi.post(`/personnes`, personneCommand)
 }
 
-export const updatePersonne = (personne) => {
-    return personneApi.put = ('/personnes/modifier', personne)
+export const updatePersonne = (personneCommand) => {
+    return personneApi.put('/personnes/modifier', personneCommand)
 }
 
 // export const updateAdresse= (adresse) => {
