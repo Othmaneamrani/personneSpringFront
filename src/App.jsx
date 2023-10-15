@@ -97,11 +97,11 @@ export default function App() {
           {isLoggedIn && (
             <>
               <Route path='/home' element={<Home  handleLadrisa={handleLadrisa}    selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  sort={sort} onSort={toggleSort} username={username} onDeconnexionClick={toggle} />} />
-              <Route path='/modifier' element={<Modifier selectedPersonId={selectedPersonId} onCreate={toggleP} />} />
+              <Route path='/modifier' element={<Modifier selectionPersonne={selectionPersonne} selectedPersonId={selectedPersonId} onCreate={toggleP} />} />
               <Route path='/modifierAdresse' element={<ModifierAdresse ladrisa={ladrisa}  onCreate={toggleP} />} />
-              <Route path='/create' element={<Create onCreate={toggleP} />} />
+              <Route path='/create' element={<Create  selectionPersonne={selectionPersonne} onCreate={toggleP} />} />
               <Route path='/popDemander' element={<PopDemander  p={p} />} />
-              <Route path='/popValider' element={<PopValider  selectedPersonId={selectedPersonId} />} />
+              <Route path='/popValider' element={<PopValider  selectionPersonne={selectionPersonne} selectedPersonId={selectedPersonId} />} />
               <Route path='/popVoid' element={<PopVoid p={p}/>} />
               <Route path='/sort' element={<Sort handleLadrisa={handleLadrisa}  sort={sort} onvide={toggleSort} selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  />} />
               <Route path='/popSign' element={<PopSign />} />

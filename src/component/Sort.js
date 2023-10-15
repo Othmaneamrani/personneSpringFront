@@ -51,6 +51,7 @@ export default function Sort ({sort , onvide, onDeconnexionClick,selectedPersonI
   }
 
   useEffect(() => {
+    handleNull()
     const storedPage = localStorage.getItem("currentPage")
     if(storedPage){
       setPageActuelle(Number(storedPage))
@@ -73,13 +74,17 @@ export default function Sort ({sort , onvide, onDeconnexionClick,selectedPersonI
     });
   };
   
+  const handleNull = () => {
+    selectionPersonne(null)
+  }
+
 
   return (
     <div className={`transition-fade ${isVisible ? "visible" : "invisible"}`}>
         <Link className="retourSort" to={'/home'}><span className="arrow">&#8592;</span> Retour</Link>
 
       <div className="bienvenu">
-        <SidebarSort onDeconnexionClick={onDeconnexionClick} />
+        <SidebarSort selectedPersonId={selectedPersonId} onDeconnexionClick={onDeconnexionClick} />
 
 
 

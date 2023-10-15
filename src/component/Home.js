@@ -51,6 +51,7 @@ const handleModifierAdresse = (adresse) => {
 
 
   useEffect(() => {
+    handleNull()
     const storedPage = localStorage.getItem("currentPage");
     if (storedPage) {
       setPageActuelle(Number(storedPage));
@@ -73,11 +74,14 @@ const handleModifierAdresse = (adresse) => {
     });
   };
   
+  const handleNull = () => {
+    selectionPersonne(null)
+  }
 
   return (
     <div className={`transition-fade ${isVisible ? "visible" : "invisible"}`}>
       <div className="bienvenu">
-        <Sidebar onSort={onSort} sort={sort} onDeconnexionClick={onDeconnexionClick} />
+        <Sidebar onSort={onSort} selectedPersonId={selectedPersonId} sort={sort} onDeconnexionClick={onDeconnexionClick} />
 
         <h1 className="smia">BIENVENU {username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}</h1>
         <h3>Que souhaitez-vous faire ?</h3>

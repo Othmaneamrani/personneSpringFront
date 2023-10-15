@@ -210,15 +210,28 @@ body {
 }
 
 
-.supprimer{
+.supprimer-oui{
   color: rgb(241, 12, 12);
 }
+
+.supprimer-non{
+  color: #888;
+  cursor: not-allowed;
+}
+
+
 .sidebar-l3 {
   color: #fff;
 }
 
+.sidebar-l3-non {
+  color: #888;
+  cursor: not-allowed;
+}
 
-
+.sidebar-l3-oui {
+  color: #fff;
+}
 
 .search-form {
   margin-top: 10px;
