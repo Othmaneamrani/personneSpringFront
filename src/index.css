@@ -915,6 +915,42 @@ text-decoration: none;
   margin-left: 20px;
 }
 
+
+.adresses-table2 {
+  width: 103%; 
+  border-collapse: collapse;
+  margin-top: 5px;
+  max-height: 100px; 
+}
+
+.adresses-table2 th {
+  background-color: #333;
+  color: #fff;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.adresses-table2 th{
+  white-space: nowrap; 
+}
+
+.adresses-table2 th,
+.adresses-table2 td {
+  padding: 7px;
+  border: 1px solid #ddd;
+  text-align: left;
+  word-break:break-all;
+}
+
+.adresses-table2 td {
+  font-size: 17px;
+  font-weight: bold;
+  color: #0d0d0e ;
+}
+
+
+
+
 }
 
 
