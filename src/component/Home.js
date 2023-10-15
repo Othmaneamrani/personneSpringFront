@@ -85,7 +85,7 @@ const handleModifierAdresse = (adresse) => {
         <Sidebar   onProblem={onProblem} onSort={onSort} selectedPersonId={selectedPersonId} sort={sort} onDeconnexionClick={onDeconnexionClick} />
 
         <h1 className="smia">BIENVENU {username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}</h1>
-        <h3>Que souhaitez-vous faire ?</h3>
+        <h3 className="faire">Que souhaitez-vous faire ?</h3>
 
         <h1 className="personnes-title">Liste des Personnes :</h1>
         <table className="personnes-table">
