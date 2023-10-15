@@ -5,7 +5,7 @@ import Pagination from "./Pagination";
 import { useNavigate} from 'react-router-dom';
 
 
-export default function Home({ onDeconnexionClick, username, onSort, sort , onProblem,selectedPersonId, selectionPersonne , handleLadrisa}) {
+export default function Home({ onDeconnexionClick,toggleVersSort, username, onSort, sort , onProblem,selectedPersonId, selectionPersonne , handleLadrisa}) {
   const isVisible = true;
 
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
@@ -52,6 +52,7 @@ const handleModifierAdresse = (adresse) => {
 
   useEffect(() => {
     handleNull()
+    toggleVersSort(false)
     const storedPage = localStorage.getItem("currentPage");
     if (storedPage) {
       setPageActuelle(Number(storedPage));

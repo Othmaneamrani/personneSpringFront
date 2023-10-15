@@ -99,20 +99,19 @@ const toggleVersSort = (val) => {
               <Route path='/popGmail' element={<PopGmail />} />
               <Route path='/popMdp' element={<PopMdp />} />
               <Route path='/popSign' element={<PopSign />} />
-              <Route path='/popVoid' element={<PopVoid p={p}/>} />
-              <Route path='/popValider' element={<PopValider  selectionPersonne={selectionPersonne} selectedPersonId={selectedPersonId} />} />
+              <Route path='/popVoid' element={<PopVoid p={p}   versSort={versSort} />} />
+              <Route path='/popValider' element={<PopValider   versSort={versSort}  selectionPersonne={selectionPersonne} selectedPersonId={selectedPersonId} />} />
               <Route path='/popDemander' element={<PopDemander  p={p} />} />
             </>
           )}
 
           {isLoggedIn && (
             <>
-              <Route path='/home' element={<Home  handleLadrisa={handleLadrisa}  onProblem={togglePop}  selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  sort={sort} onSort={toggleSort} username={username} onDeconnexionClick={toggle} />} />
+              <Route path='/home' element={<Home  toggleVersSort={toggleVersSort} handleLadrisa={handleLadrisa}  onProblem={togglePop}  selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  sort={sort} onSort={toggleSort} username={username} onDeconnexionClick={toggle} />} />
               <Route path='/modifier' element={<Modifier versSort={versSort} onProblem={togglePop} selectionPersonne={selectionPersonne} selectedPersonId={selectedPersonId} onCreate={toggleP} />} />
-              <Route path='/modifierAdresse' element={<ModifierAdresse ladrisa={ladrisa}  onCreate={toggleP} />} />
+              <Route path='/modifierAdresse' element={<ModifierAdresse  versSort={versSort}  ladrisa={ladrisa}  onCreate={toggleP} />} />
               <Route path='/create' element={<Create   onProblem={togglePop}  selectionPersonne={selectionPersonne} onCreate={toggleP} />} />
-              <Route path='/sort' element={<Sort  toggleVersSort={toggleVersSort} versSort={versSort} handleLadrisa={handleLadrisa}  sort={sort} onvide={toggleSort} selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  />} />
-
+              <Route path='/sort' element={<Sort  onProblem={togglePop}  toggleVersSort={toggleVersSort} versSort={versSort} handleLadrisa={handleLadrisa}  sort={sort} onvide={toggleSort} selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  />} />
             </>
           )}
         </Routes>

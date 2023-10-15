@@ -4,7 +4,7 @@ import { updateAdresse } from "./service";
 
 
 
-export default function ModifierAdresse({ladrisa,onCreate}) {
+export default function ModifierAdresse({ladrisa,onCreate,versSort}) {
   const navigate = useNavigate();
 
   const [idCommand, setIdCommand] = useState('');
@@ -49,8 +49,10 @@ export default function ModifierAdresse({ladrisa,onCreate}) {
     return (
       <div>
         <div className="retour-hover">
-        <Link className="retour"  to={'/home'} > <span className="arrow">&#8592;</span>  Retour</Link>
-        </div>
+        {versSort ?(
+        <Link className="retour"  to={'/sort'} ><span className="arrow">&#8592;</span> Retour</Link>
+        ):( <Link className="retour"  to={'/home'} ><span className="arrow">&#8592;</span> Retour</Link>)
+        }         </div>
         <div className="personne-container">
           <h1 className="login-header">Modifier une adresse</h1>
           <form className="login-form">

@@ -4,7 +4,7 @@ import { deleteAdresse, getPersonnesSort} from './service';
 import Pagination from "./Pagination";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Sort ({sort ,toggleVersSort, versSort,onvide, onDeconnexionClick,selectedPersonId, selectionPersonne , handleLadrisa}){
+export default function Sort ({sort,onProblem ,toggleVersSort, versSort,onvide, onDeconnexionClick,selectedPersonId, selectionPersonne , handleLadrisa}){
   const isVisible = true;
 
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
@@ -42,7 +42,7 @@ export default function Sort ({sort ,toggleVersSort, versSort,onvide, onDeconnex
 
   const handlePageChange = (page) => {
     setPageActuelle(page);
-    localStorage.setItem("currentPage", page.toString())
+    localStorage.setItem("currentPageSort", page.toString())
   };
 
   const handleModifierAdresse = (adresse) => {
@@ -53,16 +53,11 @@ export default function Sort ({sort ,toggleVersSort, versSort,onvide, onDeconnex
   useEffect(() => {
     handleNull()
     toggleVersSort(true)
-    const storedPage = localStorage.getItem("currentPage")
-    if(storedPage){
-      setPageActuelle(Number(storedPage))
+    const storedPageSort = localStorage.getItem("currentPageSort")
+    if(storedPageSort){
+      setPageActuelle(Number(storedPageSort))
     }
     hanldeGetSortPersonnes();
-    console.log(versSort)
-    return () => {
-    toggleVersSort(false)
-    console.log(versSort)
-    }
   }, [pageActuelle, taillePage]);
 
   const handleDeleteAddress = (addressId, personne) => {
@@ -90,7 +85,7 @@ export default function Sort ({sort ,toggleVersSort, versSort,onvide, onDeconnex
         <Link className="retourSort" to={'/home'}><span className="arrow">&#8592;</span> Retour</Link>
 
       <div className="bienvenu">
-        <SidebarSort selectedPersonId={selectedPersonId} onDeconnexionClick={onDeconnexionClick} />
+        <SidebarSort onProblem={onProblem} selectedPersonId={selectedPersonId} onDeconnexionClick={onDeconnexionClick} />
 
 
 

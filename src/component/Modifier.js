@@ -157,7 +157,10 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
   return (
     <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`}>
       <div className="retour-hover">
-        <Link className="retour"  to={versSort ? '/sort' : '/home'} ><span className="arrow">&#8592;</span> Retour</Link>
+        {versSort ?(
+        <Link className="retour"  to={'/sort'} ><span className="arrow">&#8592;</span> Retour</Link>
+        ):( <Link className="retour"  to={'/home'} ><span className="arrow">&#8592;</span> Retour</Link>)
+        } 
       </div>
       <div className="personne-container">
       <h1 className="login-header">Modifier {nomCommand} </h1>

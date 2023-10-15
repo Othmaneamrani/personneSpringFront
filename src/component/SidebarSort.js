@@ -1,13 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function SidebarSort({selectedPersonId}){
+export default function SidebarSort({selectedPersonId,onProblem }){
   const handleLinkClick = (e) => {
     if (e.target.classList.contains("sidebar-l3-non") || e.target.classList.contains("supprimer-non")) {
       e.preventDefault(); 
+    }else{
+      onProblemClick()
     }
   };
       
+
+  const onProblemClick = () => {
+    onProblem(true)
+  }
+
+
     return (
       <div className="sidebar">
         <div className="hebto">
