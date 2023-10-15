@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { createPersonne, getAllPersonnes } from "./service";
 
-export default function Create({ onCreate }) {
-  const isVisible = true;
+export default function Create({ onCreate,onProblem, versSort, toggleVersSort }) {
+  const isVisible = true; 
 
   const navigate = useNavigate();
 
@@ -126,6 +126,7 @@ export default function Create({ onCreate }) {
 
         if (response.data === "ok") {
           onCreate(personneCommand.nomCommand);
+          onProblem(true)
           navigate('/popDemander');
         }
       }

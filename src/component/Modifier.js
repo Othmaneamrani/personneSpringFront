@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { updatePersonne, getAllPersonnes } from "./service";
 
-export default function Modifier({onCreate ,selectedPersonId}) {
+export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}) {
   const isVisible = true;
 
   const navigate = useNavigate();
 
+  
   const [isAddingAddress, setIsAddingAddress] = useState(false);
   const [adressesCommand, setAddressesCommand] = useState([]);
   const [adresseCommand, setAdresseCommand] = useState({idCommand: '' , rueCommand : '', numeroMaisonCommand: '' });
@@ -130,6 +131,7 @@ export default function Modifier({onCreate ,selectedPersonId}) {
 
         if (response.status === 200) {
           onCreate(selectedPersonId.nomRepresentation);
+          onProblem(true)
           navigate('/popVoid');
         }
       }
@@ -155,7 +157,7 @@ export default function Modifier({onCreate ,selectedPersonId}) {
   return (
     <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`}>
       <div className="retour-hover">
-        <Link className="retour" to={'/home'}><span className="arrow">&#8592;</span> Retour</Link>
+        <Link className="retour"  to={versSort ? '/sort' : '/home'} ><span className="arrow">&#8592;</span> Retour</Link>
       </div>
       <div className="personne-container">
       <h1 className="login-header">Modifier {nomCommand} </h1>

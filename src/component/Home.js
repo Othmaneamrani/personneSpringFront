@@ -5,7 +5,7 @@ import Pagination from "./Pagination";
 import { useNavigate} from 'react-router-dom';
 
 
-export default function Home({ onDeconnexionClick, username, onSort, sort ,selectedPersonId, selectionPersonne , handleLadrisa}) {
+export default function Home({ onDeconnexionClick, username, onSort, sort , onProblem,selectedPersonId, selectionPersonne , handleLadrisa}) {
   const isVisible = true;
 
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
@@ -81,7 +81,7 @@ const handleModifierAdresse = (adresse) => {
   return (
     <div className={`transition-fade ${isVisible ? "visible" : "invisible"}`}>
       <div className="bienvenu">
-        <Sidebar onSort={onSort} selectedPersonId={selectedPersonId} sort={sort} onDeconnexionClick={onDeconnexionClick} />
+        <Sidebar   onProblem={onProblem} onSort={onSort} selectedPersonId={selectedPersonId} sort={sort} onDeconnexionClick={onDeconnexionClick} />
 
         <h1 className="smia">BIENVENU {username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}</h1>
         <h3>Que souhaitez-vous faire ?</h3>

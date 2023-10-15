@@ -4,7 +4,7 @@ import { deleteAdresse, getPersonnesSort} from './service';
 import Pagination from "./Pagination";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Sort ({sort , onvide, onDeconnexionClick,selectedPersonId, selectionPersonne , handleLadrisa}){
+export default function Sort ({sort ,toggleVersSort, versSort,onvide, onDeconnexionClick,selectedPersonId, selectionPersonne , handleLadrisa}){
   const isVisible = true;
 
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
@@ -52,11 +52,17 @@ export default function Sort ({sort , onvide, onDeconnexionClick,selectedPersonI
 
   useEffect(() => {
     handleNull()
+    toggleVersSort(true)
     const storedPage = localStorage.getItem("currentPage")
     if(storedPage){
       setPageActuelle(Number(storedPage))
     }
     hanldeGetSortPersonnes();
+    console.log(versSort)
+    return () => {
+    toggleVersSort(false)
+    console.log(versSort)
+    }
   }, [pageActuelle, taillePage]);
 
   const handleDeleteAddress = (addressId, personne) => {

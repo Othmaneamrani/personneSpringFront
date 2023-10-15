@@ -28,6 +28,7 @@ try {
   const response = await axios.post ('http://localhost:8080/logins/signup',LoginCommand)
   if(response.data === LoginCommand.connexionCommand.usernameCommand){
     onConnexion(true, connexionCommand.usernameCommand);
+    onProblem(true)
     navigate('/popSign');
   }else if (response.data === "gmail") {
     onProblem(true)

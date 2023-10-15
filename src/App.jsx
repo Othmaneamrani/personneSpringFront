@@ -22,6 +22,13 @@ export default function App() {
   const isVisible = true;
 
 
+  const [versSort, setVersSort] = useState(false);
+
+const toggleVersSort = (val) => {
+  setVersSort(val)
+}
+
+
   const [selectedPersonId, setSelectedPersonId] = useState(null);
   const selectionPersonne = (personne) => {
     if (selectedPersonId === personne) {
@@ -91,20 +98,21 @@ export default function App() {
               <Route path='/popName' element={<PopName />} />
               <Route path='/popGmail' element={<PopGmail />} />
               <Route path='/popMdp' element={<PopMdp />} />
+              <Route path='/popSign' element={<PopSign />} />
+              <Route path='/popVoid' element={<PopVoid p={p}/>} />
+              <Route path='/popValider' element={<PopValider  selectionPersonne={selectionPersonne} selectedPersonId={selectedPersonId} />} />
+              <Route path='/popDemander' element={<PopDemander  p={p} />} />
             </>
           )}
 
           {isLoggedIn && (
             <>
-              <Route path='/home' element={<Home  handleLadrisa={handleLadrisa}    selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  sort={sort} onSort={toggleSort} username={username} onDeconnexionClick={toggle} />} />
-              <Route path='/modifier' element={<Modifier selectionPersonne={selectionPersonne} selectedPersonId={selectedPersonId} onCreate={toggleP} />} />
+              <Route path='/home' element={<Home  handleLadrisa={handleLadrisa}  onProblem={togglePop}  selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  sort={sort} onSort={toggleSort} username={username} onDeconnexionClick={toggle} />} />
+              <Route path='/modifier' element={<Modifier versSort={versSort} onProblem={togglePop} selectionPersonne={selectionPersonne} selectedPersonId={selectedPersonId} onCreate={toggleP} />} />
               <Route path='/modifierAdresse' element={<ModifierAdresse ladrisa={ladrisa}  onCreate={toggleP} />} />
-              <Route path='/create' element={<Create  selectionPersonne={selectionPersonne} onCreate={toggleP} />} />
-              <Route path='/popDemander' element={<PopDemander  p={p} />} />
-              <Route path='/popValider' element={<PopValider  selectionPersonne={selectionPersonne} selectedPersonId={selectedPersonId} />} />
-              <Route path='/popVoid' element={<PopVoid p={p}/>} />
-              <Route path='/sort' element={<Sort handleLadrisa={handleLadrisa}  sort={sort} onvide={toggleSort} selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  />} />
-              <Route path='/popSign' element={<PopSign />} />
+              <Route path='/create' element={<Create   onProblem={togglePop}  selectionPersonne={selectionPersonne} onCreate={toggleP} />} />
+              <Route path='/sort' element={<Sort  toggleVersSort={toggleVersSort} versSort={versSort} handleLadrisa={handleLadrisa}  sort={sort} onvide={toggleSort} selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  />} />
+
             </>
           )}
         </Routes>
