@@ -1,34 +1,26 @@
-import React  from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 
-export default function BarreRecherche({onSort , sort}){
-  
+export default function BarreRecherche({ onSort, sort }) {
+  const isSortEmpty = sort.trim() === "";
 
-  const navigate = useNavigate();
-
-  const handleSearch = () => {
-    navigate('/sort');
-  };
-
-return(
+  return (
     <div>
-
-<form className="search-form" >
-<input
-  type="text"
-  placeholder="Rechercher..."
-  className="search-input"
-  value={sort}
-  onChange={(e)=>onSort(e.target.value)}
-/>
-<Link to='/sort' >
-<button type="submit" className="search-button"   onClick={handleSearch} >
-    Rechercher
-</button>
-</Link>
-
-</form>
-</div>
-
-)
+      <form className="search-form">
+        <input
+          type="text"
+          placeholder="Rechercher..."
+          className="search-input"
+          value={sort}
+          onChange={(e) => onSort(e.target.value)}
+        />
+        <Link to={isSortEmpty ? '#' : '/sort'}>
+          <button type="submit" className="search-button">
+            Rechercher
+          </button>
+        </Link>
+        {isSortEmpty && <p>Veuillez entrer quelque chose.</p>}
+      </form>
+    </div>
+  );
 }
