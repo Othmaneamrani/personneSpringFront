@@ -833,7 +833,7 @@ text-decoration: none;
 
 
 
-@media (min-width: 300px) and (max-width: 1000px) {
+@media (min-width: 300px) and (max-width: 980px) {
   .nav {
     width: 120%;
     height: 150px;
@@ -949,9 +949,4 @@ text-decoration: none;
 }
 
 
-
-
 }
-
-
-
