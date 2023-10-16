@@ -21,6 +21,13 @@ import PopMdp from './component/PopMdp';
 export default function App() {
   const isVisible = true;
 
+  
+  const [modifierAd, setModifierAd] = useState(false);
+  const adresseAccess = () => {
+    setModifierAd(true)
+  }
+
+
 
   const [versSort, setVersSort] = useState(false);
 
@@ -107,13 +114,27 @@ const toggleVersSort = (val) => {
 
           {isLoggedIn && (
             <>
-              <Route path='/home' element={<Home  toggleVersSort={toggleVersSort} handleLadrisa={handleLadrisa}  onProblem={togglePop}  selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  sort={sort} onSort={toggleSort} username={username} onDeconnexionClick={toggle} />} />
-              <Route path='/modifier' element={<Modifier versSort={versSort} onProblem={togglePop} selectionPersonne={selectionPersonne} selectedPersonId={selectedPersonId} onCreate={toggleP} />} />
-              <Route path='/modifierAdresse' element={<ModifierAdresse  versSort={versSort}  ladrisa={ladrisa}  onCreate={toggleP} />} />
+              <Route path='/home' element={<Home  toggleVersSort={toggleVersSort} adresseAccess={adresseAccess} handleLadrisa={handleLadrisa}  onProblem={togglePop}  selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  sort={sort} onSort={toggleSort} username={username} onDeconnexionClick={toggle} />} />
               <Route path='/create' element={<Create   onProblem={togglePop}  selectionPersonne={selectionPersonne} onCreate={toggleP} />} />
-              <Route path='/sort' element={<Sort  onProblem={togglePop}  toggleVersSort={toggleVersSort} versSort={versSort} handleLadrisa={handleLadrisa}  sort={sort} onvide={toggleSort} selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  />} />
+              <Route path='/sort' element={<Sort  onProblem={togglePop}  adresseAccess={adresseAccess}  toggleVersSort={toggleVersSort} versSort={versSort} handleLadrisa={handleLadrisa}  sort={sort} onvide={toggleSort} selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  />} />
             </>
           )}
+
+{selectedPersonId && (
+            <>
+              <Route path='/modifier' element={<Modifier versSort={versSort} onProblem={togglePop} selectionPersonne={selectionPersonne} selectedPersonId={selectedPersonId} onCreate={toggleP} />} />
+            </>
+          )}
+
+
+{modifierAd && (
+            <>
+              <Route path='/modifierAdresse' element={<ModifierAdresse  versSort={versSort}  ladrisa={ladrisa}  onCreate={toggleP} />} />
+            </>
+          )}
+
+
+
         </Routes>
       </BrowserRouter>
       <Footer />

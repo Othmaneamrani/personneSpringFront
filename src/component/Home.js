@@ -5,7 +5,7 @@ import Pagination from "./Pagination";
 import { useNavigate} from 'react-router-dom';
 
 
-export default function Home({ onDeconnexionClick,toggleVersSort, username, onSort, sort , onProblem,selectedPersonId, selectionPersonne , handleLadrisa}) {
+export default function Home({ onDeconnexionClick,toggleVersSort,adresseAccess, username, onSort, sort , onProblem,selectedPersonId, selectionPersonne , handleLadrisa}) {
   const isVisible = true;
 
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
@@ -19,6 +19,7 @@ const navigate = useNavigate()
 
 const handleModifierAdresse = (adresse) => {
   handleLadrisa(adresse)
+  adresseAccess()
   navigate('/modifierAdresse')
 }
 
