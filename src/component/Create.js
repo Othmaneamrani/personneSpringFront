@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { createPersonne, getAllPersonnes } from "./service";
 
-export default function Create({ onCreate,onProblem, versSort, toggleVersSort }) {
+export default function Create({ onCreate,onProblem }) {
   const isVisible = true; 
 
   const navigate = useNavigate();

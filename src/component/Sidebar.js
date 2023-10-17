@@ -36,8 +36,12 @@ export default function Sidebar({onDeconnexionClick , onProblem,onSort , sort,se
              <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} >
          <BarreRecherche onSort={onSort}  sort={sort} />
           </div>)}</li>
+            {selectedPersonId ?(            <li  className="sidebar-l3" >Ajouter à la liste</li>
+            ):(
+              <li><Link to={'/list'} className="sidebar-l3" >Voir liste</Link></li>
+            )   
 
-
+        }
           <li><Link to={'/create'} className="sidebar-l3" >Créer personne</Link></li>
           <li><Link to={'/modifier'}  className={selectedPersonId ? "sidebar-l3-oui" : "sidebar-l3-non"}  onClick={handleLinkClick} >Modifier personne</Link></li>
           <li><Link  to={'/popValider'}    className={ selectedPersonId ? "supprimer-oui" : "supprimer-non"} onClick={handleLinkClick} >Supprimer personne</Link></li>

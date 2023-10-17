@@ -17,6 +17,7 @@ import PopGmail from './component/PopGmail';
 import PopName from './component/PopName';
 import PopIncorrect from './component/PopIncorrect';
 import PopMdp from './component/PopMdp';
+import List from './component/List';
 
 export default function App() {
   const isVisible = true;
@@ -108,7 +109,7 @@ const toggleVersSort = (val) => {
               <Route path='/popSign' element={<PopSign />} />
               <Route path='/popVoid' element={<PopVoid p={p}   versSort={versSort} />} />
               <Route path='/popValider' element={<PopValider   versSort={versSort}  selectionPersonne={selectionPersonne} selectedPersonId={selectedPersonId} />} />
-              <Route path='/popDemander' element={<PopDemander  p={p} />} />
+              <Route path='/popName' element={<PopName />} />
             </>
           )}
 
@@ -117,6 +118,7 @@ const toggleVersSort = (val) => {
               <Route path='/home' element={<Home  toggleVersSort={toggleVersSort} adresseAccess={adresseAccess} handleLadrisa={handleLadrisa}  onProblem={togglePop}  selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  sort={sort} onSort={toggleSort} username={username} onDeconnexionClick={toggle} />} />
               <Route path='/create' element={<Create   onProblem={togglePop}  selectionPersonne={selectionPersonne} onCreate={toggleP} />} />
               <Route path='/sort' element={<Sort  onProblem={togglePop}  adresseAccess={adresseAccess}  toggleVersSort={toggleVersSort} versSort={versSort} handleLadrisa={handleLadrisa}  sort={sort} onvide={toggleSort} selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  />} />
+              <Route path='/list' element={<List />} />
             </>
           )}
 

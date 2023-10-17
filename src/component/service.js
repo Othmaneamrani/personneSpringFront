@@ -48,3 +48,8 @@ export const updateAdresse= (adresseCommand) => {
 export const loggg = (connexionCommand) => {
     return personneApi.post('/connexions/connexion',connexionCommand) 
 }
+
+
+export const getList = () => {
+    return personneApi.get('/personnes/cart')
+}

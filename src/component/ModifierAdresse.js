@@ -6,6 +6,8 @@ import { updateAdresse } from "./service";
 
 export default function ModifierAdresse({ladrisa,onCreate,versSort}) {
   const navigate = useNavigate();
+  const isVisible = true;
+
 
   const [idCommand, setIdCommand] = useState('');
   const [rueCommand, setRueCommand] = useState('');
@@ -47,6 +49,8 @@ export default function ModifierAdresse({ladrisa,onCreate,versSort}) {
 
 
     return (
+    <div className={`transition-fade ${isVisible ? "visible" : "invisible"}`}>
+
       <div>
         <div className="retour-hover">
         {versSort ?(
@@ -91,6 +95,8 @@ export default function ModifierAdresse({ladrisa,onCreate,versSort}) {
           </form>
         </div>
       </div>
+      </div>
+
     );
   }
   
