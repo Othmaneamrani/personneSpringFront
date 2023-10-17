@@ -11,6 +11,7 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
   const [isAddingAddress, setIsAddingAddress] = useState(false);
   const [adressesCommand, setAddressesCommand] = useState([]);
   const [adresseCommand, setAdresseCommand] = useState({idCommand: '' , rueCommand : '', numeroMaisonCommand: '' });
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const [idCommand,  setIdCommand] = useState('');
   const [nomCommand, setNomCommand] = useState('');
@@ -80,6 +81,8 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
 
   const handleModifierPersonne = async (e) => {
     e.preventDefault();
+    setFormSubmitted(true);
+
     if (selectedPersonId !== null ){
     try {
       const response = await getAllPersonnes();
@@ -92,11 +95,14 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
           areAddressesEqual(person.adressesRepresentation, adressesCommand)
         ));
 
-        if (existingPerson) {
+        if (existingPerson && existingPerson.idRepresentation === idCommand) {
+          setId('Aucune modification');
+          return 1;
+        }else if (existingPerson && existingPerson.idRepresentation !== idCommand){
           setId(existingPerson.idRepresentation);
-          return true;
+          return 2;
         }
-        return false;
+        return 3;
       };
 
       function areAddressesEqual(addresses1, addresses2) {
@@ -116,9 +122,11 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
         return true;
       }
 
-      if (isDuplicateP()) {
-        setIsDuplicatePerson(true);
-      } else {
+      if (isDuplicateP() === 1) {
+        setIsDuplicatePerson(1);
+      } else if (isDuplicateP() === 2){
+        setIsDuplicatePerson(2);
+      }else{
         const personneCommand = {
           idCommand:idCommand,
           nomCommand: nomCommand,
@@ -194,9 +202,18 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
           </div>
         </form>
 
-        {isDuplicatePerson && (
+        { formSubmitted && adressesCommand.length === 0 && (
+          <p className="alert alert-danger">Veuillez fournir au moins une adresse a {nomCommand}</p>
+        )}
+
+        {isDuplicatePerson ===2 && (
           <p className="alert alert-danger">
           Cette personne existe déjà avec l'id {id}
+        </p>        )}
+
+        {isDuplicatePerson ===1 && adressesCommand.length !==  0 && (
+          <p className="alert alert-danger">
+        {id}
         </p>        )}
 
         {isAddingAddress && (

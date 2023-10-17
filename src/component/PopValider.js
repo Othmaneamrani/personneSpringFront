@@ -7,23 +7,21 @@ export default function PopValider({selectedPersonId,versSort}) {
   const navigate = useNavigate();
 
   const handleDeletePersonne = (selectedPersonId) => {
-    if (selectedPersonId !== null ) {
-    deletePersonne(selectedPersonId).then(() => {
-      navigate('/home')
-    }).catch((error) => {
-      console.log(error);
-    });
-  }
+    deletePersonne(selectedPersonId.idRepresentation)
+      .then(() => navigate('/home'))
+      .catch((error) => {
+        console.error('An error occurred:', error);
+      });
   };
 
+
+
   const handleDeletePersonneSort = (selectedPersonId) => {
-    if (selectedPersonId !== null ) {
-    deletePersonne(selectedPersonId).then(() => {
-      navigate('/sort')
-    }).catch((error) => {
-      console.log(error);
-    });
-  }
+    deletePersonne(selectedPersonId.idRepresentation)
+      .then(() => navigate('/sort'))
+      .catch((error) => {
+        console.error('An error occurred:', error);
+      });
   };
 
   return (
@@ -37,7 +35,8 @@ export default function PopValider({selectedPersonId,versSort}) {
           </div>
         ):( <div>
           <Link  className="linkB" onClick={() => handleDeletePersonne(selectedPersonId)} ><button className="red-button" >Oui</button> </Link>
-          <Link  className="linkB" to={'/home'}  > <button  className="blue-button"  >Non</button> </Link>          </div>
+          <Link  className="linkB" to={'/home'}  > <button  className="blue-button"  >Non</button> </Link>          
+          </div>
         
         )
         } 

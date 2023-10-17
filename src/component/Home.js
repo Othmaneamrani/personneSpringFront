@@ -54,7 +54,8 @@ const handleModifierAdresse = (adresse) => {
   useEffect(() => {
     handleNull()
     toggleVersSort(false)
-    const storedPage = localStorage.getItem("currentPage");
+    localStorage.setItem("currentPageSort", '1')
+        const storedPage = localStorage.getItem("currentPage");
     if (storedPage) {
       setPageActuelle(Number(storedPage));
     }

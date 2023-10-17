@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getList } from "./service";
+import { Link } from "react-router-dom";
 
 
 export default function List () {
@@ -29,6 +30,9 @@ export default function List () {
     return (
         <div className={`transition-fade ${isVisible ? "visible" : "invisible"}`}>
         <div>
+        <div className="retour-hover">
+            <Link className="retour" to={'/home'}><span className="arrow">&#8592;</span> Retour</Link>
+        </div>
 
             <h1>aaaa</h1>
             {personneList &&  personneList.map((person, index)  => (

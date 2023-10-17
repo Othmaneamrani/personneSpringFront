@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function BarreRecherche({ onSort, sort }) {
+  const [buttonClicked, setButtonClicked] = useState(false);
+
   const isSortEmpty = sort.trim() === "";
 
   return (
@@ -15,11 +17,15 @@ export default function BarreRecherche({ onSort, sort }) {
           onChange={(e) => onSort(e.target.value)}
         />
         <Link to={isSortEmpty ? '#' : '/sort'}>
-          <button type="submit" className="search-button">
+          <button
+            type="submit"
+            className="search-button"
+            onClick={() => setButtonClicked(true)}
+          >
             Rechercher
           </button>
         </Link>
-        {isSortEmpty && <p>Veuillez entrer quelque chose.</p>}
+        {buttonClicked && isSortEmpty && <p>Veuillez entrer quelque chose.</p>}
       </form>
     </div>
   );

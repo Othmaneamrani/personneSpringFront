@@ -10,7 +10,7 @@ export default function Sort ({sort,onProblem ,toggleVersSort,adresseAccess ,onv
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
   const [personnes, setPersonnes] = useState([]);
   const [selectedPersonne, setSelectedPersonne] = useState(null);
-  const [pageActuelle, setPageActuelle] = useState();
+  const [pageActuelleSort, setPageActuelleSort] = useState();
   const [taillePage, setTaillePage] = useState(5);
   const [totalPages, setTotalPages] = useState(1); 
 
@@ -28,7 +28,7 @@ export default function Sort ({sort,onProblem ,toggleVersSort,adresseAccess ,onv
 
 
   const hanldeGetSortPersonnes = () => {
-    getPersonnesSort(pageActuelle, taillePage,sort).then((resp) =>{
+    getPersonnesSort(pageActuelleSort, taillePage,sort).then((resp) =>{
     setPersonnes(resp.data)
       onvide('')
     setTotalPages(Math.ceil(resp.data.totalElements / taillePage));
@@ -41,7 +41,7 @@ export default function Sort ({sort,onProblem ,toggleVersSort,adresseAccess ,onv
 }
 
   const handlePageChange = (page) => {
-    setPageActuelle(page);
+    setPageActuelleSort(page);
     localStorage.setItem("currentPageSort", page.toString())
   };
 
@@ -56,10 +56,10 @@ export default function Sort ({sort,onProblem ,toggleVersSort,adresseAccess ,onv
     toggleVersSort(true)
     const storedPageSort = localStorage.getItem("currentPageSort")
     if(storedPageSort){
-      setPageActuelle(Number(storedPageSort))
+      setPageActuelleSort(Number(storedPageSort))
     }
     hanldeGetSortPersonnes();
-  }, [pageActuelle, taillePage]);
+  }, [pageActuelleSort, taillePage]);
 
   const handleDeleteAddress = (addressId, personne) => {
     if (selectedPersonAddresses.length === 1) {
@@ -156,7 +156,7 @@ export default function Sort ({sort,onProblem ,toggleVersSort,adresseAccess ,onv
         </table>
 
         <div className="pagination-controls">
-                <Pagination  currentPage={pageActuelle}
+                <Pagination  currentPage={pageActuelleSort}
             totalPages={totalPages}
             onPageChange={handlePageChange}  />
         </div>

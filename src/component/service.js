@@ -21,8 +21,8 @@ export const getAllPersonnes = () => {
     return personneApi.get('/personnes/list')
 }
 
-export const deletePersonne = (personne) => {
-    return personneApi.delete(`/personnes/supprimer/${personne.idRepresentation}`)
+export const deletePersonne = (id) => {
+    return personneApi.delete(`/personnes/supprimer/${id}`)
 }
 
 
@@ -52,4 +52,8 @@ export const loggg = (connexionCommand) => {
 
 export const getList = () => {
     return personneApi.get('/personnes/cart')
+}
+
+export const addList = (id) => {
+    return personneApi.patch(`/personnes/add/${id}`)
 }

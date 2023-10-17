@@ -2,10 +2,15 @@ import React from "react";
 import { useState } from "react";
 import BarreRecherche from "./BarreRecherche";
 import { Link } from "react-router-dom";
+import { addList } from "./service";
 
 export default function Sidebar({onDeconnexionClick , onProblem,onSort , sort,selectedPersonId }){
 
   const isVisible=true
+
+    const handleAddToList = (selectedPersonId) => {
+        addList(selectedPersonId.idRepresentation)
+    }
 
 
   const onProblemClick = () => {
@@ -36,7 +41,7 @@ export default function Sidebar({onDeconnexionClick , onProblem,onSort , sort,se
              <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} >
          <BarreRecherche onSort={onSort}  sort={sort} />
           </div>)}</li>
-            {selectedPersonId ?(            <li  className="sidebar-l3" >Ajouter à la liste</li>
+            {selectedPersonId ?(            <li>  <Link   className="sidebar-l3"   onClick={()=> handleAddToList}  >Ajouter à la liste </Link></li>
             ):(
               <li><Link to={'/list'} className="sidebar-l3" >Voir liste</Link></li>
             )   

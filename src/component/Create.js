@@ -17,6 +17,7 @@ export default function Create({ onCreate,onProblem }) {
 
   const [isDuplicateAddress, setIsDuplicateAddress] = useState(false);
   const [isDuplicatePerson, setIsDuplicatePerson] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const [editAddressIndex, setEditAddressIndex] = useState(-1);
 
@@ -76,6 +77,11 @@ export default function Create({ onCreate,onProblem }) {
 
   const handleCreatePersonne = async (e) => {
     e.preventDefault();
+    setFormSubmitted(true);
+    if (adressesCommand.length === 0) {
+      
+      return;
+    }
 
     try {
       const response = await getAllPersonnes();
@@ -171,6 +177,10 @@ export default function Create({ onCreate,onProblem }) {
             <button className="boutton-login" type="submit">Créer Personne</button>
           </div>
         </form>
+
+        { formSubmitted && adressesCommand.length === 0 && (
+          <p className="alert alert-danger">Veuillez fournir au moins une adresse a {nomCommand}</p>
+        )}
 
         {isDuplicatePerson && (
           <p className="alert alert-danger">
