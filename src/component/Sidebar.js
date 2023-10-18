@@ -3,6 +3,7 @@ import BarreRecherche from "./BarreRecherche";
 import { Link } from "react-router-dom";
 import { addList } from "./service";
 
+
 export default function Sidebar({ onDeconnexionClick, onProblem, onSort, sort, selectedPersonId }) {
   const isVisible = true;
 
@@ -34,7 +35,8 @@ export default function Sidebar({ onDeconnexionClick, onProblem, onSort, sort, s
     const link = document.querySelector('link[href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"]');
     if (link) {
       document.head.removeChild(link);
-    }    onDeconnexionClick();
+    }   
+     onDeconnexionClick();
   };
 
   useEffect(() => {

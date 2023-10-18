@@ -4,7 +4,7 @@ import { updateAdresse } from "./service";
 
 
 
-export default function ModifierAdresse({ladrisa,onCreate,versSort}) {
+export default function ModifierAdresse({ladrisa,onCreate,versSort,onProblem}) {
   const navigate = useNavigate();
   const isVisible = true;
 
@@ -30,9 +30,13 @@ export default function ModifierAdresse({ladrisa,onCreate,versSort}) {
           console.log(adresseCommand)
 
              if (response.status === 200) {
+              if(rueCommand === ladrisa.rueRepresentation && numeroMaisonCommand === ladrisa.numeroMaisonRepresentation){
+                navigate('/home')
+              }else{
           onCreate(ladrisa.rueRepresentation);
+          onProblem(true)
                 navigate('/popVoid')
-             }
+             }}
         }catch(error){
           console.error('Erreur lors de la requête API:', error);
         }
@@ -89,11 +93,16 @@ export default function ModifierAdresse({ladrisa,onCreate,versSort}) {
             <div className="marginT">
               <div className="form-group">
                <button className="boutton-login" onClick={editAdresse} type="submit">Sauvegarder adresse</button>
+              
 
               </div>
             </div>
           </form>
-        </div>
+
+          {rueCommand === ladrisa.rueRepresentation && numeroMaisonCommand === ladrisa.numeroMaisonRepresentation &&
+             <p>Aucune modification</p>}
+
+      </div>
       </div>
       </div>
 
