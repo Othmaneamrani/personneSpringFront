@@ -441,7 +441,7 @@ text-decoration: none;
   display: block;
   color: #fff;
   font-weight: bold;
-  margin-top: 100px;
+  margin-top: 90px;
   transition: transform 0.2s;
 }
 
@@ -449,9 +449,7 @@ text-decoration: none;
   transform: translateY(-3px);
 }
 
-.hebto{
-  margin-top: 220px;
-}
+
 
 
 .popup2-overlay {
@@ -837,6 +835,10 @@ text-decoration: none;
   .nav {
     width: 120%;
     height: 150px;
+  }
+
+  .hebto{
+    margin-top: 220px;
   }
 
   .footer {
