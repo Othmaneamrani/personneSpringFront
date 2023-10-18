@@ -68,7 +68,7 @@ export default function Sidebar({toggleAddListState, selectionPersonne,toglleThe
             </div>
           )}
         </li>
-        {(selectedPersonId && selectedPersonId.listRepresentation ===false)  && 
+        {(selectedPersonId && (selectedPersonId.listRepresentation ===false || selectedPersonId.listRepresentation ===null ) )  && 
           <li>
             <Link className="sidebar-l3" onClick={() => handleAddToList(selectedPersonId)}>
               Ajouter aux favoris
