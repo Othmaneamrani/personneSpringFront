@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { getList } from "./service";
+import { desepinglerList, epinglerList, getList, retirerList } from "./service";
 import { Link } from "react-router-dom";
 
 export default function List() {
-  const [isVisible, setIsVisible] = useState(true);
   const [personneList, setPersonnesList] = useState([]);
   const [personneCount, setPersonnesCount] = useState(0);
   const [selectedPersonne, setSelectedPersonne] = useState(null);
+  const [addListState, setAddListState] = useState(false);
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
-
+  const isVisible = true
   const handleGetList = () => {
     getList()
       .then((resp) => {
@@ -22,7 +22,7 @@ export default function List() {
 
   useEffect(() => {
     handleGetList();
-  }, []);
+  }, [addListState]);
 
   const handleToggleAdresses = (personne) => {
     if (selectedPersonne === personne) {
@@ -33,6 +33,26 @@ export default function List() {
       setSelectedPersonAddresses(personne.adressesRepresentation || []);
     }
   };
+
+
+  const handleEpingler = async (personne) => {
+   await epinglerList(personne.idRepresentation)
+    setAddListState(!addListState)
+
+  }
+
+
+  const handleDesepingler = async (personne) => {
+    await desepinglerList(personne.idRepresentation)
+    setAddListState(!addListState)
+
+  }
+
+
+  const handleRetirer = async (personne) => {
+    await retirerList(personne.idRepresentation)
+    setAddListState(!addListState)
+  }
 
   return (
     <div className={`transition-fade ${isVisible ? "visible" : "invisible"}`}>
@@ -70,8 +90,8 @@ export default function List() {
                     </div>
                   ))}
                 <div className="card-footer">
-                  <button className="desepingler">Désépingler</button>
-                  <button className="retirer">Retirer</button>
+                  <button className="desepingler" onClick={()=> handleDesepingler(person)}  >Désépingler</button>
+                  <button className="retirer" onClick={()=> handleRetirer(person)} >Retirer</button>
                 </div>
                         
                         </div>
@@ -102,8 +122,8 @@ export default function List() {
                     </div>
                   ))}
                                   <div className="card-footer">
-                  <button className="epingler">Épingler</button>
-                  <button className="retirer">Retirer</button>
+                  <button className="epingler"  onClick={()=> handleEpingler(person)} >Épingler</button>
+                  <button className="retirer" onClick={()=> handleRetirer(person)}  >Retirer</button>
                 </div>
 
                         </div>
@@ -117,7 +137,8 @@ export default function List() {
             ))}
         </div>
       </div>
-      {personneCount}
+      {personneCount===0 && 
+      <h1 className="vide"  >Aucune personne trouvée.</h1>}
     </div>
   );
 }

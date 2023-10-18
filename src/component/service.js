@@ -57,3 +57,15 @@ export const getList = () => {
 export const addList = (id) => {
     return personneApi.patch(`/personnes/add/${id}`)
 }
+
+export const retirerList = (id) =>{
+    return personneApi.patch(`/personnes/retirer/${id}`)
+}
+
+export const epinglerList = (id) =>{
+    return personneApi.patch(`/personnes/epingle/${id}`)
+}
+
+export const desepinglerList = (id) =>{
+    return personneApi.patch(`/personnes/desepingle/${id}`)
+}

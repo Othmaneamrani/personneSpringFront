@@ -22,12 +22,18 @@ import List from './component/List';
 export default function App() {
   const isVisible = true;
 
-  
+  const [showBootstrap, setShowBootstrap] = useState(false);
+  const toglleTheme = (val) => {
+    setShowBootstrap(val)
+  }
+
   const [modifierAd, setModifierAd] = useState(false);
   const adresseAccess = () => {
     setModifierAd(true)
   }
 
+ 
+  
 
 
   const [versSort, setVersSort] = useState(false);
@@ -92,6 +98,22 @@ const toggleVersSort = (val) => {
     }
   }, []);
 
+
+  useEffect(() => {
+    if (showBootstrap) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css";
+      document.head.appendChild(link);
+    } else {
+      const link = document.querySelector('link[href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"]');
+      if (link) {
+        document.head.removeChild(link);
+      }
+    }
+  }, [showBootstrap]);
+
+
   return (
     <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`}>
       <Navbar />
@@ -117,7 +139,8 @@ const toggleVersSort = (val) => {
 
           {isLoggedIn && (
             <>
-              <Route path='/home' element={<Home  toggleVersSort={toggleVersSort} adresseAccess={adresseAccess} handleLadrisa={handleLadrisa}  onProblem={togglePop}  selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  sort={sort} onSort={toggleSort} username={username} onDeconnexionClick={toggle} />} />
+ 
+              <Route path='/home' element={<Home  toglleTheme={toglleTheme} showBootstrap={showBootstrap}  toggleVersSort={toggleVersSort} adresseAccess={adresseAccess} handleLadrisa={handleLadrisa}  onProblem={togglePop}  selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  sort={sort} onSort={toggleSort} username={username} onDeconnexionClick={toggle} />} />
               <Route path='/create' element={<Create   onProblem={togglePop}  selectionPersonne={selectionPersonne} onCreate={toggleP} />} />
               <Route path='/sort' element={<Sort  onProblem={togglePop}  adresseAccess={adresseAccess}  toggleVersSort={toggleVersSort} versSort={versSort} handleLadrisa={handleLadrisa}  sort={sort} onvide={toggleSort} selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  />} />
               <Route path='/list' element={<List />} />

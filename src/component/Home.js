@@ -5,7 +5,7 @@ import Pagination from "./Pagination";
 import { useNavigate} from 'react-router-dom';
 
 
-export default function Home({ onDeconnexionClick,toggleVersSort,adresseAccess, username, onSort, sort , onProblem,selectedPersonId, selectionPersonne , handleLadrisa}) {
+export default function Home({toglleTheme,showBootstrap, onDeconnexionClick,toggleVersSort,adresseAccess, username, onSort, sort , onProblem,selectedPersonId, selectionPersonne , handleLadrisa}) {
   const isVisible = true;
 
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
@@ -14,6 +14,11 @@ export default function Home({ onDeconnexionClick,toggleVersSort,adresseAccess, 
   const [pageActuelle, setPageActuelle] = useState();
   const [taillePage, setTaillePage] = useState(5);
   const [totalPages, setTotalPages] = useState(1); 
+  const [addListState, setAddListState] = useState(false);
+
+  const toggleAddListState = () => {
+    setAddListState(!addListState)
+  }
 
 const navigate = useNavigate()
 
@@ -50,6 +55,11 @@ const handleModifierAdresse = (adresse) => {
     localStorage.setItem("currentPage", page.toString());
   };
 
+useEffect(() => {
+  handleGetPersonnes();
+},[addListState]);
+
+
 
   useEffect(() => {
     handleNull()
@@ -84,7 +94,7 @@ const handleModifierAdresse = (adresse) => {
   return (
     <div className={`transition-fade ${isVisible ? "visible" : "invisible"}`}>
       <div className="bienvenu">
-        <Sidebar   onProblem={onProblem} onSort={onSort} selectedPersonId={selectedPersonId} sort={sort} onDeconnexionClick={onDeconnexionClick} />
+        <Sidebar addListState={addListState} toggleAddListState={toggleAddListState} selectionPersonne={selectionPersonne} toglleTheme={toglleTheme} showBootstrap={showBootstrap}  onProblem={onProblem} onSort={onSort} selectedPersonId={selectedPersonId} sort={sort} onDeconnexionClick={onDeconnexionClick} />
 
         <h1 className="smia">BIENVENU {username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}</h1>
         <h3 className="faire">Que souhaitez-vous faire ?</h3>
@@ -103,12 +113,22 @@ const handleModifierAdresse = (adresse) => {
             {personnes.content && personnes.content.length > 0 ? (
               personnes.content.map((personne, index) => (
                 <tr key={index}>
+                  {personne.listRepresentation ?(
                   <td
+                    className={`case-select-personne ${selectedPersonId === personne ? 'selected' : ''}`}
+                    onClick={() => selectionPersonne(personne)}
+                  >
+                    <span  className="heart">❤️</span> {personne.idRepresentation}
+                  </td>
+                  ):(
+                    <td
                     className={`case-select-personne ${selectedPersonId === personne ? 'selected' : ''}`}
                     onClick={() => selectionPersonne(personne)}
                   >
                     {personne.idRepresentation}
                   </td>
+                  )
+                  }
                   <td>{personne.nomRepresentation}</td>
                   <td>{personne.prenomRepresentation}</td>
                   <td>

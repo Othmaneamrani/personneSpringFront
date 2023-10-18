@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import BarreRecherche from "./BarreRecherche";
 import { Link } from "react-router-dom";
-import { addList } from "./service";
+import { addList, retirerList } from "./service";
 
 
-export default function Sidebar({ onDeconnexionClick, onProblem, onSort, sort, selectedPersonId }) {
+export default function Sidebar({toggleAddListState, selectionPersonne,toglleTheme,showBootstrap,onDeconnexionClick, onProblem, onSort, sort, selectedPersonId }) {
   const isVisible = true;
 
-  const [showBootstrap, setShowBootstrap] = useState(false);
 
-  const handleAddToList = (selectedPersonId) => {
-    addList(selectedPersonId.idRepresentation);
+  const handleAddToList = async (selectedPersonId) => {
+    await addList(selectedPersonId.idRepresentation);
+    selectionPersonne(selectedPersonId)
+    toggleAddListState()
   };
 
   const onProblemClick = () => {
@@ -39,26 +40,19 @@ export default function Sidebar({ onDeconnexionClick, onProblem, onSort, sort, s
      onDeconnexionClick();
   };
 
-  useEffect(() => {
-    if (showBootstrap) {
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css";
-      document.head.appendChild(link);
-    } else {
-      const link = document.querySelector('link[href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"]');
-      if (link) {
-        document.head.removeChild(link);
-      }
-    }
-  }, [showBootstrap]);
+  
+  const handleRetirerList = async (personne) => {
+    await retirerList(personne.idRepresentation)
+    toggleAddListState()
+  }
+ 
 
   return (
     <div className="sidebar">
       <div className="hebto" >
       <ul className="sidebarList">
         <li>
-          <Link className="sidebar-l3" onClick={() => setShowBootstrap(!showBootstrap)}>
+          <Link className="sidebar-l3" onClick={() => toglleTheme(!showBootstrap)}>
             {showBootstrap ? "Mode sombre" : "Mode clair"}
           </Link>
         </li>
@@ -73,19 +67,28 @@ export default function Sidebar({ onDeconnexionClick, onProblem, onSort, sort, s
             </div>
           )}
         </li>
-        {selectedPersonId ? (
+        {(selectedPersonId && selectedPersonId.listRepresentation ===false)  && 
           <li>
-            <Link className="sidebar-l3" onClick={() => handleAddToList}>
-              Ajouter à la liste
+            <Link className="sidebar-l3" onClick={() => handleAddToList(selectedPersonId)}>
+              Ajouter aux favoris
             </Link>
           </li>
-        ) : (
+        }
+      {(selectedPersonId && selectedPersonId.listRepresentation ===true) && 
+         <li>
+         <Link className="sidebar-l3"  onClick={() => handleRetirerList(selectedPersonId)}>
+           Retirer des favoris
+         </Link>
+     </li>
+        }
+
+        { !selectedPersonId &&
           <li>
             <Link to={"/list"} className="sidebar-l3">
-              Voir liste
+              Voir favoris
             </Link>
         </li>
-        )}
+        }
 
         <li>
           <Link

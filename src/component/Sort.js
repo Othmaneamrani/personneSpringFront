@@ -4,7 +4,7 @@ import { deleteAdresse, getPersonnesSort} from './service';
 import Pagination from "./Pagination";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Sort ({sort,onProblem ,toggleVersSort,adresseAccess ,onvide, onDeconnexionClick,selectedPersonId, selectionPersonne , handleLadrisa}){
+export default function Sort ({ sort,onProblem ,toggleVersSort,adresseAccess ,onvide, onDeconnexionClick,selectedPersonId, selectionPersonne , handleLadrisa}){
   const isVisible = true;
 
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
@@ -13,6 +13,11 @@ export default function Sort ({sort,onProblem ,toggleVersSort,adresseAccess ,onv
   const [pageActuelleSort, setPageActuelleSort] = useState();
   const [taillePage, setTaillePage] = useState(5);
   const [totalPages, setTotalPages] = useState(1); 
+  const [addListStateSort, setAddListStateSort] = useState(false);
+
+  const toggleAddListStateSort = () => {
+    setAddListStateSort(!addListStateSort)
+  }
 
   const navigate = useNavigate()
 
@@ -27,7 +32,7 @@ export default function Sort ({sort,onProblem ,toggleVersSort,adresseAccess ,onv
   };
 
 
-  const hanldeGetSortPersonnes = () => {
+  const handleGetSortPersonnes = () => {
     getPersonnesSort(pageActuelleSort, taillePage,sort).then((resp) =>{
     setPersonnes(resp.data)
       onvide('')
@@ -58,7 +63,7 @@ export default function Sort ({sort,onProblem ,toggleVersSort,adresseAccess ,onv
     if(storedPageSort){
       setPageActuelleSort(Number(storedPageSort))
     }
-    hanldeGetSortPersonnes();
+    handleGetSortPersonnes();
   }, [pageActuelleSort, taillePage]);
 
   const handleDeleteAddress = (addressId, personne) => {
@@ -81,12 +86,16 @@ export default function Sort ({sort,onProblem ,toggleVersSort,adresseAccess ,onv
   }
 
 
+  useEffect(() => {
+  handleGetSortPersonnes();
+  },[addListStateSort]);
+
   return (
     <div className={`transition-fade ${isVisible ? "visible" : "invisible"}`}>
         <Link className="retourSort" to={'/home'}><span className="arrow">&#8592;</span> Retour</Link>
 
       <div className="bienvenu">
-        <SidebarSort onProblem={onProblem} selectedPersonId={selectedPersonId} onDeconnexionClick={onDeconnexionClick} />
+        <SidebarSort selectionPersonne={selectionPersonne}  toggleAddListStateSort={toggleAddListStateSort} onProblem={onProblem} selectedPersonId={selectedPersonId} onDeconnexionClick={onDeconnexionClick} />
 
 
 
@@ -104,12 +113,22 @@ export default function Sort ({sort,onProblem ,toggleVersSort,adresseAccess ,onv
             {personnes.content && personnes.content.length > 0 ? (
               personnes.content.map((personne, index) => (
                 <tr key={index}>
+                  {personne.listRepresentation ?(
                   <td
+                    className={`case-select-personne ${selectedPersonId === personne ? 'selected' : ''}`}
+                    onClick={() => selectionPersonne(personne)}
+                  >
+                    <span  className="heart">❤️</span> {personne.idRepresentation}
+                  </td>
+                  ):(
+                    <td
                     className={`case-select-personne ${selectedPersonId === personne ? 'selected' : ''}`}
                     onClick={() => selectionPersonne(personne)}
                   >
                     {personne.idRepresentation}
                   </td>
+                  )
+                  }
                   <td>{personne.nomRepresentation}</td>
                   <td>{personne.prenomRepresentation}</td>
                   <td>
