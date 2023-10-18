@@ -43,6 +43,7 @@ export default function Sidebar({toggleAddListState, selectionPersonne,toglleThe
   
   const handleRetirerList = async (personne) => {
     await retirerList(personne.idRepresentation)
+    selectionPersonne(selectedPersonId)
     toggleAddListState()
   }
  
