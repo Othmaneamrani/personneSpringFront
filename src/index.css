@@ -980,6 +980,8 @@ text-decoration: none;
   flex: 0 0 calc(25% - 20px);
   font-size: 20px;
   max-height: 300px;
+  margin-left: 80px;
+  margin-bottom: 80px;
 }
 
 .card-header {
@@ -1086,4 +1088,12 @@ text-align: center;
 
 .heart{
   font-size: 10px;
+}
+
+td::first-letter {
+  text-transform: uppercase;
+}
+
+.card-container p::first-letter {
+  text-transform: uppercase;
 }

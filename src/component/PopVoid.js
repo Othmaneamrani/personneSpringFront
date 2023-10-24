@@ -19,7 +19,7 @@ export default function PopVoid({p , versSort}) {
   return (
     <div className="popup-overlay">
       <div className="popup2">
-        <h2> {p} a été modifié !</h2>
+        <h2> {p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()} a été modifié !</h2>
         {versSort ?(
           <Link  to={'/sort'} ><button  ref={okBoutonRef} >Ok</button></Link> 
         ):( <Link  to={'/home'} ><button  ref={okBoutonRef} >Ok</button></Link> )

@@ -14,6 +14,8 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const [idCommand,  setIdCommand] = useState('');
+  const [epingleCommand,  setEpingleCommand] = useState('');
+  const [listCommand,  setListCommand] = useState('');
   const [nomCommand, setNomCommand] = useState('');
   const [prenomCommand, setPrenomCommand] = useState('');
   const [id, setId] = useState('');
@@ -131,7 +133,9 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
           idCommand:idCommand,
           nomCommand: nomCommand,
           prenomCommand: prenomCommand,
-          adressesCommand: adressesCommand
+          adressesCommand: adressesCommand,
+          listCommand: listCommand,
+          epingleCommand: epingleCommand
         }
 
         const response = await updatePersonne(personneCommand);
@@ -151,6 +155,8 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
   useEffect(() => {
     if (selectedPersonId !== null) {
       setIdCommand(selectedPersonId.idRepresentation);
+      setListCommand(selectedPersonId.listRepresentation);
+      setEpingleCommand(selectedPersonId.epingleRepresentation);
       setNomCommand(selectedPersonId.nomRepresentation);
       setPrenomCommand(selectedPersonId.prenomRepresentation);
       setAddressesCommand(selectedPersonId.adressesRepresentation.map(address => ({
