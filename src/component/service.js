@@ -8,8 +8,8 @@ export const adresseApi  = axios.create({
     baseURL : "http://localhost:8080"
 });
 
-export const getPersonnes = (currentPage , size) => {
-    return personneApi.get(`/personnes?page=${currentPage}&size=${size}`)
+export const getPersonnes = (currentPage , size,id) => {
+    return personneApi.get(`/personnes/con?page=${currentPage}&size=${size}&id=${id}`)
 }
 
 export const getPersonnesSort = (currentPage , size ,sort) => {

@@ -5,7 +5,7 @@ import Pagination from "./Pagination";
 import { useNavigate} from 'react-router-dom';
 
 
-export default function Home({toglleTheme,showBootstrap, onDeconnexionClick,toggleVersSort,adresseAccess, username, onSort, sort , onProblem,selectedPersonId, selectionPersonne , handleLadrisa}) {
+export default function Home({idConnexion,toglleTheme,showBootstrap, onDeconnexionClick,toggleVersSort,adresseAccess, username, onSort, sort , onProblem,selectedPersonId, selectionPersonne , handleLadrisa}) {
   const isVisible = true;
 
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
@@ -15,6 +15,7 @@ export default function Home({toglleTheme,showBootstrap, onDeconnexionClick,togg
   const [taillePage, setTaillePage] = useState(5);
   const [totalPages, setTotalPages] = useState(1); 
   const [addListState, setAddListState] = useState(false);
+
 
   const toggleAddListState = () => {
     setAddListState(!addListState)
@@ -38,12 +39,12 @@ const handleModifierAdresse = (adresse) => {
     }
   };
 
-
   const handleGetPersonnes = () => {
-    getPersonnes(pageActuelle, taillePage)
+    getPersonnes(pageActuelle, taillePage,localStorage.getItem('idConnexion'))
       .then((resp) => {
         setPersonnes(resp.data);
         setTotalPages(Math.ceil(resp.data.totalElements / taillePage));
+        console.log(idConnexion)
       })
       .catch((err) => {
         console.log(err);
@@ -111,7 +112,9 @@ useEffect(() => {
           </thead>
           <tbody>
             {personnes.content && personnes.content.length > 0 ? (
-              personnes.content.map((personne, index) => (
+              personnes.content
+              // .filter((personne) =>personne.connexion === null)
+              .map((personne, index) => (
                 <tr key={index}>
                   {personne.listRepresentation ?(
                   <td

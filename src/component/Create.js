@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { createPersonne, getAllPersonnes } from "./service";
 
-export default function Create({ onCreate,onProblem }) {
+export default function Create({ onCreate,onProblem ,idConnexion}) {
   const isVisible = true; 
 
   const navigate = useNavigate();
@@ -12,6 +12,7 @@ export default function Create({ onCreate,onProblem }) {
   const [adresseCommand, setAdresseCommand] = useState({ rueCommand: '', numeroMaisonCommand: '' });
 
   const [nomCommand, setNomCommand] = useState('');
+  const [connexionCommand, setConnexionCommand] = useState({id:'' , username: '', password: '', personnes:[] });
   const [prenomCommand, setPrenomCommand] = useState('');
   const [id, setId] = useState('');
 
@@ -91,6 +92,7 @@ export default function Create({ onCreate,onProblem }) {
         const existingPerson = personnes.find(person => (
           person.nomRepresentation === nomCommand &&
           person.prenomRepresentation === prenomCommand &&
+          person.connexion === connexionCommand &&
           areAddressesEqual(person.adressesRepresentation, adressesCommand)
         ));
 
@@ -124,6 +126,7 @@ export default function Create({ onCreate,onProblem }) {
         const personneCommand = {
           nomCommand: nomCommand,
           prenomCommand: prenomCommand,
+          connexion:connexionCommand,
           adressesCommand: adressesCommand
         }
 
@@ -140,6 +143,11 @@ export default function Create({ onCreate,onProblem }) {
       console.error('Erreur lors de la requête API:', error);
     }
   }
+
+  useEffect(() => {
+    setConnexionCommand(idConnexion);
+    console.log(idConnexion)
+  }, []);
 
   return (
     <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`}>

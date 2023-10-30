@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link ,   useNavigate} from 'react-router-dom';
 import { loggg } from './service';
 
 
 
-export default function Login({onConnexion, onProblem}) {
+export default function Login({onConnexion, onProblem,idConnexion, idConnexionBeddel}) {
   const isVisible = true;
   const [usernameCommand, setUsernameCommand] = useState('');
   const [passwordCommand, setPasswordCommand] = useState('');
@@ -23,7 +23,8 @@ export default function Login({onConnexion, onProblem}) {
       const response = await loggg(connexionCommand)
 
       console.log('Réponse de l\'API:', response.data);
-      if(response.data === usernameCommand){
+      if(response.data.username === connexionCommand.usernameCommand){
+        idConnexionBeddel(response.data)
         onConnexion(true, usernameCommand);
         navigate('/home');
       }else {
