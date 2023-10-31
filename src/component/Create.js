@@ -12,7 +12,7 @@ export default function Create({ onCreate,onProblem ,idConnexion}) {
   const [adresseCommand, setAdresseCommand] = useState({ rueCommand: '', numeroMaisonCommand: '' });
 
   const [nomCommand, setNomCommand] = useState('');
-  const [connexionCommand, setConnexionCommand] = useState({id:'' , username: '', password: '', personnes:[] });
+  const [connexion, setConnexionCommand] = useState({id:'' , username: '', password: '', personnes:[] });
   const [prenomCommand, setPrenomCommand] = useState('');
   const [id, setId] = useState('');
 
@@ -57,6 +57,7 @@ export default function Create({ onCreate,onProblem ,idConnexion}) {
   };
 
   const removeAddress = (index) => {
+    setIsDuplicatePerson(false);
     const updatedAddresses = [...adressesCommand];
     updatedAddresses.splice(index, 1);
     setAddressesCommand(updatedAddresses);
@@ -83,16 +84,15 @@ export default function Create({ onCreate,onProblem ,idConnexion}) {
       
       return;
     }
-
+    // setIsDuplicatePerson(false);
     try {
-      const response = await getAllPersonnes();
+      const response = await getAllPersonnes(localStorage.getItem('idConnexion'));
       const personnes = response.data;
 
       const isDuplicateP = () => {
         const existingPerson = personnes.find(person => (
           person.nomRepresentation === nomCommand &&
           person.prenomRepresentation === prenomCommand &&
-          person.connexion === connexionCommand &&
           areAddressesEqual(person.adressesRepresentation, adressesCommand)
         ));
 
@@ -126,7 +126,9 @@ export default function Create({ onCreate,onProblem ,idConnexion}) {
         const personneCommand = {
           nomCommand: nomCommand,
           prenomCommand: prenomCommand,
-          connexion:connexionCommand,
+          connexion: {
+            id: localStorage.getItem('idConnexion'),
+          },
           adressesCommand: adressesCommand
         }
 
@@ -144,11 +146,15 @@ export default function Create({ onCreate,onProblem ,idConnexion}) {
     }
   }
 
-  useEffect(() => {
-    setConnexionCommand(idConnexion);
-    console.log(idConnexion)
-  }, []);
-
+  const handleNomChange = (e) => {
+    setNomCommand(e.target.value);
+    setIsDuplicatePerson(false);
+  };
+  
+  const handlePrenomChange = (e) => {
+    setPrenomCommand(e.target.value);
+    setIsDuplicatePerson(false);
+  };
   return (
     <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`}>
       <div className="retour-hover">
@@ -164,7 +170,7 @@ export default function Create({ onCreate,onProblem ,idConnexion}) {
               id="nomCommand"
               name="nomCommand"
               value={nomCommand}
-              onChange={(e) => setNomCommand(e.target.value)}
+              onChange={handleNomChange}
               required />
           </div>
           <div className="form-group">
@@ -174,7 +180,7 @@ export default function Create({ onCreate,onProblem ,idConnexion}) {
               id="prenomCommand"
               name="prenomCommand"
               value={prenomCommand}
-              onChange={(e) => setPrenomCommand(e.target.value)}
+              onChange={handlePrenomChange}              
               required />
           </div>
           <div className="form-group">

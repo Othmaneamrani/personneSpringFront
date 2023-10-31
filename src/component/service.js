@@ -12,13 +12,13 @@ export const getPersonnes = (currentPage , size,id) => {
     return personneApi.get(`/personnes/con?page=${currentPage}&size=${size}&id=${id}`)
 }
 
-export const getPersonnesSort = (currentPage , size ,sort) => {
-    return personneApi.get(`/personnes?page=${currentPage}&size=${size}&like=${sort}`)
+export const getPersonnesSort = (currentPage , size ,sort,id) => {
+    return personneApi.get(`/personnes/con?page=${currentPage}&size=${size}&like=${sort}&id=${id}`)
 }
 
 
-export const getAllPersonnes = () => {
-    return personneApi.get('/personnes/list')
+export const getAllPersonnes = (id) => {
+    return personneApi.get(`/personnes/list?id=${id}`)
 }
 
 export const deletePersonne = (id) => {

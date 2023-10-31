@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function BarreRecherche({ onSort, sort }) {
   const [buttonClicked, setButtonClicked] = useState(false);
 
   const isSortEmpty = sort.trim() === "";
-
+useEffect(()=>{
+  onSort('')
+},[])
   return (
     <div>
       <form className="search-form">

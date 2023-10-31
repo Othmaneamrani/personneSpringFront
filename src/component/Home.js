@@ -113,7 +113,6 @@ useEffect(() => {
           <tbody>
             {personnes.content && personnes.content.length > 0 ? (
               personnes.content
-              // .filter((personne) =>personne.connexion === null)
               .map((personne, index) => (
                 <tr key={index}>
                   {personne.listRepresentation ?(

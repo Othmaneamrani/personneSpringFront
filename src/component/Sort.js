@@ -33,7 +33,8 @@ export default function Sort ({ sort,onProblem ,toggleVersSort,adresseAccess ,on
 
 
   const handleGetSortPersonnes = () => {
-    getPersonnesSort(pageActuelleSort, taillePage,sort).then((resp) =>{
+    getPersonnesSort(pageActuelleSort, taillePage,sort,localStorage.getItem('idConnexion'))
+    .then((resp) =>{
     setPersonnes(resp.data)
       onvide('')
     setTotalPages(Math.ceil(resp.data.totalElements / taillePage));
