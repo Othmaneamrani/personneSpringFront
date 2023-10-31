@@ -12,7 +12,6 @@ export default function Create({ onCreate,onProblem ,idConnexion}) {
   const [adresseCommand, setAdresseCommand] = useState({ rueCommand: '', numeroMaisonCommand: '' });
 
   const [nomCommand, setNomCommand] = useState('');
-  const [connexion, setConnexionCommand] = useState({id:'' , username: '', password: '', personnes:[] });
   const [prenomCommand, setPrenomCommand] = useState('');
   const [id, setId] = useState('');
 

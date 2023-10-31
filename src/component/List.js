@@ -10,7 +10,7 @@ export default function List() {
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
   const isVisible = true
   const handleGetList = () => {
-    getList()
+    getList(localStorage.getItem('idConnexion'))
       .then((resp) => {
         setPersonnesList(resp.data);
         setPersonnesCount(resp.data.length);

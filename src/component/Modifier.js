@@ -12,7 +12,7 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
   const [adressesCommand, setAddressesCommand] = useState([]);
   const [adresseCommand, setAdresseCommand] = useState({idCommand: '' , rueCommand : '', numeroMaisonCommand: '' });
   const [formSubmitted, setFormSubmitted] = useState(false);
-
+  const [connexionCommand, setConnexionCommand] = useState({id:'' , username: '', password: '' , personnes: []});
   const [idCommand,  setIdCommand] = useState('');
   const [epingleCommand,  setEpingleCommand] = useState('');
   const [listCommand,  setListCommand] = useState('');
@@ -87,7 +87,7 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
 
     if (selectedPersonId !== null ){
     try {
-      const response = await getAllPersonnes();
+      const response = await getAllPersonnes(localStorage.getItem('idConnexion'));
       const personnes = response.data;
 
       const isDuplicateP = () => {
@@ -135,6 +135,7 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
           prenomCommand: prenomCommand,
           adressesCommand: adressesCommand,
           listCommand: listCommand,
+          connexion:connexionCommand,
           epingleCommand: epingleCommand
         }
 
@@ -154,7 +155,9 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
 
   useEffect(() => {
     if (selectedPersonId !== null) {
+      console.log(selectedPersonId);
       setIdCommand(selectedPersonId.idRepresentation);
+      setConnexionCommand(selectedPersonId.connexion);
       setListCommand(selectedPersonId.listRepresentation);
       setEpingleCommand(selectedPersonId.epingleRepresentation);
       setNomCommand(selectedPersonId.nomRepresentation);

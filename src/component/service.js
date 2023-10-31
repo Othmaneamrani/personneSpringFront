@@ -50,8 +50,8 @@ export const loggg = (connexionCommand) => {
 }
 
 
-export const getList = () => {
-    return personneApi.get('/personnes/cart')
+export const getList = (id) => {
+    return personneApi.get(`/personnes/cart?id=${id}`, id)
 }
 
 export const addList = (id) => {
