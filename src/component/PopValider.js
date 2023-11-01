@@ -3,22 +3,29 @@ import { Link , useNavigate} from 'react-router-dom';
 import { deletePersonne } from "./service";
 
 
-export default function PopValider({selectedPersonId,versSort}) {
+export default function PopValider({togllePageDelete2Sort,togllePageDelete2 , selectedPersonId , versSort}) {
   const navigate = useNavigate();
 
   const handleDeletePersonne = (selectedPersonId) => {
     deletePersonne(selectedPersonId.idRepresentation)
-      .then(() => navigate('/home'))
+      .then(() => {
+        togllePageDelete2(true);
+        navigate('/home');
+      })
       .catch((error) => {
         console.error('An error occurred:', error);
       });
   };
+  
 
 
 
   const handleDeletePersonneSort = (selectedPersonId) => {
     deletePersonne(selectedPersonId.idRepresentation)
-      .then(() => navigate('/sort'))
+      .then(() => {
+        togllePageDelete2Sort(true);
+        navigate('/sort');
+      })
       .catch((error) => {
         console.error('An error occurred:', error);
       });

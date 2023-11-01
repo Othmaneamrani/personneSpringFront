@@ -4,7 +4,7 @@ import { deleteAdresse, getPersonnesSort} from './service';
 import Pagination from "./Pagination";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Sort ({ sort,onProblem ,toggleVersSort,adresseAccess ,onvide, onDeconnexionClick,selectedPersonId, selectionPersonne , handleLadrisa}){
+export default function Sort ({lengthSort, pageDeleteSort,togllePageDeleteSort,togllePageDelete2Sort,sort,onProblem ,toggleVersSort,adresseAccess ,onvide, onDeconnexionClick,selectedPersonId, selectionPersonne , handleLadrisa}){
   const isVisible = true;
 
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
@@ -38,7 +38,7 @@ export default function Sort ({ sort,onProblem ,toggleVersSort,adresseAccess ,on
     setPersonnes(resp.data)
       onvide('')
     setTotalPages(Math.ceil(resp.data.totalElements / taillePage));
-      
+    togllePageDeleteSort(resp.data.totalElements);
   })
     .catch((err) => {
         console.log(err)
@@ -176,7 +176,10 @@ export default function Sort ({ sort,onProblem ,toggleVersSort,adresseAccess ,on
         </table>
 
         <div className="pagination-controls">
-                <Pagination  currentPage={pageActuelleSort}
+                <Pagination togllePageDelete2={togllePageDelete2Sort}
+                pageDelete={pageDeleteSort}
+                length={lengthSort}
+                 currentPage={pageActuelleSort}
             totalPages={totalPages}
             onPageChange={handlePageChange}  />
         </div>

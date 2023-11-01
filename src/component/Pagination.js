@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-export default function Pagination({ currentPage, totalPages, onPageChange }) {
+export default function Pagination({ togllePageDelete2,pageDelete,length,currentPage, totalPages, onPageChange }) {
   const pageNumbers = [];
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
   }
+
+
+  if (currentPage > 1 && length % 5 === 0 && pageDelete===true ) {
+    onPageChange(currentPage - 1);
+    togllePageDelete2(false);
+  }
+
+// useEffect(()=> {
+//   console.log(totalPages)
+//   console.log(currentPage)
+// },[])
 
   return (
     <ul className="pagination">

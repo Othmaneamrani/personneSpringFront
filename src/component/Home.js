@@ -5,7 +5,7 @@ import Pagination from "./Pagination";
 import { useNavigate} from 'react-router-dom';
 
 
-export default function Home({idConnexion,toglleTheme,showBootstrap, onDeconnexionClick,toggleVersSort,adresseAccess, username, onSort, sort , onProblem,selectedPersonId, selectionPersonne , handleLadrisa}) {
+export default function Home({togllePageDelete2, pageDelete, length,togllePageDelete,toglleTheme,showBootstrap, onDeconnexionClick,toggleVersSort,adresseAccess, username, onSort, sort , onProblem,selectedPersonId, selectionPersonne , handleLadrisa}) {
   const isVisible = true;
 
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
@@ -44,7 +44,7 @@ const handleModifierAdresse = (adresse) => {
       .then((resp) => {
         setPersonnes(resp.data);
         setTotalPages(Math.ceil(resp.data.totalElements / taillePage));
-        console.log(idConnexion)
+        togllePageDelete(resp.data.totalElements);
       })
       .catch((err) => {
         console.log(err);
@@ -168,7 +168,7 @@ useEffect(() => {
                   </td>
                 </tr>
               ))
-            ) : (
+            ):(
               <tr>
                 <td colSpan="4">Aucune personne trouvée</td>
               </tr>
@@ -177,7 +177,10 @@ useEffect(() => {
         </table>
 
         <div className="pagination-controls">
-                <Pagination  currentPage={pageActuelle}
+                <Pagination pageDelete={pageDelete} 
+                 togllePageDelete2={togllePageDelete2}
+                length={length}  
+                 currentPage={pageActuelle}
             totalPages={totalPages}
             onPageChange={handlePageChange}  />
         </div>
