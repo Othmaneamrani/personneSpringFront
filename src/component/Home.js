@@ -11,7 +11,7 @@ export default function Home({togllePageDelete2, pageDelete, length,togllePageDe
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
   const [personnes, setPersonnes] = useState([]);
   const [selectedPersonne, setSelectedPersonne] = useState(null);
-  const [pageActuelle, setPageActuelle] = useState();
+  const [pageActuelle, setPageActuelle] = useState(1);
   const [taillePage, setTaillePage] = useState(5);
   const [totalPages, setTotalPages] = useState(1); 
   const [addListState, setAddListState] = useState(false);
@@ -40,7 +40,7 @@ const handleModifierAdresse = (adresse) => {
   };
 
   const handleGetPersonnes = () => {
-    getPersonnes(pageActuelle, taillePage,localStorage.getItem('idConnexion'))
+    getPersonnes(localStorage.getItem("currentPage"), taillePage,localStorage.getItem('idConnexion'))
       .then((resp) => {
         setPersonnes(resp.data);
         setTotalPages(Math.ceil(resp.data.totalElements / taillePage));

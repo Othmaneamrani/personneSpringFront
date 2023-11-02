@@ -97,6 +97,7 @@ const toggleVersSort = (val) => {
 
   const toggleSort = (newSort) => {
     setSort(newSort);
+    localStorage.setItem('sort',newSort);
   }
 
 

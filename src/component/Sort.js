@@ -10,7 +10,7 @@ export default function Sort ({lengthSort, pageDeleteSort,togllePageDeleteSort,t
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
   const [personnes, setPersonnes] = useState([]);
   const [selectedPersonne, setSelectedPersonne] = useState(null);
-  const [pageActuelleSort, setPageActuelleSort] = useState();
+  const [pageActuelleSort, setPageActuelleSort] = useState(1);
   const [taillePage, setTaillePage] = useState(5);
   const [totalPages, setTotalPages] = useState(1); 
   const [addListStateSort, setAddListStateSort] = useState(false);
@@ -33,10 +33,10 @@ export default function Sort ({lengthSort, pageDeleteSort,togllePageDeleteSort,t
 
 
   const handleGetSortPersonnes = () => {
-    getPersonnesSort(pageActuelleSort, taillePage,sort,localStorage.getItem('idConnexion'))
+    getPersonnesSort(localStorage.getItem("currentPageSort"), taillePage,localStorage.getItem('sort'),localStorage.getItem('idConnexion'))
     .then((resp) =>{
     setPersonnes(resp.data)
-      onvide('')
+      // onvide('')
     setTotalPages(Math.ceil(resp.data.totalElements / taillePage));
     togllePageDeleteSort(resp.data.totalElements);
   })

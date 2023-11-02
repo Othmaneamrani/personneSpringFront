@@ -12,10 +12,6 @@ export default function Pagination({ togllePageDelete2,pageDelete,length,current
     togllePageDelete2(false);
   }
 
-// useEffect(()=> {
-//   console.log(totalPages)
-//   console.log(currentPage)
-// },[])
 
   return (
     <ul className="pagination">
@@ -39,7 +35,7 @@ export default function Pagination({ togllePageDelete2,pageDelete,length,current
         </li>
       )}
       <li
-        className={currentPage === totalPages ? "disabled" : ""}
+        className={currentPage === totalPages  || currentPage > totalPages ? "disabled" : ""}
         onClick={() => {
           if (currentPage < totalPages) {
             onPageChange(currentPage + 1);
