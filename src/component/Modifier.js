@@ -12,7 +12,7 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
   const [adressesCommand, setAddressesCommand] = useState([]);
   const [adresseCommand, setAdresseCommand] = useState({idCommand: '' , rueCommand : '', numeroMaisonCommand: '' });
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [connexionCommand, setConnexionCommand] = useState({id:'' , username: '', password: '' , personnes: []});
+  const [connexionCommand, setConnexionCommand] = useState({idCommand:'' , usernameCommand: '', passwordCommand: '' , personnesCommand: []});
   const [idCommand,  setIdCommand] = useState('');
   const [epingleCommand,  setEpingleCommand] = useState('');
   const [listCommand,  setListCommand] = useState('');
@@ -135,8 +135,9 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
           prenomCommand: prenomCommand,
           adressesCommand: adressesCommand,
           listCommand: listCommand,
-          connexion:connexionCommand,
-          epingleCommand: epingleCommand
+          connexionCommand: {
+            idCommand: localStorage.getItem('idConnexion'),
+          },          epingleCommand: epingleCommand
         }
 
         const response = await updatePersonne(personneCommand);
@@ -157,7 +158,6 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
     if (selectedPersonId !== null) {
       console.log(selectedPersonId);
       setIdCommand(selectedPersonId.idRepresentation);
-      setConnexionCommand(selectedPersonId.connexion);
       setListCommand(selectedPersonId.listRepresentation);
       setEpingleCommand(selectedPersonId.epingleRepresentation);
       setNomCommand(selectedPersonId.nomRepresentation);

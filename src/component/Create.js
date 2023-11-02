@@ -125,8 +125,8 @@ export default function Create({ onCreate,onProblem ,idConnexion}) {
         const personneCommand = {
           nomCommand: nomCommand,
           prenomCommand: prenomCommand,
-          connexion: {
-            id: localStorage.getItem('idConnexion'),
+          connexionCommand: {
+            idCommand: localStorage.getItem('idConnexion'),
           },
           adressesCommand: adressesCommand
         }
