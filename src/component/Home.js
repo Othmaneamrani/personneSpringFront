@@ -15,7 +15,11 @@ export default function Home({togllePageDelete2, pageDelete, length,togllePageDe
   const [taillePage, setTaillePage] = useState(5);
   const [totalPages, setTotalPages] = useState(1); 
   const [addListState, setAddListState] = useState(false);
+  const [viderState, setViderState] = useState(false);
 
+  const toggleViderState = () => {
+    setViderState(!viderState)
+  }
 
   const toggleAddListState = () => {
     setAddListState(!addListState)
@@ -60,7 +64,9 @@ useEffect(() => {
   handleGetPersonnes();
 },[addListState]);
 
-
+useEffect(() => {
+  handleGetPersonnes();
+},[viderState]);
 
   useEffect(() => {
     handleNull()
@@ -95,7 +101,7 @@ useEffect(() => {
   return (
     <div className={`transition-fade ${isVisible ? "visible" : "invisible"}`}>
       <div className="bienvenu">
-        <Sidebar addListState={addListState} toggleAddListState={toggleAddListState} selectionPersonne={selectionPersonne} toglleTheme={toglleTheme} showBootstrap={showBootstrap}  onProblem={onProblem} onSort={onSort} selectedPersonId={selectedPersonId} sort={sort} onDeconnexionClick={onDeconnexionClick} />
+        <Sidebar toggleViderState={toggleViderState} addListState={addListState} toggleAddListState={toggleAddListState} selectionPersonne={selectionPersonne} toglleTheme={toglleTheme} showBootstrap={showBootstrap}  onProblem={onProblem} onSort={onSort} selectedPersonId={selectedPersonId} sort={sort} onDeconnexionClick={onDeconnexionClick} />
 
         <h1 className="smia">BIENVENU {username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}</h1>
         <h3 className="faire">Que souhaitez-vous faire ?</h3>

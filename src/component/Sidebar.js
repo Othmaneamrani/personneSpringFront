@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import BarreRecherche from "./BarreRecherche";
 import { Link } from "react-router-dom";
 import { addList, retirerList } from "./service";
+import BarreVider from "./BarreVider";
 
 
-export default function Sidebar({toggleAddListState, selectionPersonne,toglleTheme,showBootstrap,onDeconnexionClick, onProblem, onSort, sort, selectedPersonId }) {
+export default function Sidebar({toggleAddListState,toggleViderState, selectionPersonne,toglleTheme,showBootstrap,onDeconnexionClick, onProblem, onSort, sort, selectedPersonId }) {
   const isVisible = true;
 
 
@@ -22,6 +23,12 @@ export default function Sidebar({toggleAddListState, selectionPersonne,toglleThe
 
   const activeSearch = () => {
     setShowSearch(!showSearch);
+  };
+
+  const [showSearchVider, setShowSearchVider] = useState(false);
+
+  const activeSearchVider = () => {
+    setShowSearchVider(!showSearchVider);
   };
 
   const handleLinkClick = (e) => {
@@ -117,6 +124,19 @@ export default function Sidebar({toggleAddListState, selectionPersonne,toglleThe
             Supprimer personne
           </Link>
         </li>
+
+        <li>
+          <Link onClick={activeSearchVider}className="supprimer-oui">
+            Vider liste
+          </Link>
+          {showSearchVider && (
+            <div className={`transition-fade ${isVisible ? "visible" : "invisible"}`}>
+              <BarreVider  activeSearchVider={activeSearchVider}  toggleViderState={toggleViderState} onSort={onSort} sort={sort} />
+            </div>
+          )}
+        </li>
+
+
         <li>
           <Link to={"/"} onClick={handleDeconnexionClick} className="deconnexion">
             Deconnexion
