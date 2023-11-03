@@ -38,6 +38,10 @@ export default function Login({onConnexion, onProblem,idConnexion, idConnexionBe
     }
   };
 
+  useEffect(()=> {
+    localStorage.setItem('currentPage',1);
+  },[])
+
 
   return (
     <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`}>

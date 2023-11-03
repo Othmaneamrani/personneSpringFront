@@ -22,7 +22,7 @@ import List from './component/List';
 export default function App() {
   const isVisible = true;
 
-  const [idConnexion, SetIdConnexion] = useState({id:'' , username: '', password: '' , personnes: []});
+  const [idConnexion, SetIdConnexion] = useState({id:'' , username: '', password: ''});
   const idConnexionBeddel = (val) => {
     SetIdConnexion(val)
     localStorage.setItem('idConnexion', val.id);
@@ -149,7 +149,7 @@ const toggleVersSort = (val) => {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Login onConnexion={toggle} idConnexion={idConnexion} idConnexionBeddel={idConnexionBeddel} onProblem={togglePop} />} />
-          <Route path='/sign' element={<Sign onConnexion={toggle} onProblem={togglePop} />} />
+          <Route path='/sign' element={<Sign  idConnexionBeddel={idConnexionBeddel} onConnexion={toggle} onProblem={togglePop} />} />
 
           {pop && (
             <>

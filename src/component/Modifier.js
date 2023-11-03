@@ -12,7 +12,9 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
   const [adressesCommand, setAddressesCommand] = useState([]);
   const [adresseCommand, setAdresseCommand] = useState({idCommand: '' , rueCommand : '', numeroMaisonCommand: '' });
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [connexionCommand, setConnexionCommand] = useState({idCommand:'' , usernameCommand: '', passwordCommand: '' , personnesCommand: []});
+  const [connexionCommandId, setConnexionCommandId] = useState();
+  const [connexionCommandUsername, setConnexionCommandUsername] = useState('');
+  const [connexionCommandPassword, setConnexionCommandPassword] = useState('');
   const [idCommand,  setIdCommand] = useState('');
   const [epingleCommand,  setEpingleCommand] = useState('');
   const [listCommand,  setListCommand] = useState('');
@@ -136,8 +138,11 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
           adressesCommand: adressesCommand,
           listCommand: listCommand,
           connexionCommand: {
-            idCommand: localStorage.getItem('idConnexion'),
-          },          epingleCommand: epingleCommand
+            idCommand:connexionCommandId,
+            usernameCommand:connexionCommandUsername,
+            passwordCommand:connexionCommandPassword
+          },
+          epingleCommand: epingleCommand
         }
 
         const response = await updatePersonne(personneCommand);
@@ -156,10 +161,12 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
 
   useEffect(() => {
     if (selectedPersonId !== null) {
-      console.log(selectedPersonId);
       setIdCommand(selectedPersonId.idRepresentation);
       setListCommand(selectedPersonId.listRepresentation);
       setEpingleCommand(selectedPersonId.epingleRepresentation);
+      setConnexionCommandId(selectedPersonId.connexionRepresentation.idRepresentation);
+      setConnexionCommandUsername(selectedPersonId.connexionRepresentation.usernameRepresentation);
+      setConnexionCommandPassword(selectedPersonId.connexionRepresentation.passwordRepresentation);
       setNomCommand(selectedPersonId.nomRepresentation);
       setPrenomCommand(selectedPersonId.prenomRepresentation);
       setAddressesCommand(selectedPersonId.adressesRepresentation.map(address => ({
@@ -167,7 +174,7 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
         rueCommand: address.rueRepresentation,
         numeroMaisonCommand: address.numeroMaisonRepresentation
       })));
-      console.log(adressesCommand)
+      console.log(selectedPersonId.connexionRepresentation.usernameRepresentation);
           }
   }, [selectedPersonId]);
 
