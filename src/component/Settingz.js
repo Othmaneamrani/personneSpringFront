@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { passwordChange, usernameChange } from './service';
 
-export default function Settings({onProblem}) {
+export default function Settingz({onProblem}) {
   const isVisible = true;
   const navigate = useNavigate();
 
@@ -43,7 +43,8 @@ export default function Settings({onProblem}) {
      const response = await usernameChange(localStorage.getItem('idConnexion'), usernameCommand);
      if(response.data === usernameCommand){
       localStorage.setItem('username', usernameCommand);
-      navigate('/home');
+      onProblem(true);
+      navigate('/popUsernameChange');
      }else if(response.data === "deja") {
       if(la){
         setLa(false);
