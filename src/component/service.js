@@ -85,3 +85,7 @@ export const usernameChange = (id,usernameCommand) => {
         },
       })
 }
+
+export const passwordChange = (id,passwordCommand) => {
+    return connexionApi.patch(`/password/${id}`, passwordCommand);
+}

@@ -150,7 +150,7 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
 
         if (response.status === 200) {
           onCreate(selectedPersonId.nomRepresentation);
-          onProblem(true)
+          onProblem(true);
           navigate('/popVoid');
         }
       }

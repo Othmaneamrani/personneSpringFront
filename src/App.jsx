@@ -19,6 +19,7 @@ import PopIncorrect from './component/PopIncorrect';
 import PopMdp from './component/PopMdp';
 import List from './component/List';
 import Settings from './component/Settings';
+import PopMdpChange from './component/PopMdpChange';
 
 export default function App() {
   const isVisible = true;
@@ -163,6 +164,7 @@ const toggleVersSort = (val) => {
               <Route path='/popValider' element={<PopValider  togllePageDelete2Sort={togllePageDelete2Sort}  togllePageDelete2={togllePageDelete2}  versSort={versSort}  selectionPersonne={selectionPersonne} selectedPersonId={selectedPersonId} />} />
               <Route path='/popName' element={<PopName />} />
               <Route path='/popDemander' element={<PopDemander p={p} />} />
+              <Route path='/popMdpChange' element={<PopMdpChange />} />
                 
 
             </>
@@ -175,7 +177,7 @@ const toggleVersSort = (val) => {
               <Route path='/create' element={<Create   onProblem={togglePop} idConnexion={idConnexion} selectionPersonne={selectionPersonne} onCreate={toggleP} />} />
               <Route path='/sort' element={<Sort  togllePageDeleteSort={togllePageDeleteSort} lengthSort={lengthSort} pageDeleteSort={pageDeleteSort} togllePageDelete2Sort={togllePageDelete2Sort} onProblem={togglePop}  adresseAccess={adresseAccess}  toggleVersSort={toggleVersSort} versSort={versSort} handleLadrisa={handleLadrisa}  sort={sort} onvide={toggleSort} selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  />} />
               <Route path='/list' element={<List />} />
-              <Route path='/settings' element={<Settings />} />
+              <Route path='/settings' element={<Settings onProblem={togglePop} />} />
             </>
           )}
 
