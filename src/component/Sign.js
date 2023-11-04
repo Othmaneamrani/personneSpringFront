@@ -13,10 +13,86 @@ export default function Sign({ idConnexionBeddel, onConnexion,onProblem}){
     passwordCommand: '',
   });
   const [dateDeNaissanceCommand, setDateDeNaissanceCommand] = useState('');
+  const [passwordCommandConfirm, setPasswordCommandConfirm] = useState('');
   const [gmailCommand, setGmailCommand] = useState('');
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+  const [incompatible, setIncompatible] = useState(false);
+  
+  const passwordErrorClass =
+  passwordErrorMessage === 'Mot de passe faible'
+    ? 'password-error-red'
+    : passwordErrorMessage === 'Mot de passe moyen'
+    ? 'password-error-yellow'
+    : passwordErrorMessage === 'Mot de passe accepté'
+    ? 'password-error-green'
+    : '';
+
+    const passwordErrorClassInput =
+    passwordErrorMessage === 'Mot de passe faible'
+      ? '-red'
+      : passwordErrorMessage === 'Mot de passe moyen'
+      ? '-yellow'
+      : passwordErrorMessage === 'Mot de passe accepté'
+      ? '-green'
+      : '';
+
+      const handleConfirmation = (e) => {
+        const confirm = e.target.value;
+        if(confirm !== connexionCommand.passwordCommand){
+            setIncompatible(true);
+            }else{
+            setIncompatible(false);
+            }
+            setPasswordCommandConfirm(confirm);
+      }
+
+  const handlePasswordChange = (e) => {
+    const password = e.target.value;
+
+    if (/^[a-z]+$/.test(password)   ||  /^[A-Z]+$/.test(password) ||   /^\d+$/.test(password) ) {
+      setPasswordErrorMessage('Mot de passe faible');
+    }
+    
+    
+    
+    else if ((/^[A-Z]+/.test(password) && /[a-z]+/.test(password) && /\d+/.test(password)) ||
+              (/^[A-Z]+/.test(password) && /\d+/.test(password) && /[a-z]/.test(password)) ||
+              (/^[a-z]+/.test(password) && /[A-Z]+/.test(password) && /\d+/.test(password)) ||
+              (/^[a-z]+/.test(password) && /\d+/.test(password) && /[A-Z]+/.test(password)) ||
+              (/^\d+/.test(password) && /[A-Z]+/.test(password) && /[a-z]+/.test(password)) ||
+              (/\d+/.test(password) && /[a-z]+/.test(password) && /[A-Z]+/.test(password)) 
+
+    ) {
+      setPasswordErrorMessage('Mot de passe accepté');
+    }
+    
+    
+    else if ( (/^[A-Z]+/.test(password) && /[a-z]+/.test(password)) ||
+                (/^[A-Z]+/.test(password) && /\d+/.test(password)) ||
+                (/^[a-z]+/.test(password) && /[A-Z]+/.test(password)) ||
+                (/^\d+/.test(password) && /[a-z]+/.test(password)) ||
+                (/^\d+/.test(password) && /[A-Z]+/.test(password)) ||
+
+                (/^[a-z]+/.test(password) && /\d+/.test(password))) {
+      setPasswordErrorMessage('Mot de passe moyen');
+    } else {
+      setPasswordErrorMessage('');
+    }
+
+    setConnexionCommand({ ...connexionCommand, passwordCommand: password });
+  };
+
+
 
 const handleSign = async (e) => {
 e.preventDefault();
+
+if(passwordCommandConfirm !== connexionCommand.passwordCommand){
+alert("Confirmation incorrecte.");
+  return;
+}
+
+
 const LoginCommand = {
     connexionCommand : connexionCommand,
     dateDeNaissanceCommand : dateDeNaissanceCommand,
@@ -52,14 +128,15 @@ try {
 
   return(
     <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} >
-      <div className="login-container" >
+{      console.log(passwordErrorMessage)}
+  <div className="sign-container" >
   <form className="login-form" onSubmit={handleSign} >
     <div className="form-group">
       <label htmlFor="username" className="login-label">Nom d'utilisateur :</label>
       <input type="text"
         id="usernameCommand"
         name="usernameCommand"
-        className="form-control "
+        className='form-control'
         value={connexionCommand.usernameCommand}
         onChange={(e)=> setConnexionCommand({
           ...connexionCommand , usernameCommand : (e.target.value)
@@ -71,13 +148,25 @@ try {
       <input type="password"
         id="passwordCommand"
         name="passwordCommand"
-        className="form-control "
+        className={`form-control${passwordErrorClassInput} `}
         value={connexionCommand.passwordCommand}
-        onChange={(e)=>setConnexionCommand({
-          ...connexionCommand , passwordCommand : (e.target.value)
-        })}
+        onChange={handlePasswordChange}
+        required />        
+    </div>
+    {passwordErrorMessage && <p className={`${passwordErrorClass}`}>{passwordErrorMessage}</p>}
+
+    <div className="form-group ">
+      <label htmlFor="passwordConfirm" className="login-label">Confirmer le mot de passe :</label>
+      <input type="password"
+        id="passwordCommandConfirm"
+        name="passwordCommandConfirm"
+        className="form-control "
+        value={passwordCommandConfirm}
+        onChange={handleConfirmation}
         required />
     </div>
+    {incompatible && <p className='password-error-red' >Confirmation incompatible</p>}
+
     <div className="form-group ">
       <label htmlFor="birthdate" min="1900-01-01" className="login-label">Date de naissance :</label>
       <input type="date" 
