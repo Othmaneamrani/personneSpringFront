@@ -69,6 +69,7 @@ export default function Settings() {
             placeholder="Nouveau nom d'utilisateur"
             value={usernameCommand}
             onChange={(e) => setUsernameCommand(e.target.value)}
+            required
           />
           <input className="inputSettings"
             type="text"
@@ -77,6 +78,7 @@ export default function Settings() {
             name="confirmUsername"
             value={usernameCommandConfirm}
             onChange={(e) => setUsernameCommandConfirm(e.target.value)}
+            required
           />
 
           {deja &&
@@ -103,6 +105,7 @@ export default function Settings() {
             placeholder="Mot de passe actuel"
             // value={this.state.newPassword}
             // onChange={this.handlePasswordChange}
+            required
           />
           <input  className="inputSettings"
             type="password"
@@ -111,6 +114,7 @@ export default function Settings() {
             placeholder="Nouveau mot de passe"
             // value={this.state.confirmPassword}
             // onChange={this.handlePasswordChange}
+            required
           />
           <input className="inputSettings"
             type="password"
@@ -119,6 +123,7 @@ export default function Settings() {
             placeholder="Confirmer le nouveau mot de passe"
             // value={usernameCommand}
             // onChange={(e) => setUsernameCommand(e.target.value)}
+            required
           />
           <button className="bouton-settings" type="submit">Changer le mot de passe</button>
         </form>
