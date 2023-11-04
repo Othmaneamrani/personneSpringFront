@@ -55,7 +55,7 @@ export const loggg = (connexionCommand) => {
 
 
 export const getList = (id) => {
-    return personneApi.get(`/cart?id=${id}`, id)
+    return personneApi.get(`/cart?id=${id}`)
 }
 
 export const addList = (id) => {
@@ -76,4 +76,12 @@ export const desepinglerList = (id) =>{
 
 export const vider = (id) => {
     return connexionApi.delete(`/vider/${id}`) 
+}
+
+export const usernameChange = (id,usernameCommand) => {
+    return connexionApi.patch(`/username/${id}`, usernameCommand, {
+        headers: {
+          'Content-Type': 'text/plain',
+        },
+      })
 }

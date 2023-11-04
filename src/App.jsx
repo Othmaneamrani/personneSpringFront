@@ -18,6 +18,7 @@ import PopName from './component/PopName';
 import PopIncorrect from './component/PopIncorrect';
 import PopMdp from './component/PopMdp';
 import List from './component/List';
+import Settings from './component/Settings';
 
 export default function App() {
   const isVisible = true;
@@ -104,7 +105,7 @@ const toggleVersSort = (val) => {
   const [username, setUsername] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [pop, setPop] = useState(false);
-  
+
 
   const toggle = (newIsLoggedIn, newUsername) => {
     setIsLoggedIn(newIsLoggedIn);
@@ -174,6 +175,7 @@ const toggleVersSort = (val) => {
               <Route path='/create' element={<Create   onProblem={togglePop} idConnexion={idConnexion} selectionPersonne={selectionPersonne} onCreate={toggleP} />} />
               <Route path='/sort' element={<Sort  togllePageDeleteSort={togllePageDeleteSort} lengthSort={lengthSort} pageDeleteSort={pageDeleteSort} togllePageDelete2Sort={togllePageDelete2Sort} onProblem={togglePop}  adresseAccess={adresseAccess}  toggleVersSort={toggleVersSort} versSort={versSort} handleLadrisa={handleLadrisa}  sort={sort} onvide={toggleSort} selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  />} />
               <Route path='/list' element={<List />} />
+              <Route path='/settings' element={<Settings />} />
             </>
           )}
 

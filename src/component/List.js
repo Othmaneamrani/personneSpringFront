@@ -9,6 +9,9 @@ export default function List() {
   const [addListState, setAddListState] = useState(false);
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
   const isVisible = true
+
+
+  
   const handleGetList = () => {
     getList(localStorage.getItem('idConnexion'))
       .then((resp) => {

@@ -5,7 +5,7 @@ import Pagination from "./Pagination";
 import { useNavigate} from 'react-router-dom';
 
 
-export default function Home({togllePageDelete2, pageDelete, length,togllePageDelete,toglleTheme,showBootstrap, onDeconnexionClick,toggleVersSort,adresseAccess, username, onSort, sort , onProblem,selectedPersonId, selectionPersonne , handleLadrisa}) {
+export default function Home({togllePageDelete2, pageDelete, length,togllePageDelete,toglleTheme,showBootstrap, onDeconnexionClick,toggleVersSort,adresseAccess, onSort, sort , onProblem,selectedPersonId, selectionPersonne , handleLadrisa}) {
   const isVisible = true;
 
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
@@ -103,7 +103,7 @@ useEffect(() => {
       <div className="bienvenu">
         <Sidebar toggleViderState={toggleViderState} addListState={addListState} toggleAddListState={toggleAddListState} selectionPersonne={selectionPersonne} toglleTheme={toglleTheme} showBootstrap={showBootstrap}  onProblem={onProblem} onSort={onSort} selectedPersonId={selectedPersonId} sort={sort} onDeconnexionClick={onDeconnexionClick} />
 
-        <h1 className="smia">BIENVENU {username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()}</h1>
+        <h1 className="smia">BIENVENU {localStorage.getItem('username').charAt(0).toUpperCase() + localStorage.getItem('username').slice(1).toLowerCase()}</h1>
         <h3 className="faire">Que souhaitez-vous faire ?</h3>
 
         <h1 className="personnes-title">Liste des Personnes :</h1>

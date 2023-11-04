@@ -138,6 +138,13 @@ export default function Sidebar({toggleAddListState,toggleViderState, selectionP
 
 
         <li>
+          <Link  to={"/settings"}  className="sidebar-l3">
+            Settings
+          </Link>
+        </li>
+
+
+        <li>
           <Link to={"/"} onClick={handleDeconnexionClick} className="deconnexion">
             Deconnexion
           </Link>
