@@ -8,6 +8,9 @@ export default function Settings() {
 
   const [usernameCommand,setUsernameCommand] = useState("");
   const [usernameCommandConfirm,setUsernameCommandConfirm] = useState("");
+  const [deja,setDeja] = useState(false);
+  const [la,setLa] = useState(false);
+  const [actif,setActif] = useState(false);
 
 
   const handleUsernameChange = async (e) => {
@@ -19,6 +22,18 @@ export default function Settings() {
      if(response.data === usernameCommand){
       localStorage.setItem('username', usernameCommand);
       navigate('/home');
+     }else if(response.data === "deja") {
+      if(la){
+        setLa(false);
+      }
+        setActif(true);
+        setDeja(true);
+     }else if(response.data === "non"){
+      if(deja){
+        setDeja(false);
+      }
+        setActif(true);
+        setLa(true);
      }
       }catch (error) {
       console.error('Erreur lors de la requête API:', error);
@@ -38,7 +53,7 @@ export default function Settings() {
         </div>
       <div className="settings-container">
 
-        <form className='formSettings' onSubmit={handleUsernameChange}>
+      <form className={`${actif ? "formSettings-actif" : "formSettings"}`} onSubmit={handleUsernameChange}>
           <h2 className='hjouj' > Changer le nom d'utilisateur</h2>
           <input className="inputSettings"
             type="text"
@@ -63,6 +78,19 @@ export default function Settings() {
             value={usernameCommandConfirm}
             onChange={(e) => setUsernameCommandConfirm(e.target.value)}
           />
+
+          {deja &&
+            <p>Aucune modification.</p>
+          }
+
+
+
+
+
+          {la &&
+            <p>Username déjà utilisé :/ Essayez un autre</p>
+          }
+
           <button className="bouton-settings" type="submit">Changer le nom d'utilisateur</button>
         </form>
 
