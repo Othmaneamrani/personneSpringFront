@@ -16,8 +16,16 @@ export default function Sign({ idConnexionBeddel, onConnexion,onProblem}){
   const [passwordCommandConfirm, setPasswordCommandConfirm] = useState('');
   const [gmailCommand, setGmailCommand] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+  const [usernameErrorMessage, setUsernameErrorMessage] = useState('');
   const [incompatible, setIncompatible] = useState(false);
   
+  const [showPassword, setShowPassword] = useState(false);
+
+  const containsSpace = (str) => {
+    return /\s/.test(str);
+  };
+
+
   const passwordErrorClass =
   passwordErrorMessage === 'Mot de passe faible'
     ? 'password-error-red'
@@ -25,6 +33,8 @@ export default function Sign({ idConnexionBeddel, onConnexion,onProblem}){
     ? 'password-error-yellow'
     : passwordErrorMessage === 'Mot de passe accepté'
     ? 'password-error-green'
+    : passwordErrorMessage === "Le mot de passe ne peut pas contenir d'espaces."
+    ? 'password-error-red'
     : '';
 
     const passwordErrorClassInput =
@@ -34,6 +44,8 @@ export default function Sign({ idConnexionBeddel, onConnexion,onProblem}){
       ? '-yellow'
       : passwordErrorMessage === 'Mot de passe accepté'
       ? '-green'
+      :  passwordErrorMessage === "Le mot de passe ne peut pas contenir d'espaces."
+      ? '-red'
       : '';
 
       const handleConfirmation = (e) => {
@@ -46,37 +58,55 @@ export default function Sign({ idConnexionBeddel, onConnexion,onProblem}){
             setPasswordCommandConfirm(confirm);
       }
 
+      const handleUsernameChange = (e) => {
+        const username = e.target.value;
+        if(containsSpace(username)){
+          setUsernameErrorMessage("Le nom d'utilisateur ne peut pas contenir d'espaces.");
+        }else{
+          setUsernameErrorMessage("");
+
+        }
+
+        setConnexionCommand({ ...connexionCommand, usernameCommand: username });
+      }
+
+
+
+
   const handlePasswordChange = (e) => {
     const password = e.target.value;
 
-    if (/^[a-z]+$/.test(password)   ||  /^[A-Z]+$/.test(password) ||   /^\d+$/.test(password) ) {
-      setPasswordErrorMessage('Mot de passe faible');
+    if (password.length === 0 ) {
+      setPasswordErrorMessage('');
+    }else if (containsSpace(password)){
+      setPasswordErrorMessage("Le mot de passe ne peut pas contenir d'espaces.");
     }
     
-    
-    
-    else if ((/^[A-Z]+/.test(password) && /[a-z]+/.test(password) && /\d+/.test(password)) ||
-              (/^[A-Z]+/.test(password) && /\d+/.test(password) && /[a-z]/.test(password)) ||
-              (/^[a-z]+/.test(password) && /[A-Z]+/.test(password) && /\d+/.test(password)) ||
-              (/^[a-z]+/.test(password) && /\d+/.test(password) && /[A-Z]+/.test(password)) ||
-              (/^\d+/.test(password) && /[A-Z]+/.test(password) && /[a-z]+/.test(password)) ||
-              (/\d+/.test(password) && /[a-z]+/.test(password) && /[A-Z]+/.test(password)) 
+    else if (((/^[A-Z]+/.test(password) && /[a-z]+/.test(password)) && (/\d+/.test(password) || /[!@#éè\$%\^&\*\(\)_\+\-=\[\]\{\};:'",<>\./?\\|`~]+/.test(password)) ) && password.length >6 ||
+              (/^[A-Z]+/.test(password) && (/\d+/.test(password) ||  /[!@#éè\$%\^&\*\(\)_\+\-=\[\]\{\};:'",<>\./?\\|`~]+/.test(password) ) && /[a-z]/.test(password))   && password.length > 6||
+              (/^[a-z]+/.test(password) && /[A-Z]+/.test(password) && (/\d+/.test(password)  ||   /[!@#éè\$%\^&\*\(\)_\+\-=\[\]\{\};:'",<>\./?\\|`~]+/.test(password)) )  && password.length > 6||
+              (/^[a-z]+/.test(password) &&  (/\d+/.test(password) ||  /[!@#éè\$%\^&\*\(\)_\+\-=\[\]\{\};:'",<>\./?\\|`~]+/.test(password)) && /[A-Z]+/.test(password))  && password.length > 6||
+              ((/^\d+/.test(password) ||  /[!@#éè\$%\^&\*\(\)_\+\-=\[\]\{\};:'",<>\./?\\|`~]+/.test(password)) && /[A-Z]+/.test(password) && /[a-z]+/.test(password))  && password.length > 6||
+              ((/^\d+/.test(password) ||  /[!@#éè\$%\^&\*\(\)_\+\-=\[\]\{\};:'",<>\./?\\|`~]+/.test(password))&& /[a-z]+/.test(password) && /[A-Z]+/.test(password))  && password.length > 6
 
     ) {
       setPasswordErrorMessage('Mot de passe accepté');
     }
     
     
-    else if ( (/^[A-Z]+/.test(password) && /[a-z]+/.test(password)) ||
-                (/^[A-Z]+/.test(password) && /\d+/.test(password)) ||
-                (/^[a-z]+/.test(password) && /[A-Z]+/.test(password)) ||
-                (/^\d+/.test(password) && /[a-z]+/.test(password)) ||
-                (/^\d+/.test(password) && /[A-Z]+/.test(password)) ||
-
-                (/^[a-z]+/.test(password) && /\d+/.test(password))) {
+    else if ( (/^[A-Z]+/.test(password) && /[a-z]+/.test(password)) &&  password.length >4||
+                (/^[A-Z]+/.test(password) && (/\d+/.test(password) ||  /[!@#éè\$%\^&\*\(\)_\+\-=\[\]\{\};:'",<>\./?\\|`~]+/.test(password))  ) && password.length >4||
+                (/^[a-z]+/.test(password) && /[A-Z]+/.test(password))&& password.length >4 ||
+                ((/^\d+/.test(password)  ||  /[!@#éè\$%\^&\*\(\)_\+\-=\[\]\{\};:'",<>\./?\\|`~]+/.test(password)) && /[a-z]+/.test(password)) && password.length >4||
+                ((/^\d+/.test(password) ||  /[!@#éè\$%\^&\*\(\)_\+\-=\[\]\{\};:'",<>\./?\\|`~]+/.test(password) ) && /[A-Z]+/.test(password))&& password.length >4 ||
+                (/^[a-z]+/.test(password) && (/\d+/.test(password)  ||  /[!@#éè\$%\^&\*\(\)_\+\-=\[\]\{\};:'",<>\./?\\|`~]+/.test(password) )) ||
+                (/^[a-z]+$/.test(password) &&  password.length > 6 ) ||
+                (/^[A-Z]+$/.test(password) &&  password.length > 6 ) ||
+                ((/^\d+$/.test(password) ||  /[!@#éè\$%\^&\*\(\)_\+\-=\[\]\{\};:'",<>\./?\\|`~]+/.test(password))&&  password.length > 6 )
+                ) {
       setPasswordErrorMessage('Mot de passe moyen');
-    } else {
-      setPasswordErrorMessage('');
+    }else {
+      setPasswordErrorMessage('Mot de passe faible');
     }
 
     setConnexionCommand({ ...connexionCommand, passwordCommand: password });
@@ -86,6 +116,17 @@ export default function Sign({ idConnexionBeddel, onConnexion,onProblem}){
 
 const handleSign = async (e) => {
 e.preventDefault();
+
+if (containsSpace(connexionCommand.usernameCommand)) {
+  alert("Le nom d'utilisateur ne peut pas contenir d'espaces.");
+  return;
+}
+
+if (containsSpace(connexionCommand.passwordCommand)) {
+  alert("Le mot de passe ne peut pas contenir d'espaces.");
+  return;
+}
+
 
 if(passwordCommandConfirm !== connexionCommand.passwordCommand){
 alert("Confirmation incorrecte.");
@@ -128,7 +169,6 @@ try {
 
   return(
     <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`} >
-{      console.log(passwordErrorMessage)}
   <div className="sign-container" >
   <form className="login-form" onSubmit={handleSign} >
     <div className="form-group">
@@ -136,31 +176,42 @@ try {
       <input type="text"
         id="usernameCommand"
         name="usernameCommand"
-        className='form-control'
+        className={usernameErrorMessage  ? 'form-control-red' : 'form-control'}
         value={connexionCommand.usernameCommand}
-        onChange={(e)=> setConnexionCommand({
-          ...connexionCommand , usernameCommand : (e.target.value)
-        })}
+        onChange={handleUsernameChange}
         required />
     </div>
+    {usernameErrorMessage && <p className='password-error-red'>{usernameErrorMessage}</p>}
+
     <div className="form-group ">
       <label htmlFor="password" className="login-label">Mot de passe :</label>
-      <input type="password"
-        id="passwordCommand"
-        name="passwordCommand"
-        className={`form-control${passwordErrorClassInput} `}
-        value={connexionCommand.passwordCommand}
-        onChange={handlePasswordChange}
-        required />        
+      <div className="password-input-container">
+    <input
+      type={showPassword ? 'text' : 'password'}
+      id="passwordCommand"
+      name="passwordCommand"
+      className={`form-control${passwordErrorClassInput}`}
+      value={connexionCommand.passwordCommand}
+      onChange={handlePasswordChange}
+      required
+    />
+    <button
+      type="button"
+      onClick={() => setShowPassword(!showPassword)}
+      className="show-password-button"
+    >
+      {showPassword ? 'Masquer' : 'Afficher'}
+    </button>
+  </div>
     </div>
-    {passwordErrorMessage && <p className={`${passwordErrorClass}`}>{passwordErrorMessage}</p>}
+    {passwordErrorMessage && <p className={passwordErrorClass}>{passwordErrorMessage}</p>}
 
     <div className="form-group ">
       <label htmlFor="passwordConfirm" className="login-label">Confirmer le mot de passe :</label>
       <input type="password"
         id="passwordCommandConfirm"
         name="passwordCommandConfirm"
-        className="form-control "
+        className={incompatible ?  "form-control-red" : "form-control"}
         value={passwordCommandConfirm}
         onChange={handleConfirmation}
         required />

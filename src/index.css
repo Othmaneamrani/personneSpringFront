@@ -96,7 +96,7 @@ body {
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   margin-top: 50px ;
-  max-height: 540px;
+  max-height: 580px;
 }
 
 .login-container {
@@ -1195,10 +1195,12 @@ td::first-letter {
 }
 
 .password-error-yellow {
+  font-weight: bold;
   color: yellow;
 }
 
 .password-error-green {
+  font-weight: bold;
   color: rgb(58, 218, 58);
 }
 
@@ -1206,19 +1208,21 @@ td::first-letter {
 .form-control-red{
   width: 94%;
   padding: 10px;
-  border: 1px solid #b6b3b3;
+  border: 2px solid #b6b3b3;
   border-radius: 5px;
   font-size: 16px;
-  color:  red;
+  border-color:  red;
+  color:red;
 }
 
 
 .form-control-yellow{
   width: 94%;
   padding: 10px;
-  border: 1px solid #b6b3b3;
+  border: 2px solid #b6b3b3;
   border-radius: 5px;
   font-size: 16px;
+  border-color: rgb(207, 207, 15);
   color: rgb(207, 207, 15);
 }
 
@@ -1226,12 +1230,34 @@ td::first-letter {
 .form-control-green{
   width: 94%;
   padding: 10px;
-  border: 1px solid #b6b3b3;
+  border: 2px solid #b6b3b3;
   border-radius: 5px;
   font-size: 16px;
-  color : rgb(58, 218, 58);
+  border-color : rgb(58, 218, 58);
+  color:rgb(58, 218, 58);
+
 }
 
 
 
+.password-input-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.show-password-button {
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  outline: none;
+  font-size: 14px;
+  padding: 0;
+  margin-left: -60px;
+}
+
+.show-password-button:hover {
+  text-decoration: underline;
+}
 

@@ -23,8 +23,7 @@ export default function PopMdp() {
     <div className="popup-overlay">
       <div className="popup2">
         <h2>
-          Password faible ! Il doit contenir plus de 6 caractères, et au moins
-          un chiffre et une majuscule
+          Password faible ! Il doit contenir plus de 6 caractères, et au moins une majuscule, un chiffre ou un caractère spécial
         </h2>
         <Link to={'/sign'}>
           <button ref={okButtonRef}>Ok</button>
