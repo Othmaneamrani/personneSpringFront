@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import mail from './email.png'
 import { Link  ,   useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import {getLogins } from './service';
 
 
 export default function Sign({ idConnexionBeddel, onConnexion,onProblem}){
@@ -17,13 +18,29 @@ export default function Sign({ idConnexionBeddel, onConnexion,onProblem}){
   const [gmailCommand, setGmailCommand] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
   const [usernameErrorMessage, setUsernameErrorMessage] = useState('');
-  const [incompatible, setIncompatible] = useState(false);
-  
+  const [incompatible, setIncompatible] = useState(false);  
   const [showPassword, setShowPassword] = useState(false);
+
+  const [logins, setLogins] = useState([]);
+
+  const [usernameExist, setUsernameExist] = useState(false);
+  const [gmailExist, setGmailExist] = useState(false);
+
 
   const containsSpace = (str) => {
     return /\s/.test(str);
   };
+
+
+useEffect(()=>{
+  getLogins().then((resp)=>{
+    setLogins(resp.data);
+  })
+  .catch((err)=>{
+    console.log(err);
+  })
+},[]);
+
 
 
   const passwordErrorClass =
@@ -60,17 +77,45 @@ export default function Sign({ idConnexionBeddel, onConnexion,onProblem}){
 
       const handleUsernameChange = (e) => {
         const username = e.target.value;
+        if(!containsSpace(username)){
+          setUsernameErrorMessage("");
+        }
+
         if(containsSpace(username)){
           setUsernameErrorMessage("Le nom d'utilisateur ne peut pas contenir d'espaces.");
-        }else{
+          setUsernameExist(false);
+        }else if(logins.find(login=>(
+          login.connexionRepresentation.usernameRepresentation === username
+        ))
+        ) {
+          setUsernameExist(true);
+       
+        }else if(!logins.find(login=>(
+          login.connexionRepresentation.usernameRepresentation === username
+        ))
+        ) {
+          setUsernameExist(false);
+       
+        }
+        else{
           setUsernameErrorMessage("");
-
         }
 
         setConnexionCommand({ ...connexionCommand, usernameCommand: username });
       }
 
-
+        const handleGmailChange = (e) => {
+          const gmail = e.target.value;
+          if(logins.find(login => (
+            login.gmailRepresentation === gmail
+          ))
+          ){
+              setGmailExist(true);
+          }else{
+            setGmailExist(false);
+          }
+          setGmailCommand(gmail)
+        }
 
 
   const handlePasswordChange = (e) => {
@@ -176,11 +221,13 @@ try {
       <input type="text"
         id="usernameCommand"
         name="usernameCommand"
-        className={usernameErrorMessage  ? 'form-control-red' : 'form-control'}
+        className={usernameErrorMessage || usernameExist ? 'form-control-red' : 'form-control'}
         value={connexionCommand.usernameCommand}
         onChange={handleUsernameChange}
         required />
     </div>
+    {usernameExist && <p className='password-error-red'>Username déjà utilisé.</p>}
+
     {usernameErrorMessage && <p className='password-error-red'>{usernameErrorMessage}</p>}
 
     <div className="form-group ">
@@ -231,17 +278,18 @@ try {
     <div className="form-group">
       <div className="gmail-icon">
       <img className="mail-icon" src={mail} alt="mail-icon"/>
-      <label htmlFor="gmail" className="login-label" >Gmail :</label>
+      <label htmlFor="gmail" className="login-label" >Email :</label>
       </div>
       <input type="email"
          id="gmailCommand" 
          name="gmailCommand"
-         className="form-control"
+         className={ gmailExist ? "form-control-red" : "form-control" }
          placeholder="example@gmail.com"
          value={gmailCommand}
-         onChange={(e)=>setGmailCommand(e.target.value)}
+         onChange={handleGmailChange}
          required />
     </div>
+    {gmailExist && <p className='password-error-red'>Gmail déjà utilisé.</p>}
     <div className="form-group">
       <button type="submit" className="boutton-login">S'inscrire</button> 
   

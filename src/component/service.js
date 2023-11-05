@@ -12,6 +12,10 @@ export const connexionApi  = axios.create({
     baseURL : "http://localhost:8080/connexions"
 });
 
+export const loginApi  = axios.create({
+    baseURL : "http://localhost:8080/logins"
+});
+
 export const getPersonnes = (currentPage , size,id) => {
     return personneApi.get(`/con?page=${currentPage}&size=${size}&id=${id}`)
 }
@@ -88,4 +92,9 @@ export const usernameChange = (id,usernameCommand) => {
 
 export const passwordChange = (id,passwordCommand) => {
     return connexionApi.patch(`/password/${id}`, passwordCommand);
+}
+
+
+export const getLogins = () => {
+    return loginApi.get('/list');
 }
