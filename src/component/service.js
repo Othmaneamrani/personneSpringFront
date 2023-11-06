@@ -98,3 +98,8 @@ export const passwordChange = (id,passwordCommand) => {
 export const getLogins = () => {
     return loginApi.get('/list');
 }
+
+
+export const deletePersonnes = (ids) => {
+    return personneApi.delete(`/delete?ids=${ids}`)
+}

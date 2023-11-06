@@ -5,7 +5,7 @@ import { addList, retirerList } from "./service";
 import BarreVider from "./BarreVider";
 
 
-export default function Sidebar({toggleAddListState,toggleViderState, selectionPersonne,toglleTheme,showBootstrap,onDeconnexionClick, onProblem, onSort, sort, selectedPersonId }) {
+export default function Sidebar({selectedPersonIds,toggleAddListState,toggleViderState, selectionPersonne,toglleTheme,showBootstrap,onDeconnexionClick, onProblem, onSort, sort, selectedPersonId }) {
   const isVisible = true;
 
 
@@ -106,24 +106,37 @@ export default function Sidebar({toggleAddListState,toggleViderState, selectionP
             Créer personne
           </Link>
         </li>
-        <li>
+          {(selectedPersonIds.length <= 1) &&   
+           <li>
           <Link
             to={"/modifier"}
-            className={selectedPersonId ? "sidebar-l3-oui" : "sidebar-l3-non"}
+            className={selectedPersonIds.length === 1 ? "sidebar-l3-oui" : "sidebar-l3-non"}
             onClick={handleLinkClick}
           >
             Modifier personne
           </Link>
-        </li>
-        <li>
+        </li>}
+          {(selectedPersonIds.length <= 1) &&
+          <li>
           <Link
             to={"/popValider"}
-            className={selectedPersonId ? "supprimer-oui" : "supprimer-non"}
+            className={selectedPersonIds.length === 1 ? "supprimer-oui" : "supprimer-non"}
             onClick={handleLinkClick}
           >
             Supprimer personne
           </Link>
-        </li>
+        </li>}
+
+        {  selectedPersonIds.length > 1 &&
+          <li>
+          <Link
+            to={"/popValiderS"}
+            className="supprimer-oui"
+            onClick={handleLinkClick}
+          >
+            Supprimer personnes
+          </Link>
+        </li>}
 
         <li>
           <Link onClick={activeSearchVider}className="supprimer-oui">

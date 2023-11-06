@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { updatePersonne, getAllPersonnes } from "./service";
 
-export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}) {
+export default function Modifier({selectionPersonnesVoid,onCreate ,selectedPersonIds,versSort,onProblem}) {
   const isVisible = true;
 
   const navigate = useNavigate();
@@ -87,7 +87,7 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
     e.preventDefault();
     setFormSubmitted(true);
 
-    if (selectedPersonId !== null ){
+    if (selectedPersonIds !== null ){
     try {
       const response = await getAllPersonnes(localStorage.getItem('idConnexion'));
       const personnes = response.data;
@@ -149,7 +149,7 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
         console.log('réponse de l\'API : ', response.data);
 
         if (response.status === 200) {
-          onCreate(selectedPersonId.nomRepresentation);
+          onCreate(selectedPersonIds[selectedPersonIds.lenght - 1 ].nomRepresentation);
           onProblem(true);
           navigate('/popVoid');
         }
@@ -160,23 +160,28 @@ export default function Modifier({onCreate ,selectedPersonId,versSort,onProblem}
   }}
 
   useEffect(() => {
-    if (selectedPersonId !== null) {
-      setIdCommand(selectedPersonId.idRepresentation);
-      setListCommand(selectedPersonId.listRepresentation);
-      setEpingleCommand(selectedPersonId.epingleRepresentation);
-      setConnexionCommandId(selectedPersonId.connexionRepresentation.idRepresentation);
-      setConnexionCommandUsername(selectedPersonId.connexionRepresentation.usernameRepresentation);
-      setConnexionCommandPassword(selectedPersonId.connexionRepresentation.passwordRepresentation);
-      setNomCommand(selectedPersonId.nomRepresentation);
-      setPrenomCommand(selectedPersonId.prenomRepresentation);
-      setAddressesCommand(selectedPersonId.adressesRepresentation.map(address => ({
+    if (selectedPersonIds.length >= 1) {
+      const firstPerson = selectedPersonIds[0];      
+      setIdCommand(firstPerson.idRepresentation);
+      setListCommand(firstPerson.listRepresentation);
+      setEpingleCommand(firstPerson.epingleRepresentation);
+      setConnexionCommandId(firstPerson.connexionRepresentation.idRepresentation);
+      setConnexionCommandUsername(firstPerson.connexionRepresentation.usernameRepresentation);
+      setConnexionCommandPassword(firstPerson.connexionRepresentation.passwordRepresentation);
+      setNomCommand(firstPerson.nomRepresentation);
+      setPrenomCommand(firstPerson.prenomRepresentation);
+      setAddressesCommand(firstPerson.adressesRepresentation.map(address => ({
         idCommand : address.idRepresentation,
         rueCommand: address.rueRepresentation,
         numeroMaisonCommand: address.numeroMaisonRepresentation
       })));
-      console.log(selectedPersonId.connexionRepresentation.usernameRepresentation);
+
+      return () => {
+        selectionPersonnesVoid();
+      };
+
           }
-  }, [selectedPersonId]);
+  }, [selectedPersonIds]);
 
   return (
     <div className={`transition-fade ${isVisible ? 'visible' : 'invisible'}`}>
