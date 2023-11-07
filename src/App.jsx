@@ -76,19 +76,6 @@ const toggleVersSort = (val) => {
   setVersSort(val)
 }
 
-
-  const [selectedPersonId, setSelectedPersonId] = useState(null);
-  const selectionPersonne = (personne) => {
-    if (selectedPersonId === personne) {
-      setSelectedPersonId(null);
-    } else if(!selectedPersonId){
-      setSelectedPersonId(personne);
-    }else if (selectedPersonId !== personne){
-      return;
-    }
-  };
-
-
   const [selectedPersonIds, setSelectedPersonIds] = useState([]);
   const selectionPersonnes = (personne) => {
     if (selectedPersonIds.includes(personne)) {
@@ -197,9 +184,9 @@ const toggleVersSort = (val) => {
           {isLoggedIn && (
             <>
  
-              <Route path='/home' element={<Home selectionPersonnesVoid={selectionPersonnesVoid} selectedPersonIds={selectedPersonIds} selectionPersonnes={selectionPersonnes} togllePageDelete2={togllePageDelete2} pageDelete={pageDelete}  length={length}  togllePageDelete={togllePageDelete} toglleTheme={toglleTheme} idConnexion={idConnexion} showBootstrap={showBootstrap}  toggleVersSort={toggleVersSort} adresseAccess={adresseAccess} handleLadrisa={handleLadrisa}  onProblem={togglePop}  selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  sort={sort} onSort={toggleSort} username={username} onDeconnexionClick={toggle} />} />
-              <Route path='/create' element={<Create   onProblem={togglePop} idConnexion={idConnexion} selectionPersonne={selectionPersonne} onCreate={toggleP} />} />
-              <Route path='/sort' element={<Sort  togllePageDeleteSort={togllePageDeleteSort} lengthSort={lengthSort} pageDeleteSort={pageDeleteSort} togllePageDelete2Sort={togllePageDelete2Sort} onProblem={togglePop}  adresseAccess={adresseAccess}  toggleVersSort={toggleVersSort} versSort={versSort} handleLadrisa={handleLadrisa}  sort={sort} onvide={toggleSort} selectedPersonId={selectedPersonId} selectionPersonne={selectionPersonne}  />} />
+              <Route path='/home' element={<Home selectionPersonnesVoid={selectionPersonnesVoid} selectedPersonIds={selectedPersonIds} selectionPersonnes={selectionPersonnes} togllePageDelete2={togllePageDelete2} pageDelete={pageDelete}  length={length}  togllePageDelete={togllePageDelete} toglleTheme={toglleTheme} idConnexion={idConnexion} showBootstrap={showBootstrap}  toggleVersSort={toggleVersSort} adresseAccess={adresseAccess} handleLadrisa={handleLadrisa}  onProblem={togglePop}  sort={sort} onSort={toggleSort} username={username} onDeconnexionClick={toggle} />} />
+              <Route path='/create' element={<Create   onProblem={togglePop} idConnexion={idConnexion} onCreate={toggleP} />} />
+              <Route path='/sort' element={<Sort  selectionPersonnesVoid={selectionPersonnesVoid}  togllePageDeleteSort={togllePageDeleteSort} lengthSort={lengthSort} pageDeleteSort={pageDeleteSort} togllePageDelete2Sort={togllePageDelete2Sort} onProblem={togglePop}  adresseAccess={adresseAccess}  toggleVersSort={toggleVersSort} versSort={versSort} handleLadrisa={handleLadrisa}  sort={sort} selectedPersonIds={selectedPersonIds} selectionPersonnes={selectionPersonnes}  />} />
               <Route path='/list' element={<List />} />
               <Route path='/settings' element={<Settingz onProblem={togglePop} />} />
             </>
@@ -207,7 +194,7 @@ const toggleVersSort = (val) => {
 
 {selectedPersonIds && (
             <>
-              <Route path='/modifier' element={<Modifier  selectionPersonnesVoid={selectionPersonnesVoid} versSort={versSort} onProblem={togglePop} selectionPersonne={selectionPersonne} selectedPersonIds={selectedPersonIds} onCreate={toggleP} />} />
+              <Route path='/modifier' element={<Modifier  selectionPersonnesVoid={selectionPersonnesVoid} versSort={versSort} onProblem={togglePop} selectedPersonIds={selectedPersonIds} onCreate={toggleP} />} />
             </>
           )}
 

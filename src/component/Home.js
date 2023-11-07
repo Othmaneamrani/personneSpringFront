@@ -5,7 +5,7 @@ import Pagination from "./Pagination";
 import { useNavigate} from 'react-router-dom';
 
 
-export default function Home({selectionPersonnes,selectionPersonnesVoid,selectedPersonIds,togllePageDelete2, pageDelete, length,togllePageDelete,toglleTheme,showBootstrap, onDeconnexionClick,toggleVersSort,adresseAccess, onSort, sort , onProblem,selectedPersonId, selectionPersonne , handleLadrisa}) {
+export default function Home({selectionPersonnes,selectionPersonnesVoid,selectedPersonIds,togllePageDelete2, pageDelete, length,togllePageDelete,toglleTheme,showBootstrap, onDeconnexionClick,toggleVersSort,adresseAccess, onSort, sort , onProblem , handleLadrisa}) {
   const isVisible = true;
 
   const [selectedPersonAddresses, setSelectedPersonAddresses] = useState([]);
@@ -94,14 +94,12 @@ useEffect(() => {
     });
   };
   
-  const handleNull = () => {
-    selectionPersonne(selectedPersonId)
-  }
+
 
   return (
     <div className={`transition-fade ${isVisible ? "visible" : "invisible"}`}>
       <div className="bienvenu">
-        <Sidebar  selectedPersonIds={selectedPersonIds} toggleViderState={toggleViderState} addListState={addListState} toggleAddListState={toggleAddListState} selectionPersonne={selectionPersonne} toglleTheme={toglleTheme} showBootstrap={showBootstrap}  onProblem={onProblem} onSort={onSort} selectedPersonId={selectedPersonId} sort={sort} onDeconnexionClick={onDeconnexionClick} />
+        <Sidebar selectionPersonnesVoid={selectionPersonnesVoid} selectedPersonIds={selectedPersonIds} toggleViderState={toggleViderState} addListState={addListState} toggleAddListState={toggleAddListState} selectionPersonnes={selectionPersonnes} toglleTheme={toglleTheme} showBootstrap={showBootstrap}  onProblem={onProblem} onSort={onSort} sort={sort} onDeconnexionClick={onDeconnexionClick} />
 
         <h1 className="smia">BIENVENU {localStorage.getItem('username').charAt(0).toUpperCase() + localStorage.getItem('username').slice(1).toLowerCase()}</h1>
         <h3 className="faire">Que souhaitez-vous faire ?</h3>
@@ -124,15 +122,14 @@ useEffect(() => {
                   {personne.listRepresentation ?(
                   <td
                     className={`case-select-personne ${selectedPersonIds.includes(personne) ? 'selected' : ''}`}
-                    onClick={() =>{ selectionPersonne(personne); selectionPersonnes(personne);} }
+                    onClick={() =>{selectionPersonnes(personne);} }
                   >
                     <span  className="heart">❤️</span> {personne.idRepresentation}
                   </td>
                   ):(
                     <td
                     className={`case-select-personne ${selectedPersonIds.includes(personne) ? 'selected' : ''}`}
-                    onClick={() =>{ selectionPersonne(personne);
-                                    selectionPersonnes(personne);} }
+                    onClick={() =>{selectionPersonnes(personne);} }
                   >
                     {personne.idRepresentation}
                   </td>

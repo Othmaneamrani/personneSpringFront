@@ -67,7 +67,7 @@ export const addList = (id) => {
 }
 
 export const retirerList = (id) =>{
-    return personneApi.patch(`/personnes/retirer/${id}`)
+    return personneApi.patch(`/retirer/${id}`)
 }
 
 export const epinglerList = (id) =>{

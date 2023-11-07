@@ -5,13 +5,13 @@ import { addList, retirerList } from "./service";
 import BarreVider from "./BarreVider";
 
 
-export default function Sidebar({selectedPersonIds,toggleAddListState,toggleViderState, selectionPersonne,toglleTheme,showBootstrap,onDeconnexionClick, onProblem, onSort, sort, selectedPersonId }) {
+export default function Sidebar({ selectionPersonnesVoid,selectedPersonIds,toggleAddListState,toggleViderState,toglleTheme,showBootstrap,onDeconnexionClick, onProblem, onSort, sort }) {
   const isVisible = true;
 
 
-  const handleAddToList = async (selectedPersonId) => {
-    await addList(selectedPersonId.idRepresentation);
-    selectionPersonne(selectedPersonId)
+  const handleAddToList = async (personne) => {
+    await addList(personne.idRepresentation);
+    selectionPersonnesVoid();
     toggleAddListState()
   };
 
@@ -50,8 +50,8 @@ export default function Sidebar({selectedPersonIds,toggleAddListState,toggleVide
   
   const handleRetirerList = async (personne) => {
     await retirerList(personne.idRepresentation)
-    selectionPersonne(selectedPersonId)
-    toggleAddListState()
+    selectionPersonnesVoid();
+    toggleAddListState();
   }
  
 
@@ -75,22 +75,22 @@ export default function Sidebar({selectedPersonIds,toggleAddListState,toggleVide
             </div>
           )}
         </li>
-        {(selectedPersonId && (selectedPersonId.listRepresentation ===false || selectedPersonId.listRepresentation ===null ) )  && 
+        {(selectedPersonIds.length === 1 && (selectedPersonIds[0].listRepresentation ===false || selectedPersonIds[0].listRepresentation ===null ))  && 
           <li>
-            <Link className="sidebar-l3" onClick={() => handleAddToList(selectedPersonId)}>
+            <Link className="sidebar-l3" onClick={() => handleAddToList(selectedPersonIds[0])}>
               Ajouter aux favoris
             </Link>
           </li>
         }
-      {(selectedPersonId && selectedPersonId.listRepresentation ===true) && 
+      {(selectedPersonIds.length === 1  && selectedPersonIds[0].listRepresentation ===true) && 
          <li>
-         <Link className="sidebar-l3"  onClick={() => handleRetirerList(selectedPersonId)}>
+         <Link className="sidebar-l3"  onClick={() => handleRetirerList(selectedPersonIds[0])}>
            Retirer des favoris
          </Link>
      </li>
         }
 
-        { !selectedPersonId &&
+        { selectedPersonIds.length === 0 &&
           <li>
             <Link to={"/list"} className="sidebar-l3">
               Voir favoris
