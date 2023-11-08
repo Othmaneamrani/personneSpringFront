@@ -8,6 +8,8 @@ export default function Login({onConnexion, onProblem,idConnexion, idConnexionBe
   const isVisible = true;
   const [usernameCommand, setUsernameCommand] = useState('');
   const [passwordCommand, setPasswordCommand] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -60,17 +62,29 @@ export default function Login({onConnexion, onProblem,idConnexion, idConnexionBe
               onChange={(e) => setUsernameCommand(e.target.value)}
             />
           </div>
-          <div className="form-group">
-            <label className="login-label" htmlFor="password">Mot de passe :</label>
-            <input
-              type="password"
-              id="passwordCommand"
-              name="passwordCommand"
-              className="form-control"
-              value={passwordCommand}
-              onChange={(e) => setPasswordCommand(e.target.value)}
-            />
-          </div>
+
+      <div className="form-group ">
+      <label htmlFor="password" className="login-label">Mot de passe :</label>
+      <div className="password-input-container">
+      <input
+      type={showPassword ? 'text' : 'password'}
+      id="passwordCommand"
+      name="passwordCommand"
+      className="form-control"
+      value={passwordCommand}
+      onChange={(e) => setPasswordCommand(e.target.value)}
+      required
+    />
+    <button
+      type="button"
+      onClick={() => setShowPassword(!showPassword)}
+      className="show-password-button"
+    >
+      {showPassword ? 'Masquer' : 'Afficher'}
+    </button>
+  </div>
+    </div>
+
           <div className="form-group">
             <button type="submit" className="boutton-login">Se connecter</button>
             <Link className="inscription"  to={'/sign'} >S'inscrire</Link>
