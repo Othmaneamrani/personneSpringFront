@@ -101,7 +101,7 @@ useEffect(() => {
       <div className="bienvenu">
         <Sidebar selectionPersonnesVoid={selectionPersonnesVoid} selectedPersonIds={selectedPersonIds} toggleViderState={toggleViderState} addListState={addListState} toggleAddListState={toggleAddListState} selectionPersonnes={selectionPersonnes} toglleTheme={toglleTheme} showBootstrap={showBootstrap}  onProblem={onProblem} onSort={onSort} sort={sort} onDeconnexionClick={onDeconnexionClick} />
 
-        <h1 className="smia">BIENVENU {localStorage.getItem('username').charAt(0).toUpperCase() + localStorage.getItem('username').slice(1).toLowerCase()}</h1>
+        <h1 className="smia">BIENVENUE {localStorage.getItem('username').charAt(0).toUpperCase() + localStorage.getItem('username').slice(1).toLowerCase()}</h1>
         <h3 className="faire">Que souhaitez-vous faire ?</h3>
 
         <h1 className="personnes-title">Liste des Personnes :</h1>
